@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Meridian Society</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0d0d0d;
+    --dark: #111111;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --cream: #f5f0e8;
+    --grey: #888;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(13,13,13,0.98), transparent);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 8rem 2rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-line {
+    width: 1px; height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    margin: 0 auto 3rem;
+    opacity: 0.6;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-style: italic;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+    margin: 1.5rem 0 2.5rem;
+    opacity: 0.9;
+  }
+  .hero-meta {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 3rem;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .btn:hover {
+    background: var(--gold);
+    color: var(--black);
+  }
+  .hero-bottom-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    margin: 4rem auto 0;
+    opacity: 0.4;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 7rem 2rem;
+  }
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0.8;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--cream);
+    margin-bottom: 2rem;
+  }
+  .section-title em { color: var(--gold); font-style: italic; }
+  .body-text {
+    font-size: 1rem;
+    color: rgba(245,240,232,0.75);
+    line-height: 1.9;
+    max-width: 680px;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* MERIDIAN BLOCK */
+  .meridian-block {
+    border-left: 1px solid var(--gold);
+    padding: 2rem 2.5rem;
+    margin: 3rem 0;
+    background: rgba(201,168,76,0.04);
+  }
+  .meridian-block p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  /* WHO WE BRING */
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .who-card {
+    border: 1px solid var(--border);
+    padding: 2rem 1.75rem;
+    transition: border-color 0.3s;
+  }
+  .who-card:hover { border-color: rgba(201,168,76,0.5); }
+  .who-card-icon {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--gold);
+    opacity: 0.7;
+  }
+  .who-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+  }
+  .who-card p {
+    font-size: 0.88rem;
+    color: var(--grey);
+    line-height: 1.6;
+  }
+
+  /* NOT LIST */
+  .not-list {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .not-item {
+    display: flex; align-items: center; gap: 1.2rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.65);
+    letter-spacing: 0.02em;
+  }
+  .not-item::before {
+    content: '—';
+    color: var(--gold);
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+  .closing-note {
+    margin-top: 2.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.8;
+  }
+
+  /* JOIN */
+  .join-section {
+    text-align: center;
+    padding: 8rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .join-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+  }
+  .join-section .section-label, .join-section .section-title, .join-section .body-text {
+    position: relative;
+  }
+  .join-section .section-title { margin: 0 auto 1.5rem; }
+  .join-section .body-text { margin: 0 auto 3rem; text-align: center; }
+  .join-btns { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; position: relative; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer .nav-logo { font-size: 0.95rem; }
+  footer p {
+    font-size: 0.72rem;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">The Meridian Society</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#meridian">Our Name</a>
+    <a href="#who">Who We Gather</a>
+    <a href="#join">Get Involved</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-line"></div>
+  <div class="hero-meta">Ottawa · Est. 2025</div>
+  <h1>The <span>Meridian</span><br>Society</h1>
+  <div class="hero-subtitle">Find your bearing.</div>
+  <a href="#join" class="btn">Get Involved</a>
+  <div class="hero-bottom-line"></div>
+</div>
+
+<!-- ABOUT -->
+<div class="divider"></div>
+<section id="about">
+  <div class="section-label">About</div>
+  <h2 class="section-title">A social and intellectual space for the <em>globally curious.</em></h2>
+  <p class="body-text">
+    The Meridian Society is a student-run Ottawa-based group that brings together curious students, alumni, and professionals to share experiences, perspectives, and pathways across travel, careers, and public life.
+  </p>
+  <br/>
+  <p class="body-text">
+    Through open conversations and informal gatherings, the Society helps its members orient themselves in an increasingly complex world — and gain exposure to people and opportunities they would not otherwise encounter.
+  </p>
+</section>
+
+<!-- MERIDIAN -->
+<div class="divider"></div>
+<section id="meridian">
+  <div class="section-label">Our Name</div>
+  <h2 class="section-title">What is a <em>Meridian?</em></h2>
+  <p class="body-text">In geography, a meridian is a line used to orient the world.</p>
+  <div class="meridian-block">
+    <p>We liked the idea of creating a place that helps people orient themselves — not by telling them where to go, but by exposing them to different paths.</p>
+  </div>
+  <p class="body-text">The Society's primary role is simple: bring the right people into the same room.</p>
+</section>
+
+<!-- WHO -->
+<div class="divider"></div>
+<section id="who">
+  <div class="section-label">Who We Gather</div>
+  <h2 class="section-title">People worth being in a room with.</h2>
+  <p class="body-text">The Meridian Society creates conditions where young adults can expand their academic and professional horizons — naturally, through conversation and connection.</p>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-card-icon">◈</div>
+      <h3>Students</h3>
+      <p>Curious, ambitious, and open to where ideas might lead them.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">◈</div>
+      <h3>Alumni & Professionals</h3>
+      <p>Those with lived experience willing to share their paths honestly.</p>
+    </div>
+    <div class="who-card">
+      <div class="who-card-icon">◈</div>
+      <h3>Across Many Fields</h3>
+      <p>Law, business, policy, media, international work — and everything in between.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE'RE NOT -->
+<div class="divider"></div>
+<section id="not">
+  <div class="section-label">What We Are Not</div>
+  <h2 class="section-title">Honest about what we <em>don't</em> offer.</h2>
+  <p class="body-text">The Meridian Society is not for everyone, and that's intentional. We won't pretend to be something we're not.</p>
+  <div class="not-list">
+    <div class="not-item">A resume workshop</div>
+    <div class="not-item">A career placement office</div>
+    <div class="not-item">A political advocacy group</div>
+    <div class="not-item">A startup incubator</div>
+    <div class="not-item">A closed elite circle</div>
+  </div>
+  <p class="closing-note">
+    We cannot promise outcomes.<br>We can only provide access, exposure, and orientation to people and their ideas.
+  </p>
+</section>
+
+<!-- JOIN -->
+<div class="divider"></div>
+<div class="join-section" id="join">
+  <div class="section-label">Get Involved</div>
+  <h2 class="section-title" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;color:var(--cream);margin-bottom:1.5rem;">Find your room.</h2>
+  <p class="body-text">Follow us on Instagram to stay up to date on upcoming gatherings, conversations, and how to get involved with the Society.</p>
+  <div class="join-btns">
+    <a href="https://www.instagram.com/Meridian.Society" target="_blank" class="btn">@Meridian.Society</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="nav-logo">The Meridian Society</div>
+  <p>Ottawa, Canada &nbsp;·&nbsp; Student Run &nbsp;·&nbsp; Est. 2025</p>
+</footer>
+
+</body>
+</html>
