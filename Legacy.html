@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Legacy — The Meridian Society</title>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0d0d0d;
+    --dark: #111111;
+    --gold: #c9a84c;
+    --gold-light: #e2c47a;
+    --cream: #f5f0e8;
+    --grey: #888;
+    --border: rgba(201,168,76,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(13,13,13,0.98), transparent);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 55vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    padding: 10rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-line {
+    width: 1px; height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    margin: 0 auto 3rem;
+    opacity: 0.6;
+  }
+  .hero-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-style: italic;
+    color: rgba(245,240,232,0.55);
+    margin-top: 1.5rem;
+    max-width: 560px;
+  }
+  .hero-bottom-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    margin: 3rem auto 0;
+    opacity: 0.4;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* SPEAKERS */
+  .speakers-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 3rem;
+    opacity: 0.8;
+  }
+
+  /* SPEAKER CARD */
+  .speaker-card {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+    transition: border-color 0.3s;
+  }
+  .speaker-card:hover { border-color: rgba(201,168,76,0.45); }
+
+  .speaker-date-col {
+    border-right: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.3rem;
+  }
+  .speaker-month {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.8;
+  }
+  .speaker-day {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .speaker-year {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--grey);
+  }
+
+  .speaker-info-col {
+    padding: 2.5rem 2.5rem;
+  }
+  .speaker-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+  .speaker-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    opacity: 0.75;
+    margin-bottom: 1.2rem;
+  }
+  .speaker-topic-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-bottom: 0.4rem;
+  }
+  .speaker-topic {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(245,240,232,0.85);
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+  }
+  .speaker-bio {
+    font-size: 0.88rem;
+    color: var(--grey);
+    line-height: 1.8;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    border: 1px solid var(--border);
+  }
+  .empty-state p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: rgba(245,240,232,0.4);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  footer p {
+    font-size: 0.72rem;
+    color: var(--grey);
+    letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .speaker-card { grid-template-columns: 1fr; }
+    .speaker-date-col { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; flex-direction: row; gap: 1rem; align-items: baseline; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/index.html" class="nav-logo">The Meridian Society</a>
+  <div class="nav-links">
+    <a href="/index.html#about">About</a>
+    <a href="/index.html#meridian">Our Name</a>
+    <a href="/index.html#who">Who We Gather</a>
+    <a href="/index.html#speaking">Speaking</a>
+    <a href="/index.html#register">Membership</a>
+    <a href="legacy.html" class="active">Legacy</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-line"></div>
+  <div class="hero-label">The Meridian Society</div>
+  <h1>Legacy</h1>
+  <p class="hero-subtitle">A record of the people who have shared their paths with us.</p>
+  <div class="hero-bottom-line"></div>
+</div>
+
+<!-- SPEAKERS -->
+<div class="divider"></div>
+<div class="speakers-section">
+  <div class="section-label">Past Speakers</div>
+
+  <!-- =====================================================
+       TO ADD A NEW SPEAKER: Copy one speaker-card block
+       below and fill in the details. Add newest at the top.
+  ====================================================== -->
+
+  <!-- EXAMPLE SPEAKER — replace with real details -->
+  <div class="speaker-card">
+    <div class="speaker-date-col">
+      <div class="speaker-month">Feb</div>
+      <div class="speaker-day">14</div>
+      <div class="speaker-year">2026</div>
+    </div>
+    <div class="speaker-info-col">
+      <div class="speaker-name">Jane Doe</div>
+      <div class="speaker-title">Senior Policy Advisor · Government of Canada</div>
+      <div class="speaker-topic-label">Presented on</div>
+      <div class="speaker-topic">"Navigating a Career in Public Policy — From University to Parliament Hill"</div>
+      <div class="speaker-bio">Jane shared her journey from studying political science at uOttawa to advising senior ministers on international trade policy. She spoke candidly about the unglamorous early years, the importance of staying curious, and how she found her footing in a field she never planned to enter.</div>
+    </div>
+  </div>
+
+  <!-- ADD MORE SPEAKERS ABOVE THIS LINE -->
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="/index.html" class="nav-logo" style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;text-decoration:none;">The Meridian Society</a>
+  <p>Ottawa, Canada &nbsp;·&nbsp; Student Run &nbsp;·&nbsp; Est. 2025</p>
+</footer>
+
+</body>
+</html>
