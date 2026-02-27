@@ -75,6 +75,7 @@
     height: 2px;
     background: var(--gold);
   }
+  /* *** REPLACE FROM HERE *** */
   .mobile-menu {
     display: none;
     position: fixed;
@@ -131,6 +132,7 @@
     font-family: 'Inter', sans-serif;
   }
   .mobile-close:hover { opacity: 0.8; }
+  /* *** TO HERE *** */
 
   /* HERO */
   .hero {
@@ -330,14 +332,17 @@
     <a href="#speaking">Speaking</a>
     <a href="#register">Membership</a>
     <a href="#join">Get Involved</a>
+    <!-- *** CHANGED HERE *** -->
     <a href="/legacy.html" style="color:var(--gold);opacity:1;">Legacy</a>
+    <!-- *** END *** -->
   </div>
   <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
-div class="mobile-menu" id="mobileMenu">
+<!-- *** REPLACE FROM HERE *** -->
+<div class="mobile-menu" id="mobileMenu">
   <div class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</div>
   <div class="mobile-menu-logo">The Meridian Society</div>
   <div class="mobile-menu-inner">
@@ -350,6 +355,7 @@ div class="mobile-menu" id="mobileMenu">
     <a href="/legacy.html" class="gold" onclick="document.getElementById('mobileMenu').classList.remove('open')">Legacy</a>
   </div>
 </div>
+<!-- *** TO HERE *** -->
 
 <div class="hero">
   <div class="hero-line"></div>
