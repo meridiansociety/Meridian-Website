@@ -33,7 +33,7 @@
     overflow-x: hidden;
   }
 
- /* NAV */
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
@@ -153,6 +153,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    align-items: flex-start;
     gap: 0.3rem;
   }
   .speaker-month {
@@ -174,6 +175,19 @@
     letter-spacing: 0.15em;
     color: var(--grey);
   }
+  /* *** PHOTO STYLE CHANGED HERE *** */
+  .speaker-photo {
+    width: calc(100% + 4rem);
+    height: 160px;
+    object-fit: cover;
+    margin-top: 1.5rem;
+    margin-left: -2rem;
+    margin-bottom: -2.5rem;
+    filter: grayscale(30%);
+    display: block;
+  }
+  /* *** END *** */
+
   .speaker-info-col {
     padding: 2.5rem 2.5rem;
   }
@@ -227,7 +241,7 @@
     color: rgba(245,240,232,0.4);
   }
 
- /* FOOTER */
+  /* FOOTER */
   footer {
     border-top: 1px solid var(--border);
     padding: 2.5rem 4rem;
@@ -243,19 +257,20 @@
     letter-spacing: 0.1em;
   }
 
+  /* *** REPLACE EVERYTHING FROM HERE *** */
   .hamburger {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
     cursor: pointer;
     padding: 4px;
     z-index: 200;
   }
   .hamburger span {
     display: block;
-    width: 24px;
-    height: 1px;
-    background: var(--cream);
+    width: 28px;
+    height: 2px;
+    background: var(--gold);
     transition: all 0.3s;
   }
   .mobile-menu {
@@ -287,8 +302,6 @@
     cursor: pointer;
     opacity: 0.6;
   }
-    .hamburger { display: none; }
-  }
   @media (max-width: 700px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
@@ -296,12 +309,16 @@
     .speaker-date-col { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; flex-direction: row; gap: 1rem; align-items: baseline; }
     footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
   }
+  /* *** TO HERE *** */
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
+  <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </div>
   <a href="/index.html" class="nav-logo">The Meridian Society</a>
   <div class="nav-links">
     <a href="/index.html#about">About</a>
@@ -310,8 +327,6 @@
     <a href="/index.html#speaking">Speaking</a>
     <a href="/index.html#register">Membership</a>
     <a href="legacy.html" class="active">Legacy</a>
-    <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
-    <span></span><span></span><span></span>
   </div>
 </nav>
 
@@ -326,7 +341,7 @@
   <a href="legacy.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Legacy</a>
 </div>
 <!-- *** END NEW *** -->
- 
+
 <!-- HERO -->
 <div class="hero">
   <div class="hero-line"></div>
@@ -352,6 +367,7 @@
       <div class="speaker-month">Feb</div>
       <div class="speaker-day">14</div>
       <div class="speaker-year">2026</div>
+      <img src="speaker-jane-doe.jpg" alt="Jane Doe" class="speaker-photo"/>
     </div>
     <div class="speaker-info-col">
       <div class="speaker-name">Jane Doe</div>
@@ -374,11 +390,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
