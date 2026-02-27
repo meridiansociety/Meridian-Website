@@ -4,14 +4,17 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>The Meridian Society</title>
-<!-- *** GOOGLE VERIFICATION TAG ADDED HERE *** -->
-<meta name="google-site-verification" content="google2af069010dc1ab79" />
-<!-- *** END *** -->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="google-site-verification" content="google2af069010dc1ab79" />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -61,7 +64,7 @@
     transition: opacity 0.2s;
   }
   .nav-links a:hover { opacity: 1; color: var(--gold-light); }
-
+  
   /* HERO */
   .hero {
     min-height: 100vh;
@@ -284,6 +287,52 @@
     letter-spacing: 0.1em;
   }
 
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--cream);
+    transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(13,13,13,0.98);
+    z-index: 150;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.1em;
+    opacity: 0.85;
+  }
+  .mobile-menu a:hover { color: var(--gold-light); opacity: 1; }
+  .mobile-close {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--cream);
+    cursor: pointer;
+    opacity: 0.6;
+  }
+    .hamburger { display: none; }
+  }
   @media (max-width: 700px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
@@ -302,7 +351,8 @@
     <a href="#who">Who We Gather</a>
     <a href="#speaking">Speaking</a>
     <a href="#register">Membership</a>
-    <a href="#register">Join</a>
+    <a href="#join">Get Involved</a>
+    <a href="/legacy.html" style="opacity:1;color:var(--gold-light);">Legacy</a>
   </div>
 </nav>
 
@@ -312,7 +362,7 @@
   <div class="hero-meta">Ottawa · Est. 2025</div>
   <h1>The <span>Meridian</span><br>Society</h1>
   <div class="hero-subtitle">Find your bearing.</div>
-  <a href="#register" class="btn">Join</a>
+<a href="#register" class="btn">Join</a>
   <div class="hero-bottom-line"></div>
 </div>
 
@@ -322,11 +372,11 @@
   <div class="section-label">About</div>
   <h2 class="section-title">A social and intellectual space for the <em>globally curious.</em></h2>
   <p class="body-text">
-    The Meridian Society is a student-run Ottawa-based group that brings together curious students, alumni, and professionals to share experiences, perspectives, and pathways across travel, careers, and public life.
+    The Meridian Society is a student run Ottawa-based group that brings together curious students, alumni, and professionals to share experiences, perspectives, and pathways across travel, careers, and public life.
   </p>
   <br/>
   <p class="body-text">
-    Through open conversations and informal gatherings, the Society helps its members orient themselves in an increasingly complex world — and gain exposure to people and opportunities they would not otherwise encounter.
+    Through open conversations and informal gatherings, the Society helps its members orient themselves in an increasingly complex world and gain exposure to people and opportunities they would not otherwise encounter.
   </p>
 </section>
 
@@ -337,7 +387,7 @@
   <h2 class="section-title">What is a <em>Meridian?</em></h2>
   <p class="body-text">In geography, a meridian is a line used to orient the world.</p>
   <div class="meridian-block">
-    <p>We liked the idea of creating a place that helps people orient themselves — not by telling them where to go, but by exposing them to different paths.</p>
+    <p>We liked the idea of creating a place that helps people orient themselves, not by telling them where to go, but by exposing them to different paths.</p>
   </div>
   <p class="body-text">The Society's primary role is simple: bring the right people into the same room.</p>
 </section>
@@ -347,7 +397,7 @@
 <section id="who">
   <div class="section-label">Who We Gather</div>
   <h2 class="section-title">People worth being in a room with.</h2>
-  <p class="body-text">The Meridian Society creates conditions where young adults can expand their academic and professional horizons — naturally, through conversation and connection.</p>
+  <p class="body-text">The Meridian Society creates conditions where young adults can expand their academic and professional horizons, naturally, through conversation and connection.</p>
   <div class="who-grid">
     <div class="who-card">
       <div class="who-card-icon">◈</div>
@@ -362,7 +412,7 @@
     <div class="who-card">
       <div class="who-card-icon">◈</div>
       <h3>Across Many Fields</h3>
-      <p>Law, business, policy, media, international work — and everything in between.</p>
+      <p>Law, business, policy, media, international work and everything in between.</p>
     </div>
   </div>
 </section>
@@ -385,33 +435,33 @@
   </p>
 </section>
 
-<!-- SPEAKING -->
-<div class="divider"></div>
-<section id="speaking">
-  <div class="section-label">Speaking & Presenting</div>
-  <h2 class="section-title">Interested in <em>speaking or presenting?</em></h2>
-  <p class="body-text">The Meridian Society regularly hosts open conversations and informal gatherings where professionals, alumni, and thinkers share their experiences and perspectives. If you have a story, insight, or path worth sharing — we want to hear about it.</p>
-  <div class="meridian-block">
-    <p>We would love to hear from you.</p>
-  </div>
-  <p class="body-text">Reach out to us directly at <a href="mailto:meridiansocietycanada@gmail.com" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">meridiansocietycanada@gmail.com</a> and tell us a little about yourself and what you'd like to share.</p>
-</section>
-
 <!-- REGISTER -->
 <div class="divider"></div>
 <section id="register">
   <div class="section-label">Membership</div>
   <h2 class="section-title">Become a <em>Member.</em></h2>
-  <p class="body-text">If you're a curious student, alumni, or professional who believes in the value of the right conversation with the right people — we'd like to meet you. Register your interest using the form below and we'll be in touch.</p>
+  <p class="body-text">If you're a curious student, alumni, or professional who believes in the value of conversation and knowledge, we'd like to meet you. Register as a member using the form below.</p>
   <br/>
   <a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform" target="_blank" class="btn" style="margin-top:1rem;">Register as a Member</a>
 </section>
 
+<!-- SPEAKING -->
+<div class="divider"></div>
+<section id="speaking">
+  <div class="section-label">Speaking & Presenting</div>
+  <h2 class="section-title">Interested in <em>speaking or presenting?</em></h2>
+  <p class="body-text">The Meridian Society hosts speaker events and informal gatherings where professionals, and alumni, share their experiences and perspectives.</p>
+  <div class="meridian-block">
+    <p>We would love to hear from you.</p>
+  </div>
+  <p class="body-text">Reach out to us directly at <a href="mailto:meridiansocietycanada@gmail.com" style="color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.3);">meridiansocietycanada@gmail.com</a> and tell us a little about yourself and what you'd like to share.</p>
+</section>
+  
 <!-- JOIN -->
 <div class="divider"></div>
 <div class="join-section" id="join">
   <div class="section-label">Get Involved</div>
-  <h2 class="section-title" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;color:var(--cream);margin-bottom:1.5rem;">Find your room.</h2>
+  <h2 class="section-title" style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.2;color:var(--cream);margin-bottom:1.5rem;">Stay Connected.</h2>
   <p class="body-text">Follow us on Instagram to stay up to date on upcoming gatherings, conversations, and how to get involved with the Society.</p>
   <div class="join-btns">
     <a href="https://www.instagram.com/Meridian.Society" target="_blank" class="btn">@Meridian.Society</a>
@@ -423,6 +473,11 @@
   <div class="nav-logo">The Meridian Society</div>
   <p>Ottawa, Canada &nbsp;·&nbsp; Student Run &nbsp;·&nbsp; Est. 2025</p>
 </footer>
+
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 
 </body>
 </html>
