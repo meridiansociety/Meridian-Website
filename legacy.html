@@ -40,9 +40,11 @@
     padding: 1.5rem 4rem;
     background: linear-gradient(to bottom, rgba(13,13,13,0.98), transparent);
   }
- nav .hamburger {
-    margin-right: -10rem;
+  /* *** ADDED HERE *** */
+  nav .hamburger {
+    margin-right: 1rem;
   }
+  /* *** END *** */
   .nav-logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
@@ -178,6 +180,19 @@
     letter-spacing: 0.15em;
     color: var(--grey);
   }
+  /* *** PHOTO STYLE CHANGED HERE *** */
+  .speaker-photo {
+    width: calc(100% + 4rem);
+    height: 160px;
+    object-fit: cover;
+    margin-top: 1.5rem;
+    margin-left: -2rem;
+    margin-bottom: -2.5rem;
+    filter: grayscale(30%);
+    display: block;
+  }
+  /* *** END *** */
+
   .speaker-info-col {
     padding: 2.5rem 2.5rem;
   }
@@ -253,8 +268,9 @@
     flex-direction: column;
     gap: 6px;
     cursor: pointer;
-    padding: 4px;
+    padding: 8px;
     z-index: 200;
+    border: 1px solid var(--gold);
   }
   .hamburger span {
     display: block;
@@ -267,31 +283,58 @@
     display: none;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(13,13,13,0.98);
+    background: var(--black);
     z-index: 150;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2.5rem;
+    gap: 0;
   }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    color: var(--cream);
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: 0.1em;
-    opacity: 0.85;
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 320px;
+    border-top: 1px solid var(--border);
   }
-  .mobile-menu a:hover { color: var(--gold-light); opacity: 1; }
+  .mobile-menu a {
+    color: rgba(245,240,232,0.7);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    padding: 1.2rem 0;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold-light); }
+  .mobile-menu a.gold { color: var(--gold); }
+  .mobile-menu-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 2.5rem;
+  }
   .mobile-close {
     position: absolute;
-    top: 1.5rem; right: 1.5rem;
-    font-size: 1.5rem;
+    top: 1.5rem; right: 1.8rem;
+    font-size: 1.2rem;
     color: var(--cream);
     cursor: pointer;
-    opacity: 0.6;
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+    font-family: 'Inter', sans-serif;
   }
+  .mobile-close:hover { opacity: 0.8; }
   @media (max-width: 700px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
@@ -323,12 +366,16 @@
 <!-- *** NEW: MOBILE MENU *** -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</div>
-  <a href="/index.html#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
-  <a href="/index.html#meridian" onclick="document.getElementById('mobileMenu').classList.remove('open')">Our Name</a>
-  <a href="/index.html#who" onclick="document.getElementById('mobileMenu').classList.remove('open')">Who We Gather</a>
-  <a href="/index.html#speaking" onclick="document.getElementById('mobileMenu').classList.remove('open')">Speaking</a>
-  <a href="/index.html#register" onclick="document.getElementById('mobileMenu').classList.remove('open')">Membership</a>
-  <a href="legacy.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Legacy</a>
+  <div class="mobile-menu-logo">The Meridian Society</div>
+  <div class="mobile-menu-inner">
+    <a href="/index.html#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
+    <a href="/index.html#meridian" onclick="document.getElementById('mobileMenu').classList.remove('open')">Our Name</a>
+    <a href="/index.html#who" onclick="document.getElementById('mobileMenu').classList.remove('open')">Who We Gather</a>
+    <a href="/index.html#speaking" onclick="document.getElementById('mobileMenu').classList.remove('open')">Speaking</a>
+    <a href="/index.html#register" onclick="document.getElementById('mobileMenu').classList.remove('open')">Membership</a>
+    <a href="/index.html#join" onclick="document.getElementById('mobileMenu').classList.remove('open')">Get Involved</a>
+    <a href="legacy.html" class="gold" onclick="document.getElementById('mobileMenu').classList.remove('open')">Legacy</a>
+  </div>
 </div>
 <!-- *** END NEW *** -->
 
@@ -357,6 +404,7 @@
       <div class="speaker-month">Feb</div>
       <div class="speaker-day">14</div>
       <div class="speaker-year">2026</div>
+      <img src="speaker-jane-doe.jpg" alt="Jane Doe" class="speaker-photo"/>
     </div>
     <div class="speaker-info-col">
       <div class="speaker-name">Jane Doe</div>
@@ -366,22 +414,6 @@
       <div class="speaker-bio">Jane shared her journey from studying political science at uOttawa to advising senior ministers on international trade policy. She spoke candidly about the unglamorous early years, the importance of staying curious, and how she found her footing in a field she never planned to enter.</div>
     </div>
   </div>
-
-   <div class="speaker-card">
-    <div class="speaker-date-col">
-      <div class="speaker-month">Feb</div>
-      <div class="speaker-day">14</div>
-      <div class="speaker-year">2026</div>
-    </div>
-    <div class="speaker-info-col">
-      <div class="speaker-name">Jane Doe</div>
-      <div class="speaker-title">Senior Policy Advisor · Government of Canada</div>
-      <div class="speaker-topic-label">Presented on</div>
-      <div class="speaker-topic">"Navigating a Career in Public Policy — From University to Parliament Hill"</div>
-      <div class="speaker-bio">Jane shared her journey from studying political science at uOttawa to advising senior ministers on international trade policy. She spoke candidly about the unglamorous early years, the importance of staying curious, and how she found her footing in a field she never planned to enter.</div>
-    </div>
-  </div>
-
 
   <!-- ADD MORE SPEAKERS ABOVE THIS LINE -->
 
@@ -395,7 +427,3 @@
 
 </body>
 </html>
-
-
-
-
