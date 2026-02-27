@@ -286,8 +286,9 @@
     color: var(--grey);
     letter-spacing: 0.1em;
   }
- .hamburger {
-    display: none;
+
+  .hamburger {
+    display: flex;
     flex-direction: column;
     gap: 5px;
     cursor: pointer;
@@ -330,15 +331,18 @@
     cursor: pointer;
     opacity: 0.6;
   }
+  @media (min-width: 701px) {
+    .hamburger { display: none; }
+  }
   @media (max-width: 700px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
-      .hamburger { display: flex; }
     footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
   }
 </style>
 </head>
 <body>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo">The Meridian Society</div>
