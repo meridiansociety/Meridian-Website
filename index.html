@@ -403,15 +403,43 @@
     50% { opacity: 0.3; transform: scale(0.7); }
   }
 
+  /* STICKY JOIN BUTTON */
+  .sticky-join {
+    display: none;
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    padding: 0.85rem 2.8rem;
+    background: var(--black);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    white-space: nowrap;
+  }
+  .sticky-join:hover { background: var(--gold); color: var(--black); }
+  .sticky-join.hidden { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(10px); transition: opacity 0.3s, transform 0.3s; }
+  .sticky-join.visible { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); transition: opacity 0.3s, transform 0.3s; }
+
   @media (max-width: 700px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
     footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+    .sticky-join { display: block; }
   }
 </style>
 </head>
 <body>
+
+<a href="#register" class="sticky-join hidden" id="stickyJoin">Join The Society</a>
 
 <nav>
   <div class="nav-logo">The Meridian Society</div>
@@ -554,7 +582,23 @@
 </footer>
 
 <script>
-  // ============================================================
+  // STICKY JOIN BUTTON
+  const stickyJoin = document.getElementById('stickyJoin');
+  const heroSection = document.querySelector('.hero');
+  const registerSection = document.getElementById('register');
+
+  window.addEventListener('scroll', () => {
+    const heroBottom = heroSection.getBoundingClientRect().bottom;
+    const registerBottom = registerSection.getBoundingClientRect().bottom;
+    if (heroBottom < 0 && registerBottom > 0) {
+      stickyJoin.classList.remove('hidden');
+      stickyJoin.classList.add('visible');
+    } else {
+      stickyJoin.classList.remove('visible');
+      stickyJoin.classList.add('hidden');
+    }
+  });
+
   // LIVE MEMBER COUNTER
   // Replace APPS_SCRIPT_URL below with your deployed Web App URL
   // ============================================================
