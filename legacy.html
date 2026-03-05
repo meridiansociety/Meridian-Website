@@ -40,11 +40,6 @@
     padding: 1.5rem 4rem;
     background: linear-gradient(to bottom, rgba(13,13,13,0.98), transparent);
   }
-  /* *** ADDED HERE *** */
-  nav .hamburger {
-    margin-right: -15rem;
-  }
-  /* *** END *** */
   .nav-logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.1rem;
@@ -64,6 +59,80 @@
     transition: opacity 0.2s;
   }
   .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--gold);
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--black);
+    z-index: 150;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    max-width: 320px;
+    border-top: 1px solid var(--border);
+  }
+  .mobile-menu a {
+    color: rgba(245,240,232,0.7);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    padding: 1.2rem 0;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold-light); }
+  .mobile-menu a.gold { color: var(--gold); }
+  .mobile-menu-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    margin-bottom: 2.5rem;
+  }
+  .mobile-close {
+    position: absolute;
+    top: 1.5rem; right: 1.8rem;
+    font-size: 1.2rem;
+    color: var(--cream);
+    cursor: pointer;
+    opacity: 0.4;
+    letter-spacing: 0.1em;
+    font-family: 'Inter', sans-serif;
+  }
+  .mobile-close:hover { opacity: 0.8; }
 
   /* HERO */
   .hero {
@@ -249,122 +318,44 @@
     letter-spacing: 0.1em;
   }
 
-  /* *** REPLACE EVERYTHING FROM HERE *** */
-  .hamburger {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    padding: 8px;
-    z-index: 200;
-    border: 1px solid var(--gold);
-  }
-  .hamburger span {
-    display: block;
-    width: 28px;
-    height: 2px;
-    background: var(--gold);
-    transition: all 0.3s;
-  }
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--black);
-    z-index: 150;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    width: 100%;
-    max-width: 320px;
-    border-top: 1px solid var(--border);
-  }
-  .mobile-menu a {
-    color: rgba(245,240,232,0.7);
-    text-decoration: none;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    padding: 1.2rem 0;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    transition: color 0.2s;
-  }
-  .mobile-menu a:hover { color: var(--gold-light); }
-  .mobile-menu a.gold { color: var(--gold); }
-  .mobile-menu-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.6;
-    margin-bottom: 2.5rem;
-  }
-  .mobile-close {
-    position: absolute;
-    top: 1.5rem; right: 1.8rem;
-    font-size: 1.2rem;
-    color: var(--cream);
-    cursor: pointer;
-    opacity: 0.4;
-    letter-spacing: 0.1em;
-    font-family: 'Inter', sans-serif;
-  }
-  .mobile-close:hover { opacity: 0.8; }
   @media (max-width: 700px) {
     nav { padding: 1.2rem 1.5rem; }
     .nav-links { display: none; }
+    .hamburger { display: flex; }
     .speaker-card { grid-template-columns: 1fr; }
     .speaker-date-col { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; flex-direction: row; gap: 1rem; align-items: baseline; }
     footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
   }
-  /* *** TO HERE *** */
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
+  <a href="/index.html" class="nav-logo">The Meridian Society</a>
+  <div class="nav-links">
+    <a href="/index.html#about">Bio</a>
+    <a href="/index.html#speaking">Speaking</a>
+    <a href="/index.html#register">Membership</a>
+    <a href="/index.html#join">Get Involved</a>
+    <a href="legacy.html" class="active" style="color:var(--gold);opacity:1;">Legacy</a>
+  </div>
   <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
     <span></span><span></span><span></span>
   </div>
-  <a href="/index.html" class="nav-logo">The Meridian Society</a>
-  <div class="nav-links">
-    <a href="/index.html#about">About</a>
-    <a href="/index.html#meridian">Our Name</a>
-    <a href="/index.html#who">Who We Gather</a>
-    <a href="/index.html#speaking">Speaking</a>
-    <a href="/index.html#register">Membership</a>
-    <a href="legacy.html" class="active">Legacy</a>
-  </div>
 </nav>
 
-<!-- *** NEW: MOBILE MENU *** -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</div>
   <div class="mobile-menu-logo">The Meridian Society</div>
   <div class="mobile-menu-inner">
-    <a href="/index.html#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
-    <a href="/index.html#meridian" onclick="document.getElementById('mobileMenu').classList.remove('open')">Our Name</a>
-    <a href="/index.html#who" onclick="document.getElementById('mobileMenu').classList.remove('open')">Who We Gather</a>
+    <a href="/index.html#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">Bio</a>
     <a href="/index.html#speaking" onclick="document.getElementById('mobileMenu').classList.remove('open')">Speaking</a>
     <a href="/index.html#register" onclick="document.getElementById('mobileMenu').classList.remove('open')">Membership</a>
     <a href="/index.html#join" onclick="document.getElementById('mobileMenu').classList.remove('open')">Get Involved</a>
     <a href="legacy.html" class="gold" onclick="document.getElementById('mobileMenu').classList.remove('open')">Legacy</a>
   </div>
 </div>
-<!-- *** END NEW *** -->
 
 <!-- HERO -->
 <div class="hero">
@@ -400,7 +391,6 @@
       <div class="speaker-bio">Jane shared her journey from studying political science at uOttawa to advising senior ministers on international trade policy. She spoke candidly about the unglamorous early years, the importance of staying curious, and how she found her footing in a field she never planned to enter.</div>
     </div>
   </div>
- 
 
   <!-- ADD MORE SPEAKERS ABOVE THIS LINE -->
 
@@ -414,8 +404,3 @@
 
 </body>
 </html>
-
-
-
-
-
