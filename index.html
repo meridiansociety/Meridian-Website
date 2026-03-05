@@ -513,42 +513,54 @@
   // ============================================================
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx12Z8U8xQUYUHYLZkgVBlzGvhvx2uqSd1WBJNBBQcP0vlbrGzxJFfqi8QWnQVHyiKS/exec';
 
-  function animateCount(el, target, duration) {
+  let currentCount = 0;
+
+  function animateIncrement(el, from, to, duration) {
     const startTime = performance.now();
     function update(currentTime) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target);
+      el.textContent = Math.floor(from + eased * (to - from));
       if (progress < 1) requestAnimationFrame(update);
-      else el.textContent = target;
+      else el.textContent = to;
     }
     requestAnimationFrame(update);
   }
 
   function fetchMemberCount() {
-    fetch(APPS_SCRIPT_URL)
-      .then(res => res.json())
+    fetch(APPS_SCRIPT_URL, {
+      method: 'GET',
+      mode: 'cors',
+      redirect: 'follow'
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
       .then(data => {
         const el = document.getElementById('memberCount');
-        if (data.count !== undefined) {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                animateCount(el, data.count, 1800);
-                observer.unobserve(el);
-              }
-            });
-          }, { threshold: 0.5 });
-          observer.observe(el);
+        if (data.count !== undefined && data.count > 0) {
+          if (currentCount === 0) {
+            // First load — just display the number, no animation
+            el.textContent = data.count;
+            currentCount = data.count;
+          } else if (data.count > currentCount) {
+            // New member joined — animate the increment
+            animateIncrement(el, currentCount, data.count, 1200);
+            currentCount = data.count;
+          }
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.warn('Member count fetch failed:', err);
         document.getElementById('memberCount').textContent = '—';
       });
   }
 
+  // Fetch on load, then poll every 30 seconds for new members
   fetchMemberCount();
+  setInterval(fetchMemberCount, 30000);
 </script>
 
 </body>
