@@ -312,7 +312,37 @@
   footer .nav-logo { font-size: 0.95rem; }
   footer p { font-size: 0.72rem; color: var(--grey); letter-spacing: 0.1em; }
 
-  /* MEMBER COUNTER BADGE */
+  /* PLANET LOADER */
+  .planet-loader {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    position: relative;
+  }
+  .planet-core {
+    width: 10px;
+    height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    opacity: 0.85;
+    flex-shrink: 0;
+  }
+  .planet-ring {
+    position: absolute;
+    width: 22px;
+    height: 8px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: orbit 1.4s linear infinite;
+    transform-origin: center center;
+  }
+  @keyframes orbit {
+    from { transform: rotateX(70deg) rotateZ(0deg); }
+    to   { transform: rotateX(70deg) rotateZ(360deg); }
+  }
   .register-header {
     display: flex;
     justify-content: space-between;
@@ -482,7 +512,12 @@
   <div class="register-header">
     <div class="section-label">Membership</div>
     <div class="member-badge">
-      <div class="member-badge-number" id="memberCount">—</div>
+      <div class="member-badge-number" id="memberCount">
+        <span class="planet-loader" id="planetLoader">
+          <span class="planet-core"></span>
+          <span class="planet-ring"></span>
+        </span>
+      </div>
       <div class="member-badge-label"><span class="counter-live-dot"></span>Members</div>
     </div>
   </div>
@@ -543,7 +578,7 @@
         const el = document.getElementById('memberCount');
         if (data.count !== undefined && data.count > 0) {
           if (currentCount === 0) {
-            // First load — just display the number, no animation
+            // First load — remove planet, just display the number
             el.textContent = data.count;
             currentCount = data.count;
           } else if (data.count > currentCount) {
@@ -555,7 +590,11 @@
       })
       .catch((err) => {
         console.warn('Member count fetch failed:', err);
-        document.getElementById('memberCount').textContent = '—';
+        document.getElementById('memberCount').innerHTML = `
+          <span class="planet-loader">
+            <span class="planet-core"></span>
+            <span class="planet-ring" style="animation:none;transform:rotateX(70deg) rotateZ(30deg);"></span>
+          </span>`;
       });
   }
 
