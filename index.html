@@ -317,27 +317,38 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    width: 28px;
+    height: 28px;
     position: relative;
   }
   .planet-core {
-    width: 10px;
-    height: 10px;
-    background: var(--gold);
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid var(--gold);
     border-radius: 50%;
+    background: transparent;
     opacity: 0.85;
     flex-shrink: 0;
   }
   .planet-ring {
     position: absolute;
-    width: 22px;
-    height: 8px;
+    width: 32px;
+    height: 10px;
     border: 1.5px solid var(--gold);
     border-radius: 50%;
     opacity: 0.6;
     animation: orbit 1.4s linear infinite;
     transform-origin: center center;
+  }
+  .planet-ring::after {
+    content: '★';
+    position: absolute;
+    font-size: 7px;
+    color: var(--gold);
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 1;
   }
   @keyframes orbit {
     from { transform: rotateX(70deg) rotateZ(0deg); }
