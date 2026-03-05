@@ -75,7 +75,7 @@
     height: 2px;
     background: var(--gold);
   }
-  /* *** REPLACE FROM HERE *** */
+
   .mobile-menu {
     display: none;
     position: fixed;
@@ -132,7 +132,6 @@
     font-family: 'Inter', sans-serif;
   }
   .mobile-close:hover { opacity: 0.8; }
-  /* *** TO HERE *** */
 
   /* HERO */
   .hero {
@@ -326,36 +325,28 @@
 <nav>
   <div class="nav-logo">The Meridian Society</div>
   <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#meridian">Our Name</a>
-    <a href="#who">Who We Gather</a>
+    <a href="#about">Bio</a>
     <a href="#speaking">Speaking</a>
     <a href="#register">Membership</a>
     <a href="#join">Get Involved</a>
-    <!-- *** CHANGED HERE *** -->
     <a href="/legacy.html" style="color:var(--gold);opacity:1;">Legacy</a>
-    <!-- *** END *** -->
   </div>
   <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
     <span></span><span></span><span></span>
   </div>
 </nav>
 
-<!-- *** REPLACE FROM HERE *** -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</div>
   <div class="mobile-menu-logo">The Meridian Society</div>
   <div class="mobile-menu-inner">
-    <a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
-    <a href="#meridian" onclick="document.getElementById('mobileMenu').classList.remove('open')">Our Name</a>
-    <a href="#who" onclick="document.getElementById('mobileMenu').classList.remove('open')">Who We Gather</a>
+    <a href="#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">Bio</a>
     <a href="#speaking" onclick="document.getElementById('mobileMenu').classList.remove('open')">Speaking</a>
     <a href="#register" onclick="document.getElementById('mobileMenu').classList.remove('open')">Membership</a>
     <a href="#join" onclick="document.getElementById('mobileMenu').classList.remove('open')">Get Involved</a>
     <a href="/legacy.html" class="gold" onclick="document.getElementById('mobileMenu').classList.remove('open')">Legacy</a>
   </div>
 </div>
-<!-- *** TO HERE *** -->
 
 <div class="hero">
   <div class="hero-line"></div>
