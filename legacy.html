@@ -3,7 +3,7 @@
 <head>
   <script defer src="/_vercel/insights/script.js"></script>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Legacy — The Meridian Society</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,7 +35,7 @@
       --body:        'Cormorant Garamond', Georgia, serif;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 60px; }
     body {
       background: var(--black);
       color: var(--cream);
@@ -202,7 +202,7 @@
     .hero-title {
       font-family: var(--display);
       font-size: clamp(52px, 9vw, 128px);
-      font-weight: 300; letter-spacing: 0.04em; line-height: 0.9;
+      font-weight: 300; letter-spacing: 0.04em; line-height: 0.95;
       color: var(--cream);
       opacity: 0; animation: riseIn 0.8s 0.25s ease forwards;
     }
@@ -404,6 +404,15 @@
 
     /* ─── MOBILE ─── */
     @media (max-width: 700px) {
+      /* iOS tap highlight + tap delay */
+      a { -webkit-tap-highlight-color: transparent; }
+      a, button { touch-action: manipulation; }
+
+      /* Disable mobile-menu hover shift on touch */
+      .mobile-menu a:hover { padding-left: 0; color: var(--cream-35); }
+      .mobile-menu a.gold:hover,
+      .mobile-menu a.active:hover { color: var(--gold); }
+
       .nav-links, .nav-btn { display: none; }
       .hamburger { display: flex; }
       .nav-inner { padding: 0 20px; }
@@ -413,51 +422,50 @@
       .hero { padding-left: 20px; padding-right: 20px; min-height: 44vh; }
       .hero-accent-line { display: none; }
       .hero-globe { display: none; }
-      .hero-content { padding: 52px 0 48px 0; }
+      .hero-content { padding: 48px 0 44px 0; }
 
-      .hero-eyebrow {
-        font-size: 11px;
-        letter-spacing: 0.16em;
-        gap: 10px;
-        margin-bottom: 20px;
-      }
+      .hero-eyebrow { font-size: 11px; letter-spacing: 0.14em; gap: 10px; margin-bottom: 18px; }
       .hero-eyebrow-line { width: 20px; }
-      .hero-title {
-        font-size: clamp(42px, 13vw, 72px);
-        letter-spacing: 0.02em;
+      /* line-height 0.95 prevents Garamond ascender clipping */
+      .hero-title { font-size: clamp(42px, 13vw, 72px); letter-spacing: 0.02em; line-height: 0.95; }
+      .hero-subtitle { font-size: 17px; margin-top: 14px; color: var(--cream-60); }
+
+      .marquee-item { padding: 0 20px; gap: 16px; font-size: 10px; }
+
+      .sec-meta { margin-bottom: 24px; }
+      .speakers-wrap { padding: 36px 0 48px; }
+
+      /* Disable speaker card hover effects — stick on tap */
+      .speaker-card:hover { border-color: var(--gold-border); background: transparent; }
+      .speaker-card:hover::before { transform: scaleY(0); }
+
+      .speaker-card { margin-bottom: 8px; }
+      .speaker-date-col {
+        padding: 14px 20px;
+        gap: 6px;
+        border-right: none;
+        border-bottom: 1px solid var(--gold-border);
+        flex-direction: row;
+        align-items: baseline;
       }
-      .hero-subtitle {
-        font-size: 16px;
-        margin-top: 14px;
-      }
+      .speaker-month { font-size: 11px; }
+      .speaker-day { font-size: 32px; }
+      .speaker-year { font-size: 11px; }
+      .speaker-info-col { padding: 22px 20px 28px; }
+      .speaker-name { font-size: 26px; margin-bottom: 5px; line-height: 1.1; }
+      .speaker-title { font-size: 11px; letter-spacing: 0.14em; margin-bottom: 20px; }
+      .speaker-topic-label { font-size: 11px; margin-bottom: 8px; }
+      .speaker-topic { font-size: 17px; padding-left: 14px; margin-bottom: 16px; line-height: 1.5; }
+      .speaker-bio { font-size: 17px; line-height: 1.85; color: var(--grey); }
 
-      .marquee-item { padding: 0 24px; gap: 20px; font-size: 10px; }
-
-      .sec-meta { margin-bottom: 28px; }
-      .speakers-wrap { padding: 40px 0; }
-
-      .speaker-card { margin-bottom: 2px; }
-      .speaker-date-col { padding: 16px 20px; gap: 8px; }
-      .speaker-month { font-size: 10px; }
-      .speaker-day { font-size: 30px; }
-      .speaker-year { font-size: 10px; }
-      .speaker-info-col { padding: 20px 20px 24px; }
-      .speaker-name { font-size: 24px; margin-bottom: 4px; }
-      .speaker-title {
-        font-size: 10px;
-        letter-spacing: 0.14em;
-        margin-bottom: 18px;
-      }
-      .speaker-topic-label { font-size: 10px; }
-      .speaker-topic { font-size: 16px; margin-bottom: 14px; }
-      .speaker-bio { font-size: 16px; line-height: 1.85; }
-
+      /* Footer: safe area + vertical stack */
       .footer-inner {
-        padding: 24px 20px;
+        padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        gap: 12px;
       }
+      .footer-meta { font-size: 13px; }
     }
   </style>
 </head>
@@ -568,7 +576,7 @@
         <div class="speaker-name">Jane Doe</div>
         <div class="speaker-title">Senior Policy Advisor · Government of Canada</div>
         <div class="speaker-topic-label">Presented on</div>
-        <div class="speaker-topic">"Navigating a Career in Public Policy — From University to Parliament Hill"</div>
+        <div class="speaker-topic">"Navigating a Career in Public Policy, From University to Parliament Hill"</div>
         <div class="speaker-bio">Jane shared her journey from studying political science at uOttawa to advising senior ministers on international trade policy. She spoke candidly about the unglamorous early years, the importance of staying curious, and how she found her footing in a field she never planned to enter.</div>
       </div>
     </div>
