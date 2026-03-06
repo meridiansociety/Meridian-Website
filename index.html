@@ -49,68 +49,110 @@
       overflow-x: hidden;
     }
 
-    /* ─── HAMBURGER & MOBILE MENU ─── */
+    /* ─── HAMBURGER & MOBILE MENU (8B Frosted Side Drawer) ─── */
     .hamburger {
       display: none; flex-direction: column; justify-content: center;
-      cursor: pointer; z-index: 200;
+      cursor: pointer; z-index: 210;
       width: 36px; height: 36px;
-      border: 1px solid var(--gold-border);
       padding: 9px 8px; gap: 0;
-      transition: border-color 0.2s;
+      transition: opacity 0.2s;
     }
-    .hamburger:hover { border-color: var(--gold); }
+    .hamburger:hover { opacity: 0.7; }
     .hamburger span {
       display: block; width: 100%; height: 1px;
       background: var(--gold);
-      transition: transform 0.3s ease, width 0.3s ease;
+      transition: transform 0.35s ease, width 0.35s ease, opacity 0.35s ease;
       transform-origin: center;
     }
     .hamburger span:nth-child(1) { margin-bottom: 5px; }
-    .hamburger span:nth-child(2) { width: 65%; }
-    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); margin-bottom: 0; width: 100%; }
-    .hamburger.open span:nth-child(2) { transform: translateY(0) rotate(-45deg); width: 100%; }
+    .hamburger span:nth-child(2) { width: 60%; margin-left: auto; }
+    .hamburger.open span:nth-child(1) { transform: translateY(3px) rotate(45deg); margin-bottom: -1px; width: 100%; }
+    .hamburger.open span:nth-child(2) { transform: translateY(-3px) rotate(-45deg); width: 100%; margin-left: 0; }
 
-    .mobile-menu {
+    /* Backdrop: dim + blur the page behind the drawer */
+    .mobile-menu-backdrop {
       display: none; position: fixed; inset: 0;
-      background: var(--black); z-index: 150;
-      flex-direction: column; justify-content: center; align-items: center;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 155;
+      opacity: 0;
+      transition: opacity 0.35s ease;
     }
-    .mobile-menu.open { display: flex; }
+    .mobile-menu-backdrop.open { display: block; opacity: 1; }
+
+    /* Drawer: slides in from right */
+    .mobile-menu {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 76%; max-width: 340px;
+      z-index: 160;
+      display: flex; flex-direction: column;
+      background: rgba(18,18,18,0.82);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-left: 1px solid var(--gold-border);
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+      padding: 0;
+      overflow: hidden;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    /* Gold accent top bar */
+    .mobile-menu::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.6;
+    }
+
+    .mobile-menu-logo {
+      font-family: var(--display); font-size: 11px;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55;
+      padding: 28px 32px 0;
+      text-align: left;
+    }
+
     .mobile-menu-inner {
       display: flex; flex-direction: column; align-items: stretch;
-      width: 100%; padding: 0 32px;
+      padding: 32px 32px 0; flex: 1;
     }
+
     .mobile-menu a {
-      color: var(--cream-35); text-decoration: none;
-      font-family: var(--display); font-size: 0.9rem;
-      font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
-      padding: 1.3rem 0; width: 100%;
-      border-bottom: 1px solid rgba(201,168,76,0.1);
-      transition: color 0.2s, padding-left 0.2s;
+      color: rgba(245,240,232,0.55); text-decoration: none;
+      font-family: var(--display); font-size: 1rem;
+      font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 1.15rem 0; width: 100%;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+      transition: color 0.2s;
       display: flex; align-items: center; justify-content: space-between;
     }
-    .mobile-menu a::after { content: "\2192"; color: var(--gold); opacity: 0; transition: opacity 0.2s; font-size: 0.8rem; }
-    .mobile-menu a:hover { color: var(--cream); padding-left: 6px; }
-    .mobile-menu a:hover::after { opacity: 1; }
-    .mobile-menu a.gold { color: var(--gold); }
-    .mobile-menu a.gold::after { opacity: 1; }
-    .mobile-menu-logo {
-      font-family: var(--display); font-size: 0.8rem;
-      letter-spacing: 0.24em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 3rem; opacity: 0.5; text-align: center;
+    .mobile-menu a::after {
+      content: "→"; color: var(--gold); opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      font-size: 0.85rem; transform: translateX(-4px);
     }
+    .mobile-menu a:hover { color: var(--cream); }
+    .mobile-menu a:hover::after { opacity: 1; transform: translateX(0); }
+    .mobile-menu a.gold, .mobile-menu a.active { color: var(--gold); }
+    .mobile-menu a.gold:hover::after, .mobile-menu a.active:hover::after { opacity: 1; transform: translateX(0); }
+
     .mobile-menu-bottom {
-      position: absolute; bottom: 2.5rem; left: 32px; right: 32px;
+      padding: 24px 32px calc(2.5rem + env(safe-area-inset-bottom, 0px));
       display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(201,168,76,0.08);
+      margin-top: 8px;
     }
     .mobile-menu-bottom-text {
-      font-family: var(--display); font-size: 11px; font-weight: 500;
+      font-family: var(--display); font-size: 10px; font-weight: 500;
       letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey2);
     }
     .mobile-menu-cta {
       display: inline-block; padding: 10px 22px;
       border: 1px solid var(--gold-border); color: var(--gold);
-      font-size: 12px; font-weight: 500; font-family: var(--display);
+      font-size: 11px; font-weight: 500; font-family: var(--display);
       letter-spacing: 0.14em; text-transform: uppercase;
       text-decoration: none; transition: all 0.2s;
     }
@@ -989,6 +1031,7 @@
 </nav>
 
 <!-- MOBILE MENU -->
+<div class="mobile-menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-logo">The Meridian Society</div>
   <div class="mobile-menu-inner">
@@ -1190,8 +1233,8 @@
           <p class="speaking-body">
             If you have a story, insight, or path worth sharing, we want to hear about it. We would love to hear from you.
           </p>
-          <a href="mailto:meridiansocietycanada@gmail.com" class="speaking-email">
-            meridiansocietycanada@gmail.com &nbsp;→
+          <a href="/cdn-cgi/l/email-protection#7d10180f1419141c130e121e141809041e1c131c191c3d1a101c1411531e1210" class="speaking-email">
+            <span class="__cf_email__" data-cfemail="cfa2aabda6aba6aea1bca0aca6aabbb6acaea1aeabae8fa8a2aea6a3e1aca0a2">[email&#160;protected]</span> &nbsp;→
           </a>
         </div>
         <div class="formats-panel rv" data-d="2">
@@ -1314,7 +1357,7 @@
       <div class="footer-col-label">Connect</div>
       <ul class="footer-links">
         <li><a href="https://www.instagram.com/Meridian.Society" target="_blank">Instagram</a></li>
-        <li><a href="mailto:meridiansocietycanada@gmail.com">Email Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#254840574c414c444b564a464c40515c46444b444144654248444c490b464a48">Email Us</a></li>
       </ul>
     </div>
     <div>
@@ -1338,7 +1381,7 @@
   }
 </style>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 30);
@@ -1366,9 +1409,11 @@
   rvEls.forEach(el => rvObs.observe(el));
 
   function toggleMenu() {
-    const menu = document.getElementById('mobileMenu');
-    const btn  = document.getElementById('burgerBtn');
-    const open = menu.classList.toggle('open');
+    const menu     = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('menuBackdrop');
+    const btn      = document.getElementById('burgerBtn');
+    const open     = menu.classList.toggle('open');
+    backdrop.classList.toggle('open', open);
     btn.classList.toggle('open', open);
     document.body.style.overflow = open ? 'hidden' : '';
   }
