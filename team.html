@@ -1,396 +1,714 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> <script defer src="/_vercel/insights/script.js"></script>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Team — The Meridian Society</title>
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<head>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Team — The Meridian Society</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet"/>
 
-  :root {
-    --black: #0d0d0d;
-    --dark: #111111;
-    --gold: #c9a84c;
-    --gold-light: #e2c47a;
-    --cream: #f5f0e8;
-    --grey: #888;
-    --border: rgba(201,168,76,0.2);
-  }
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+    :root {
+      --black:       #0d0d0d;
+      --dark:        #111111;
+      --surface:     #161616;
+      --surface2:    #1a1a1a;
+      --gold:        #c9a84c;
+      --gold-light:  #e2c47a;
+      --gold-dim:    rgba(201,168,76,0.12);
+      --gold-border: rgba(201,168,76,0.2);
+      --cream:       #f5f0e8;
+      --cream-60:    rgba(245,240,232,0.84);
+      --cream-35:    rgba(245,240,232,0.58);
+      --grey:        #8a8a8a;
+      --grey2:       #555;
+      --display:     'Cormorant Garamond', Georgia, serif;
+      --serif:       'Cormorant Garamond', Georgia, serif;
+      --body:        'Cormorant Garamond', Georgia, serif;
+    }
 
-  body {
-    background: var(--black);
-    color: var(--cream);
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+    html { scroll-behavior: smooth; scroll-padding-top: 60px; }
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: var(--body);
+      font-weight: 400;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 1.5rem 4rem;
-    background: linear-gradient(to bottom, rgba(13,13,13,0.98), transparent);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    letter-spacing: 0.15em;
-    color: var(--gold);
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2.5rem; }
-  .nav-links a {
-    color: var(--cream);
-    text-decoration: none;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-  }
-  .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+    /* ─── HAMBURGER & MOBILE MENU ─── */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      cursor: pointer; z-index: 210;
+      width: 36px; height: 36px;
+      padding: 9px 8px; gap: 0;
+      transition: opacity 0.2s;
+    }
+    .hamburger:hover { opacity: 0.7; }
+    .hamburger span {
+      display: block; width: 100%; height: 1px;
+      background: var(--gold);
+      transition: transform 0.35s ease, width 0.35s ease, opacity 0.35s ease;
+      transform-origin: center;
+    }
+    .hamburger span:nth-child(1) { margin-bottom: 5px; }
+    .hamburger span:nth-child(2) { width: 60%; margin-left: auto; }
+    .hamburger.open span:nth-child(1) { transform: translateY(3px) rotate(45deg); margin-bottom: -1px; width: 100%; }
+    .hamburger.open span:nth-child(2) { transform: translateY(-3px) rotate(-45deg); width: 100%; margin-left: 0; }
 
-  /* HAMBURGER */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    padding: 4px;
-    z-index: 200;
-  }
-  .hamburger span {
-    display: block;
-    width: 26px;
-    height: 2px;
-    background: var(--gold);
-    transition: all 0.3s;
-  }
+    .mobile-menu-backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 155; opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .mobile-menu-backdrop.open { display: block; opacity: 1; }
 
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--black);
-    z-index: 150;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    width: 100%;
-    max-width: 320px;
-    border-top: 1px solid var(--border);
-  }
-  .mobile-menu a {
-    color: rgba(245,240,232,0.7);
-    text-decoration: none;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    padding: 1.2rem 0;
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    transition: color 0.2s;
-  }
-  .mobile-menu a:hover { color: var(--gold-light); }
-  .mobile-menu a.gold { color: var(--gold); }
-  .mobile-menu-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.6;
-    margin-bottom: 2.5rem;
-  }
-  .mobile-close {
-    position: absolute;
-    top: 1.5rem; right: 1.8rem;
-    font-size: 1.2rem;
-    color: var(--cream);
-    cursor: pointer;
-    opacity: 0.4;
-    letter-spacing: 0.1em;
-    font-family: 'Inter', sans-serif;
-  }
-  .mobile-close:hover { opacity: 0.8; }
+    .mobile-menu {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 76%; max-width: 340px;
+      z-index: 160;
+      display: flex; flex-direction: column;
+      background: rgba(18,18,18,0.82);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-left: 1px solid var(--gold-border);
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+      overflow: hidden;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.6;
+    }
 
-  /* PAGE HEADER */
-  .page-header {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 8rem 2rem 3rem;
-  }
-  .page-tag {
-    font-size: 0.62rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold);
-    opacity: 0.6;
-    margin-bottom: 1rem;
-  }
-  .page-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    font-weight: 300;
-    color: var(--cream);
-    letter-spacing: 0.04em;
-  }
+    .mobile-menu-logo {
+      font-family: var(--display); font-size: 11px;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.55;
+      padding: 28px 32px 0; text-align: left;
+    }
+    .mobile-menu-inner {
+      display: flex; flex-direction: column; align-items: stretch;
+      padding: 32px 32px 0; flex: 1;
+    }
+    .mobile-menu a {
+      color: rgba(245,240,232,0.55); text-decoration: none;
+      font-family: var(--display); font-size: 1rem;
+      font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 1.15rem 0; width: 100%;
+      border-bottom: 1px solid rgba(201,168,76,0.08);
+      transition: color 0.2s;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .mobile-menu a::after {
+      content: '→'; color: var(--gold); opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      font-size: 0.85rem; transform: translateX(-4px);
+    }
+    .mobile-menu a:hover { color: var(--cream); }
+    .mobile-menu a:hover::after { opacity: 1; transform: translateX(0); }
+    .mobile-menu a.gold, .mobile-menu a.active { color: var(--gold); }
+    .mobile-menu-bottom {
+      padding: 24px 32px calc(2.5rem + env(safe-area-inset-bottom, 0px));
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      border-top: 1px solid rgba(201,168,76,0.08);
+      margin-top: 8px;
+    }
+    .mobile-menu-bottom-text {
+      font-family: var(--display); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey2);
+    }
+    .mobile-menu-cta {
+      display: inline-block; padding: 10px 22px;
+      border: 1px solid var(--gold-border); color: var(--gold) !important;
+      font-family: var(--display); font-size: 11px !important; font-weight: 500;
+      letter-spacing: 0.14em !important; text-transform: uppercase;
+      transition: all 0.2s !important; text-decoration: none;
+    }
+    .mobile-menu-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .mobile-menu-cta::after { display: none !important; }
 
-  /* TEAM SECTION */
-  .team-section {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 2rem 7rem;
-  }
-  .page-header {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 4rem 2rem 3rem;
-  }
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px; display: flex; align-items: center;
+      transition: background 0.5s, border-color 0.5s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(13,13,13,0.96);
+      border-color: var(--gold-border);
+      backdrop-filter: blur(16px);
+    }
+    .nav-inner {
+      width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .nav-compass { position: relative; width: 26px; height: 26px; flex-shrink: 0; }
+    .nav-compass svg { width: 100%; height: 100%; }
+    .nav-wordmark {
+      font-family: var(--display); font-size: 14px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream);
+    }
+    .nav-links { display: flex; align-items: center; list-style: none; }
+    .nav-links a {
+      display: block; padding: 0 20px;
+      font-family: var(--display); font-size: 14px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;
+      color: var(--cream-35); transition: color 0.2s; line-height: 60px;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-links a.active { color: var(--gold); }
+    .nav-btn {
+      display: inline-block; padding: 10px 26px;
+      border: 1px solid rgba(201,168,76,0.5); color: var(--gold);
+      text-decoration: none; font-family: var(--display);
+      font-size: 14px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; transition: all 0.25s; white-space: nowrap;
+    }
+    .nav-btn:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
 
-  /* FEATURE CARD */
-  .feature-card {
-    max-width: 1080px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    min-height: 420px;
-    position: relative;
-    overflow: hidden;
-    background: rgba(255,255,255,0.015);
-    transition: background 0.4s;
-  }
-  .feature-card:hover { background: rgba(201,168,76,0.03); }
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 52vh;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 48px 0;
+      padding-top: 60px;
+      position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .hero-globe {
+      position: absolute; right: -60px; top: 50%;
+      transform: translateY(-50%);
+      width: min(520px, 70vw); opacity: 0.04; pointer-events: none;
+    }
+    .hero-globe svg { width: 100%; height: 100%; }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 55% 100% at 85% 50%, transparent, var(--black) 70%);
+      pointer-events: none; z-index: 1;
+    }
+    .hero-accent-line {
+      position: absolute; left: 48px; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold-border) 25%, var(--gold-border) 75%, transparent);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 1400px; margin: 0 auto; width: 100%;
+      padding: 80px 0 72px 40px;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 16px;
+      font-family: var(--display); font-size: 12px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0; animation: riseIn 0.6s 0.1s ease forwards;
+    }
+    .hero-eyebrow-line { width: 36px; height: 1px; background: var(--gold); opacity: 0.5; }
+    .hero-title {
+      font-family: var(--display);
+      font-size: clamp(52px, 9vw, 128px);
+      font-weight: 300; letter-spacing: 0.04em; line-height: 0.95;
+      color: var(--cream);
+      opacity: 0; animation: riseIn 0.8s 0.25s ease forwards;
+    }
+    .hero-title-gold { color: var(--gold); }
+    .hero-subtitle {
+      font-family: var(--serif); font-size: clamp(17px, 1.8vw, 23px);
+      font-style: italic; font-weight: 300; color: var(--cream-60);
+      margin-top: 18px; letter-spacing: 0.04em;
+      opacity: 0; animation: riseIn 0.7s 0.4s ease forwards;
+    }
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-  .card-photo-col {
-    position: relative;
-    overflow: hidden;
-  }
-  .card-photo {
-    width: 100%; height: 100%;
-    min-height: 420px;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    filter: grayscale(25%);
-    transition: filter 0.5s, transform 0.6s;
-    transform: scale(1.02);
-  }
-  .feature-card:hover .card-photo { filter: grayscale(0%); transform: scale(1); }
-  .card-photo-col::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to right, rgba(13,13,13,0) 50%, var(--black) 100%),
-                linear-gradient(to top, rgba(13,13,13,0.85) 0%, rgba(13,13,13,0.3) 30%, transparent 55%);
-    pointer-events: none;
-  }
-  .card-name-overlay {
-    position: absolute;
-    bottom: 1.8rem; left: 1.8rem;
-    z-index: 2;
-  }
-  .card-name-overlay .first {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; font-weight: 400;
-    color: #ffffff; display: block; line-height: 1;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9);
-    letter-spacing: 0.03em;
-  }
-  .card-name-overlay .last {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; font-weight: 400;
-    color: var(--gold-light); display: block; line-height: 1.1;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9);
-    letter-spacing: 0.03em;
-  }
+    /* ─── MARQUEE ─── */
+    .marquee {
+      overflow: hidden; background: var(--surface);
+      border-bottom: 1px solid var(--gold-border);
+      height: 44px; display: flex; align-items: center;
+    }
+    .marquee-track {
+      display: flex; white-space: nowrap;
+      animation: scroll 30s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      padding: 0 40px;
+      font-family: var(--display); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey);
+      display: flex; align-items: center; gap: 32px;
+    }
+    .marquee-item b { color: var(--gold); font-weight: 600; font-size: 10px; }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
 
-  .card-info-col {
-    padding: 3rem 3.5rem;
-    display: flex; flex-direction: column; justify-content: center;
-    border-left: 1px solid var(--border);
-  }
-  .card-role {
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold); opacity: 0.8;
-    margin-bottom: 2rem;
-  }
-  .card-bio {
-    font-size: 0.88rem;
-    color: rgba(245,240,232,0.6);
-    line-height: 1.9;
-    max-width: 460px;
-  }
-  .bio-divider {
-    width: 28px; height: 1px;
-    background: rgba(201,168,76,0.3);
-    margin: 1rem 0;
-  }
+    /* ─── MAIN WRAP ─── */
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
 
-  /* GOLD SECTION DIVIDER */
-  .section-divider {
-    max-width: 1080px;
-    margin: 0 auto;
-    display: flex; align-items: center; gap: 1.2rem;
-    padding: 2.5rem 2rem;
-  }
-  .section-divider::before, .section-divider::after {
-    content: ''; flex: 1; height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-    opacity: 0.35;
-  }
-  .section-divider span {
-    font-size: 0.6rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--gold); opacity: 0.5;
-    white-space: nowrap;
-  }
+    /* ─── SECTION META ROW ─── */
+    .sec-meta {
+      display: flex; align-items: center; gap: 20px; margin-bottom: 48px;
+    }
+    .sec-tag {
+      font-family: var(--display); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .sec-rule { flex: 1; height: 1px; background: var(--gold-border); }
+    .sec-idx {
+      font-family: var(--display); font-size: 11px; font-weight: 400;
+      letter-spacing: 0.16em; color: var(--grey2); flex-shrink: 0;
+    }
 
-  /* PLACEHOLDER */
-  .feature-card.placeholder {
-    border: 1px dashed rgba(201,168,76,0.1);
-    background: transparent;
-    min-height: 140px;
-  }
-  .placeholder-inner {
-    grid-column: 1 / -1;
-    display: flex; align-items: center; justify-content: center;
-    padding: 3rem;
-  }
-  .placeholder-inner p {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem; font-style: italic;
-    color: rgba(245,240,232,0.18);
-    letter-spacing: 0.06em;
-  }
+    /* ─── TEAM WRAP ─── */
+    .team-wrap { padding: 64px 0; }
 
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2.5rem 4rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  footer p {
-    font-size: 0.72rem;
-    color: var(--grey);
-    letter-spacing: 0.1em;
-  }
+    /* ─── MEMBER CARD ─── */
+    .member-card {
+      display: grid;
+      grid-template-columns: 160px 300px 1fr;
+      border: 1px solid var(--gold-border);
+      margin-bottom: 2px;
+      transition: border-color 0.3s, background 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .member-card::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 2px;
+      background: var(--gold);
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform 0.4s ease;
+    }
+    .member-card:hover { border-color: rgba(201,168,76,0.4); background: var(--surface); }
+    .member-card:hover::before { transform: scaleY(1); }
 
-  @media (max-width: 700px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
-    .feature-card { grid-template-columns: 1fr; }
-    .card-photo { min-height: 320px; }
-    .card-photo-col::after { background: linear-gradient(to bottom, transparent 50%, var(--black) 95%); }
-    .card-info-col { border-left: none; border-top: 1px solid var(--border); padding: 2rem 1.5rem; }
-    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
-  }
-</style>
+    /* Number column — mirrors the date column from legacy */
+    .member-num-col {
+      border-right: 1px solid var(--gold-border);
+      padding: 36px 28px;
+      display: flex; flex-direction: column;
+      justify-content: flex-start; gap: 4px;
+      flex-shrink: 0;
+    }
+    .member-num-label {
+      font-family: var(--display); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.85;
+    }
+    .member-num {
+      font-family: var(--serif); font-size: 56px; font-weight: 300;
+      color: var(--cream); line-height: 1; letter-spacing: -0.02em;
+    }
+    .member-num-role {
+      font-family: var(--display); font-size: 11px; font-weight: 400;
+      letter-spacing: 0.14em; color: var(--grey);
+      text-transform: uppercase; line-height: 1.5;
+    }
+
+    /* Photo column */
+    .member-photo-col {
+      position: relative; overflow: hidden;
+      border-right: 1px solid var(--gold-border);
+    }
+    .member-photo {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center top;
+      display: block;
+      filter: grayscale(30%) contrast(1.04);
+      transition: filter 0.55s ease, transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+      transform: scale(1.04);
+    }
+    .member-card:hover .member-photo {
+      filter: grayscale(0%) contrast(1.01);
+      transform: scale(1);
+    }
+    /* Subtle bottom fade to blend into the card */
+    .member-photo-col::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.55) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    /* Info column */
+    .member-info-col { padding: 36px 40px; }
+    .member-name {
+      font-family: var(--serif); font-size: 32px; font-weight: 400;
+      color: var(--cream); margin-bottom: 6px; line-height: 1.15;
+    }
+    .member-title {
+      font-family: var(--display); font-size: 11px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold-light); opacity: 0.8; margin-bottom: 24px;
+    }
+    .member-bio-label {
+      font-family: var(--display); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--grey); margin-bottom: 6px;
+    }
+    .member-focus {
+      font-family: var(--serif); font-size: 20px; font-style: italic;
+      font-weight: 300; color: var(--cream-60);
+      margin-bottom: 20px; line-height: 1.55;
+      border-left: 1px solid var(--gold-border); padding-left: 16px;
+    }
+    .member-bio {
+      font-family: var(--body); font-size: 18px; font-weight: 400;
+      color: var(--grey); line-height: 1.9;
+    }
+
+    /* ─── SECTION DIVIDER ─── */
+    .section-divider {
+      display: flex; align-items: center; gap: 20px;
+      padding: 56px 0 48px;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-border), transparent);
+    }
+    .section-divider-inner {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-divider-diamond {
+      width: 5px; height: 5px;
+      background: var(--gold); transform: rotate(45deg); opacity: 0.5;
+    }
+    .section-divider span {
+      font-family: var(--display); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.5; white-space: nowrap;
+    }
+
+    /* ─── PLACEHOLDER CARD ─── */
+    .member-card.placeholder {
+      border-style: dashed;
+      border-color: rgba(201,168,76,0.12);
+      background: transparent; min-height: 140px;
+    }
+    .member-card.placeholder::before { display: none; }
+    .member-card.placeholder:hover { background: transparent; border-color: rgba(201,168,76,0.18); }
+    .placeholder-inner {
+      grid-column: 1 / -1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 48px; gap: 14px;
+    }
+    .placeholder-diamond {
+      width: 14px; height: 14px;
+      border: 1px solid rgba(201,168,76,0.22);
+      transform: rotate(45deg);
+    }
+    .placeholder-inner p {
+      font-family: var(--serif); font-size: 20px; font-style: italic;
+      color: rgba(245,240,232,0.2); letter-spacing: 0.05em;
+    }
+
+    /* ─── REVEAL ─── */
+    .rv {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .rv.on { opacity: 1; transform: none; }
+    .rv[data-d="1"] { transition-delay: 0.08s; }
+    .rv[data-d="2"] { transition-delay: 0.16s; }
+    .rv[data-d="3"] { transition-delay: 0.24s; }
+
+    @media (max-width: 700px) {
+      .rv { opacity: 0; transform: none; transition: opacity 0.25s ease; }
+      .rv[data-d="1"], .rv[data-d="2"], .rv[data-d="3"] { transition-delay: 0s; }
+    }
+
+    /* ─── FOOTER ─── */
+    footer { background: var(--dark); border-top: 1px solid var(--gold-border); }
+    .footer-inner {
+      max-width: 1400px; margin: 0 auto; padding: 36px 48px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .footer-compass { width: 20px; height: 20px; }
+    .footer-name {
+      font-family: var(--display); font-size: 13px; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream);
+    }
+    .footer-meta {
+      font-family: var(--body); font-size: 14px; font-weight: 400;
+      color: var(--grey); letter-spacing: 0.06em;
+    }
+
+    /* ─── TABLET ─── */
+    @media (max-width: 900px) {
+      .member-card { grid-template-columns: 160px 1fr; }
+      .member-photo-col { display: none; }
+      .member-num-col {
+        border-right: none; border-bottom: 1px solid var(--gold-border);
+        padding: 20px 24px; flex-direction: row; align-items: baseline; gap: 10px;
+      }
+      .member-num { font-size: 38px; }
+      .member-info-col { padding: 24px 28px; }
+      .member-name { font-size: 26px; }
+      .member-focus { font-size: 17px; }
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 700px) {
+      a { -webkit-tap-highlight-color: transparent; }
+      a, button { touch-action: manipulation; }
+      .mobile-menu a:hover { padding-left: 0; color: var(--cream-35); }
+      .mobile-menu a.gold:hover, .mobile-menu a.active:hover { color: var(--gold); }
+      .nav-links, .nav-btn { display: none; }
+      .hamburger { display: flex; }
+      .nav-inner { padding: 0 20px; }
+      .nav-wordmark { font-size: 12px; letter-spacing: 0.16em; }
+      .wrap { padding: 0 20px; }
+      .hero { padding-left: 20px; padding-right: 20px; min-height: 44vh; }
+      .hero-accent-line, .hero-globe { display: none; }
+      .hero-content { padding: 36px 0 32px 0; }
+      .hero-eyebrow { font-size: 11px; letter-spacing: 0.14em; gap: 10px; margin-bottom: 18px; }
+      .hero-eyebrow-line { width: 20px; }
+      .hero-title { font-size: clamp(42px, 13vw, 72px); letter-spacing: 0.02em; line-height: 0.95; }
+      .hero-subtitle { font-size: 17px; margin-top: 14px; }
+      .marquee-item { padding: 0 20px; gap: 16px; font-size: 10px; }
+      .sec-meta { margin-bottom: 24px; }
+      .team-wrap { padding: 24px 0 36px; }
+      .member-card:hover { border-color: var(--gold-border); background: transparent; }
+      .member-card:hover::before { transform: scaleY(0); }
+      .member-card { margin-bottom: 8px; grid-template-columns: 1fr; }
+      .member-photo-col {
+        display: block;
+        border-right: none; border-bottom: 1px solid var(--gold-border);
+        height: 280px;
+      }
+      .member-num-col {
+        padding: 14px 20px; gap: 6px;
+        border-right: none; border-bottom: 1px solid var(--gold-border);
+        flex-direction: row; align-items: baseline;
+      }
+      .member-num { font-size: 32px; }
+      .member-num-label, .member-num-role { font-size: 11px; }
+      .member-info-col { padding: 22px 20px 28px; }
+      .member-name { font-size: 26px; margin-bottom: 5px; line-height: 1.1; }
+      .member-title { font-size: 11px; letter-spacing: 0.14em; margin-bottom: 20px; }
+      .member-bio-label { font-size: 11px; margin-bottom: 8px; }
+      .member-focus { font-size: 17px; padding-left: 14px; margin-bottom: 16px; line-height: 1.5; }
+      .member-bio { font-size: 17px; line-height: 1.85; }
+      .section-divider { padding: 36px 0 28px; }
+      .footer-inner {
+        padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+        flex-direction: column; align-items: flex-start; gap: 12px;
+      }
+      .footer-meta { font-size: 13px; }
+    }
+  </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <a href="/index.html" class="nav-logo">The Meridian Society</a>
-  <div class="nav-links">
-    <a href="/index.html#about">About</a>
-    <a href="/index.html#speaking">Speaking</a>
-    <a href="/index.html#register">Membership</a>
-    <a href="/index.html#join">Get Involved</a>
-    <a href="/team.html" class="active" style="color:var(--gold);opacity:1;">Team</a>
-    <a href="/legacy.html">Legacy</a>
-  </div>
-  <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
-    <span></span><span></span><span></span>
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo">
+      <div class="nav-compass">
+        <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="13" cy="13" r="11.5" stroke="#c9a84c" stroke-width="0.8" opacity="0.9"/>
+          <ellipse cx="13" cy="13" rx="6" ry="11.5" stroke="#c9a84c" stroke-width="0.6" opacity="0.6"/>
+          <line x1="1.5" y1="13" x2="24.5" y2="13" stroke="#c9a84c" stroke-width="0.6" opacity="0.5"/>
+          <line x1="13"  y1="1.5" x2="13"  y2="24.5" stroke="#c9a84c" stroke-width="0.6" opacity="0.4"/>
+          <circle cx="13" cy="13" r="2" fill="#c9a84c" opacity="0.8"/>
+        </svg>
+      </div>
+      <span class="nav-wordmark">The Meridian Society</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/index.html#about">About</a></li>
+      <li><a href="/index.html#speaking">Speaking</a></li>
+      <li><a href="/index.html#register">Membership</a></li>
+      <li><a href="/index.html#join">Get Involved</a></li>
+      <li><a href="/team.html" class="active">Team</a></li>
+      <li><a href="/legacy.html">Legacy</a></li>
+    </ul>
+    <a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform"
+       target="_blank" class="nav-btn">Register</a>
+    <div class="hamburger" id="burgerBtn" onclick="toggleMenu()">
+      <span></span><span></span>
+    </div>
   </div>
 </nav>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</div>
   <div class="mobile-menu-logo">The Meridian Society</div>
   <div class="mobile-menu-inner">
-    <a href="/index.html#about" onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
-    <a href="/index.html#speaking" onclick="document.getElementById('mobileMenu').classList.remove('open')">Speaking</a>
-    <a href="/index.html#register" onclick="document.getElementById('mobileMenu').classList.remove('open')">Membership</a>
-    <a href="/index.html#join" onclick="document.getElementById('mobileMenu').classList.remove('open')">Get Involved</a>
-    <a href="/team.html" class="gold" onclick="document.getElementById('mobileMenu').classList.remove('open')">Team</a>
-    <a href="/legacy.html" onclick="document.getElementById('mobileMenu').classList.remove('open')">Legacy</a>
+    <a href="/index.html#about"    onclick="toggleMenu()">About</a>
+    <a href="/index.html#speaking" onclick="toggleMenu()">Speaking</a>
+    <a href="/index.html#register" onclick="toggleMenu()">Membership</a>
+    <a href="/index.html#join"     onclick="toggleMenu()">Get Involved</a>
+    <a href="/team.html" class="active gold">Team</a>
+    <a href="/legacy.html"         onclick="toggleMenu()">Legacy</a>
+  </div>
+  <div class="mobile-menu-bottom">
+    <span class="mobile-menu-bottom-text">Ottawa · Est. 2025</span>
+    <a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform"
+       target="_blank" class="mobile-menu-cta" onclick="toggleMenu()">Register</a>
   </div>
 </div>
 
-<!-- PAGE HEADER -->
-<div class="page-header">
-  <div class="page-title">The Team</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-accent-line"></div>
+  <div class="hero-globe">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <circle cx="300" cy="300" r="270" stroke="#c9a84c" stroke-width="0.8"/>
+      <ellipse cx="300" cy="300" rx="160" ry="270" stroke="#c9a84c" stroke-width="0.6"/>
+      <ellipse cx="300" cy="300" rx="60"  ry="270" stroke="#c9a84c" stroke-width="0.4"/>
+      <ellipse cx="300" cy="175" rx="224" ry="38"  stroke="#c9a84c" stroke-width="0.5"/>
+      <ellipse cx="300" cy="300" rx="270" ry="36"  stroke="#c9a84c" stroke-width="0.7"/>
+      <ellipse cx="300" cy="425" rx="212" ry="36"  stroke="#c9a84c" stroke-width="0.5"/>
+      <line x1="300" y1="30"  x2="300" y2="570" stroke="#c9a84c" stroke-width="0.5"/>
+      <line x1="30"  y1="300" x2="570" y2="300" stroke="#c9a84c" stroke-width="0.5"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      The Meridian Society
+      <div class="hero-eyebrow-line"></div>
+    </div>
+    <h1 class="hero-title">THE <span class="hero-title-gold">TEAM</span></h1>
+    <p class="hero-subtitle">The people who believe the right conversation, with the right person, changes everything.</p>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item">Founding Leadership <b>◈</b> Ottawa, Canada <b>◈</b> Est. 2025 <b>◈</b> Society Executives <b>◈</b> Student Run <b>◈</b> Global &amp; International Studies <b>◈</b> The Meridian Society <b>◈</b></div>
+    <div class="marquee-item">Founding Leadership <b>◈</b> Ottawa, Canada <b>◈</b> Est. 2025 <b>◈</b> Society Executives <b>◈</b> Student Run <b>◈</b> Global &amp; International Studies <b>◈</b> The Meridian Society <b>◈</b></div>
+  </div>
 </div>
 
 <!-- TEAM -->
-<div class="team-section">
+<div class="wrap">
+  <div class="team-wrap">
 
-  <!-- Magnus -->
-  <div class="feature-card">
-    <div class="card-photo-col">
-      <img src="/images/team/magnus.jpg" class="card-photo" alt="Magnus Abdelnour"/>
-      <div class="card-name-overlay">
-        <span class="first">Magnus</span>
-        <span class="last">Abdelnour</span>
+    <!-- Founding Leadership label -->
+    <div class="sec-meta rv">
+      <span class="sec-tag">Founding Leadership</span>
+      <div class="sec-rule"></div>
+      <span class="sec-idx">The Team</span>
+    </div>
+
+    <!-- =====================================================
+         TO ADD A NEW MEMBER: Copy one member-card block
+         and fill in the details. Add newest at the bottom.
+    ====================================================== -->
+
+    <!-- Magnus -->
+    <div class="member-card rv" data-d="1">
+      <div class="member-num-col">
+        <div class="member-num-label">No.</div>
+        <div class="member-num">01</div>
+        <div class="member-num-role">Founder</div>
+      </div>
+      <div class="member-photo-col">
+        <img src="/images/team/magnus.jpg" class="member-photo" alt="Magnus Abdelnour"/>
+      </div>
+      <div class="member-info-col">
+        <div class="member-name">Magnus Abdelnour</div>
+        <div class="member-title">Founder &amp; President</div>
+        <div class="member-bio-label">Studies</div>
+        <div class="member-focus">"Bachelor's of Global and International Studies — Europe and Russia in the World (EURUS), Carleton University"</div>
+        <div class="member-bio">Started The Meridian Society because the Journalists, Founders, Scholars, and Accomplished Professionals worth learning from rarely just show up — someone has to bring them to the room.</div>
       </div>
     </div>
-    <div class="card-info-col">
-      <div class="card-role">Founder &amp; President</div>
-      <div class="card-bio">
-        Studying at Carleton University — Bachelor's of Global and International Studies, specializing in Europe and Russia in the World (EURUS).
-        <div class="bio-divider"></div>
-        Started The Meridian Society because the Journalists, Founders, Scholars, and Accomplished Professionals worth learning from rarely just show up — someone has to bring them to the room.
+
+    <!-- ADD MORE MEMBERS ABOVE THIS LINE -->
+
+    <!-- Society Executives divider -->
+    <div class="section-divider rv">
+      <div class="section-divider-inner">
+        <div class="section-divider-diamond"></div>
+        <span>Society Executives</span>
+        <div class="section-divider-diamond"></div>
       </div>
     </div>
-  </div>
 
-  <!-- Divider between founder and execs -->
-  <div class="section-divider">
-    <span>Society Executives</span>
-  </div>
-
-  <!-- Placeholder — remove when first exec is added -->
-  <div class="feature-card placeholder">
-    <div class="placeholder-inner">
-      <p>More to come — the team is growing.</p>
+    <!-- Placeholder exec card -->
+    <div class="member-card placeholder rv">
+      <div class="placeholder-inner">
+        <div class="placeholder-diamond"></div>
+        <p>More to come — the team is growing.</p>
+      </div>
     </div>
-  </div>
 
+  </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  <a href="/index.html" class="nav-logo" style="font-family:'Cormorant Garamond',serif;font-size:0.95rem;letter-spacing:0.15em;color:var(--gold);text-transform:uppercase;text-decoration:none;">The Meridian Society</a>
-  <p>Ottawa, Canada &nbsp;·&nbsp; Student Run &nbsp;·&nbsp; Est. 2025</p>
+  <div class="footer-inner">
+    <a href="/index.html" class="footer-logo">
+      <svg class="footer-compass" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="11" cy="11" r="9.5" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+        <ellipse cx="11" cy="11" rx="5" ry="9.5" stroke="#c9a84c" stroke-width="0.6" opacity="0.4"/>
+        <line x1="1.5" y1="11" x2="20.5" y2="11" stroke="#c9a84c" stroke-width="0.6" opacity="0.35"/>
+        <line x1="11"  y1="1.5" x2="11"  y2="20.5" stroke="#c9a84c" stroke-width="0.6" opacity="0.3"/>
+        <circle cx="11" cy="11" r="1.5" fill="#c9a84c" opacity="0.6"/>
+      </svg>
+      <span class="footer-name">The Meridian Society</span>
+    </a>
+    <span class="footer-meta">Ottawa, Canada &nbsp;·&nbsp; Student Run &nbsp;·&nbsp; Est. 2025</span>
+  </div>
 </footer>
+
+<script>
+  // Scroll nav
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  // Reveal on scroll
+  const rvEls = document.querySelectorAll('.rv');
+  const rvObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('on'); rvObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  rvEls.forEach(el => rvObs.observe(el));
+
+  // Mobile menu toggle
+  function toggleMenu() {
+    const menu     = document.getElementById('mobileMenu');
+    const backdrop = document.getElementById('menuBackdrop');
+    const btn      = document.getElementById('burgerBtn');
+    const open     = menu.classList.toggle('open');
+    backdrop.classList.toggle('open', open);
+    btn.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+</script>
 
 </body>
 </html>
