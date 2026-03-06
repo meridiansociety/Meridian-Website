@@ -141,7 +141,7 @@
 
     .mobile-menu-bottom {
       padding: 24px 32px calc(2.5rem + env(safe-area-inset-bottom, 0px));
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
       border-top: 1px solid rgba(201,168,76,0.08);
       margin-top: 8px;
     }
@@ -150,10 +150,11 @@
       letter-spacing: 0.16em; text-transform: uppercase; color: var(--grey2);
     }
     .mobile-menu-cta {
-      display: inline-block; padding: 10px 22px;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      padding: 12px 22px; width: 100%;
       border: 1px solid var(--gold-border); color: var(--gold);
-      font-size: 11px; font-weight: 500; font-family: var(--display);
-      letter-spacing: 0.14em; text-transform: uppercase;
+      font-size: 12px; font-weight: 500; font-family: var(--display);
+      letter-spacing: 0.18em; text-transform: uppercase;
       text-decoration: none; transition: all 0.2s;
     }
     .mobile-menu-cta:hover { background: var(--gold); color: var(--black); }
@@ -975,7 +976,7 @@
       .member-count-num { font-size: 40px; }
       .member-count-box { padding: 14px 28px; }
 
-      #join { padding: 56px 20px; }
+      #join { padding: 40px 20px; }
       .join-headline { font-size: clamp(30px, 8.5vw, 46px); }
       .join-body { font-size: 18px; font-weight: 400; }
       .join-handle { padding: 18px 28px; font-size: 19px; width: 100%; justify-content: center; }
@@ -991,7 +992,9 @@
       /* ── Sticky join: show + respect iPhone home bar safe area ── */
       .sticky-join { display: block; bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)); }
 
-      .s { padding: 56px 0; }
+      .s { padding: 40px 0; }
+      /* Tighter section spacing on mobile */
+      #about, #who, #not, #speaking, #register { padding-top: 36px; padding-bottom: 36px; }
     }
   </style>
 </head>
