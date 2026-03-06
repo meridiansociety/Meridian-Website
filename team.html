@@ -438,56 +438,117 @@
     @media (max-width: 900px) {
       .member-card { grid-template-columns: 1fr; }
       .member-photo-col {
-        display: block;
-        border-right: none; border-bottom: 1px solid var(--gold-border);
-        height: 320px;
+        border-right: none;
+        border-bottom: 1px solid var(--gold-border);
+        height: 360px;
       }
-      .member-info-col { padding: 24px 28px; }
-      .member-name { font-size: 26px; }
-      .member-focus { font-size: 17px; }
+      .member-info-col { padding: 28px 32px 36px; }
+      .member-name { font-size: 28px; }
+      .member-focus { font-size: 18px; }
     }
 
     /* ─── MOBILE ─── */
     @media (max-width: 700px) {
+      /* Touch polish */
       a { -webkit-tap-highlight-color: transparent; }
       a, button { touch-action: manipulation; }
-      .mobile-menu a:hover { padding-left: 0; color: var(--cream-35); }
-      .mobile-menu a.gold:hover, .mobile-menu a.active:hover { color: var(--gold); }
+
+      /* Disable mobile-menu hover shift on touch */
+      .mobile-menu a:hover { color: var(--cream-35); }
+      .mobile-menu a.gold:hover,
+      .mobile-menu a.active:hover { color: var(--gold); }
+
+      /* Nav */
       .nav-links, .nav-btn { display: none; }
       .hamburger { display: flex; }
       .nav-inner { padding: 0 20px; }
-      .nav-wordmark { font-size: 12px; letter-spacing: 0.16em; }
-      .wrap { padding: 0 20px; }
-      .hero { padding-left: 20px; padding-right: 20px; min-height: 44vh; }
+      .nav-wordmark { font-size: 11px; letter-spacing: 0.14em; }
+
+      /* Layout */
+      .wrap { padding: 0 16px; }
+
+      /* Hero */
+      .hero { padding-left: 16px; padding-right: 16px; min-height: 42vh; }
       .hero-accent-line, .hero-globe { display: none; }
-      .hero-content { padding: 36px 0 32px 0; }
-      .hero-eyebrow { font-size: 11px; letter-spacing: 0.14em; gap: 10px; margin-bottom: 18px; }
-      .hero-eyebrow-line { width: 20px; }
-      .hero-title { font-size: clamp(42px, 13vw, 72px); letter-spacing: 0.02em; line-height: 0.95; }
-      .hero-subtitle { font-size: 17px; margin-top: 14px; }
-      .marquee-item { padding: 0 20px; gap: 16px; font-size: 10px; }
-      .sec-meta { margin-bottom: 24px; }
-      .team-wrap { padding: 24px 0 36px; }
+      .hero-content { padding: 32px 0 28px 0; }
+      .hero-eyebrow {
+        font-size: 10px; letter-spacing: 0.14em;
+        gap: 10px; margin-bottom: 16px;
+      }
+      .hero-eyebrow-line { width: 16px; }
+      .hero-title {
+        font-size: clamp(40px, 12vw, 68px);
+        letter-spacing: 0.02em; line-height: 0.93;
+      }
+      .hero-subtitle { font-size: 16px; margin-top: 12px; line-height: 1.6; }
+
+      /* Marquee */
+      .marquee-item { padding: 0 16px; gap: 14px; font-size: 10px; letter-spacing: 0.14em; }
+
+      /* Team section */
+      .team-wrap { padding: 20px 0 40px; }
+
+      /* Member card — stacked, no hover effects on touch */
+      .member-card {
+        grid-template-columns: 1fr;
+        margin-bottom: 12px;
+      }
       .member-card:hover { border-color: var(--gold-border); background: transparent; }
       .member-card:hover::before { transform: scaleY(0); }
-      .member-card { margin-bottom: 8px; grid-template-columns: 1fr; }
+
+      /* Photo */
       .member-photo-col {
-        display: block;
-        border-right: none; border-bottom: 1px solid var(--gold-border);
-        height: 280px;
+        border-right: none;
+        border-bottom: 1px solid var(--gold-border);
+        height: 300px;
       }
-      .member-info-col { padding: 22px 20px 28px; }
-      .member-name { font-size: 26px; margin-bottom: 5px; line-height: 1.1; }
-      .member-title { font-size: 11px; letter-spacing: 0.14em; margin-bottom: 20px; }
-      .member-bio-label { font-size: 11px; margin-bottom: 8px; }
-      .member-focus { font-size: 17px; padding-left: 14px; margin-bottom: 16px; line-height: 1.5; }
-      .member-bio { font-size: 17px; line-height: 1.85; }
-      .section-divider { padding: 36px 0 28px; }
+      /* Disable the scale transform on mobile so it sits flush */
+      .member-photo {
+        transform: scale(1);
+        filter: grayscale(0%) contrast(1.02);
+      }
+
+      /* Info */
+      .member-info-col {
+        padding: 20px 18px 28px;
+      }
+      .member-name {
+        font-size: 24px; margin-bottom: 4px;
+        line-height: 1.1; word-break: break-word;
+      }
+      .member-title {
+        font-size: 10px; letter-spacing: 0.14em;
+        margin-bottom: 18px;
+      }
+      .member-bio-label { font-size: 10px; margin-bottom: 6px; }
+      .member-focus {
+        font-size: 16px; padding-left: 12px;
+        margin-bottom: 14px; line-height: 1.5;
+      }
+      .member-bio { font-size: 16px; line-height: 1.85; }
+
+      /* Section divider */
+      .section-divider { padding: 32px 0 24px; }
+      .section-divider span { font-size: 10px; letter-spacing: 0.32em; }
+
+      /* Placeholder */
+      .placeholder-inner { padding: 36px 20px; }
+      .placeholder-inner p { font-size: 17px; }
+
+      /* Footer */
       .footer-inner {
-        padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
-        flex-direction: column; align-items: flex-start; gap: 12px;
+        padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+        flex-direction: column; align-items: flex-start; gap: 10px;
       }
       .footer-meta { font-size: 13px; }
+    }
+
+    /* ─── VERY SMALL (320px) ─── */
+    @media (max-width: 360px) {
+      .hero-title { font-size: 36px; }
+      .member-name { font-size: 22px; }
+      .member-focus { font-size: 15px; }
+      .member-bio { font-size: 15px; }
     }
   </style>
 </head>
