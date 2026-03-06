@@ -29,7 +29,7 @@
       --cream:      #f5f0e8;
       --cream-60:   rgba(245,240,232,0.6);
       --cream-35:   rgba(245,240,232,0.35);
-      --grey:       #666;
+      --grey:       #888;
       --grey2:      #444;
       --display:    'Syne', sans-serif;
       --serif:      'Cormorant Garamond', Georgia, serif;
@@ -42,7 +42,7 @@
       color: var(--cream);
       font-family: var(--body);
       font-weight: 300;
-      line-height: 1.7;
+      line-height: 1.75;
       overflow-x: hidden;
     }
 
@@ -91,6 +91,7 @@
     .mobile-menu a:hover::after { opacity: 1; }
     .mobile-menu a.gold { color: var(--gold); }
     .mobile-menu a.gold::after { opacity: 1; }
+    .mobile-menu-logo-img { height: 28px; width: auto; display: block; opacity: 0.55; }
     .mobile-menu-logo {
       font-family: var(--display); font-size: 0.65rem;
       letter-spacing: 0.38em; text-transform: uppercase;
@@ -134,7 +135,7 @@
     /* ─── NAV ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100; height: 60px;
+      z-index: 210; height: 60px;
       display: flex; align-items: center;
       transition: background 0.5s, border-color 0.5s;
       border-bottom: 1px solid transparent;
@@ -151,13 +152,8 @@
     }
     /* Logo: small compass glyph + wordmark */
     .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-    .nav-compass {
-      position: relative; width: 26px; height: 26px; flex-shrink: 0;
-    }
-    .nav-compass svg { width: 100%; height: 100%; }
-    .nav-wordmark {
-      font-family: var(--display); font-size: 11px; font-weight: 600;
-      letter-spacing: 0.26em; text-transform: uppercase; color: var(--cream);
+    .nav-logo-img {
+      height: 34px; width: auto; display: block; flex-shrink: 0;
     }
     .nav-links { display: flex; align-items: center; list-style: none; }
     .nav-links a {
@@ -277,7 +273,7 @@
       font-family: var(--serif);
       font-size: clamp(22px, 2.6vw, 38px);
       font-style: italic; font-weight: 300;
-      color: var(--cream-60); letter-spacing: 0.04em;
+      color: var(--cream-75); letter-spacing: 0.04em;
       margin-top: 8px;
       opacity: 0; animation: riseIn 0.7s 0.5s ease forwards;
     }
@@ -290,8 +286,8 @@
     @keyframes expandLine { from{width:0;opacity:0} to{width:56px;opacity:1} }
 
     .hero-desc {
-      font-family: var(--body); font-size: 15px; font-weight: 300;
-      color: var(--cream-60); max-width: 440px; line-height: 1.8;
+      font-family: var(--body); font-size: 16px; font-weight: 300;
+      color: var(--cream-75); max-width: 440px; line-height: 1.9;
       margin-bottom: 40px;
       opacity: 0; animation: riseIn 0.7s 0.75s ease forwards;
     }
@@ -423,8 +419,8 @@
     }
     .about-headline em { color: var(--gold); font-style: italic; }
     .about-body {
-      font-family: var(--body); font-size: 15px; font-weight: 300;
-      line-height: 1.85; color: var(--cream-60);
+      font-family: var(--body); font-size: 16px; font-weight: 300;
+      line-height: 1.9; color: var(--cream-75);
       margin-top: 28px;
     }
     /* Definition callout */
@@ -445,8 +441,8 @@
       line-height: 1.55; margin-bottom: 20px;
     }
     .def-body {
-      font-family: var(--body); font-size: 14px; font-weight: 300;
-      color: var(--cream-60); line-height: 1.8;
+      font-family: var(--body); font-size: 15px; font-weight: 300;
+      color: var(--cream-75); line-height: 1.9;
     }
 
     /* ═══════════════════════════════════════════
@@ -465,8 +461,8 @@
     }
     .who-headline em { color: var(--gold); font-style: italic; }
     .who-intro-body {
-      font-family: var(--body); font-size: 15px; font-weight: 300;
-      color: var(--cream-60); line-height: 1.8;
+      font-family: var(--body); font-size: 16px; font-weight: 300;
+      color: var(--cream-75); line-height: 1.9;
     }
     /* Card trio */
     .who-cards {
@@ -498,7 +494,7 @@
       color: var(--cream); margin-bottom: 14px;
     }
     .who-body {
-      font-family: var(--body); font-size: 14px; font-weight: 300;
+      font-family: var(--body); font-size: 15px; font-weight: 300;
       color: var(--grey); line-height: 1.75;
     }
 
@@ -517,8 +513,8 @@
     }
     .not-headline em { color: var(--gold); font-style: italic; }
     .not-header-body {
-      font-family: var(--body); font-size: 15px; font-weight: 300;
-      color: var(--cream-60); line-height: 1.8;
+      font-family: var(--body); font-size: 16px; font-weight: 300;
+      color: var(--cream-75); line-height: 1.9;
     }
     /* Each NOT item is a full-width row */
     .not-rows { border-top: 1px solid var(--gold-border); }
@@ -533,7 +529,7 @@
     .not-row-left {
       display: flex; align-items: baseline; gap: 22px;
       font-family: var(--body); font-size: 16px; font-weight: 300;
-      color: var(--cream-60);
+      color: var(--cream-75);
     }
     .not-row:hover .not-row-left { color: var(--cream); }
     .not-x {
@@ -555,8 +551,8 @@
       padding-left: 28px;
     }
     .not-closing-body {
-      font-family: var(--body); font-size: 14px; font-weight: 300;
-      color: var(--cream-60); line-height: 1.85;
+      font-family: var(--body); font-size: 15px; font-weight: 300;
+      color: var(--cream-75); line-height: 1.9;
     }
 
     /* ═══════════════════════════════════════════
@@ -575,8 +571,8 @@
     }
     .speaking-headline em { color: var(--gold); font-style: italic; }
     .speaking-body {
-      font-family: var(--body); font-size: 15px; font-weight: 300;
-      color: var(--cream-60); line-height: 1.85; margin-bottom: 16px;
+      font-family: var(--body); font-size: 16px; font-weight: 300;
+      color: var(--cream-75); line-height: 1.9; margin-bottom: 16px;
     }
     .speaking-email {
       display: inline-flex; align-items: center; gap: 10px;
@@ -602,8 +598,8 @@
     .formats-list { list-style: none; }
     .formats-list li {
       display: flex; align-items: center; gap: 14px;
-      font-family: var(--body); font-size: 14px; font-weight: 300;
-      color: var(--cream-60); padding: 14px 0;
+      font-family: var(--body); font-size: 15px; font-weight: 300;
+      color: var(--cream-75); padding: 14px 0;
       border-bottom: 1px solid rgba(255,255,255,0.04);
       transition: color 0.2s, padding-left 0.3s;
     }
@@ -631,14 +627,14 @@
     }
     .register-headline em { color: var(--gold); font-style: italic; }
     .register-body {
-      font-family: var(--body); font-size: 15px; font-weight: 300;
-      color: var(--cream-60); line-height: 1.85; margin-bottom: 32px;
+      font-family: var(--body); font-size: 16px; font-weight: 300;
+      color: var(--cream-75); line-height: 1.9; margin-bottom: 32px;
     }
     .register-perks { list-style: none; margin-bottom: 40px; }
     .register-perks li {
       display: flex; align-items: flex-start; gap: 14px;
-      font-family: var(--body); font-size: 14px; font-weight: 300;
-      color: var(--cream-60); padding: 13px 0;
+      font-family: var(--body); font-size: 15px; font-weight: 300;
+      color: var(--cream-75); padding: 13px 0;
       border-bottom: 1px solid rgba(255,255,255,0.04);
     }
     .register-perks li::before {
@@ -717,7 +713,7 @@
     }
     .member-vis-detail {
       font-family: var(--body); font-size: 12px; font-weight: 300;
-      color: var(--grey); line-height: 1.8; z-index: 1;
+      color: var(--grey); line-height: 1.9; z-index: 1;
     }
 
     /* ═══════════════════════════════════════════
@@ -750,8 +746,8 @@
     }
     .join-headline em { color: var(--gold); font-style: italic; }
     .join-body {
-      font-family: var(--body); font-size: 15px; font-weight: 300;
-      color: var(--cream-60); line-height: 1.8;
+      font-family: var(--body); font-size: 16px; font-weight: 300;
+      color: var(--cream-75); line-height: 1.9;
     }
     .join-handle {
       display: inline-flex; align-items: center; gap: 14px;
@@ -792,8 +788,8 @@
       letter-spacing: 0.24em; text-transform: uppercase; color: var(--cream);
     }
     .footer-desc {
-      font-family: var(--body); font-size: 13px; font-weight: 300;
-      color: var(--grey); line-height: 1.8; max-width: 270px;
+      font-family: var(--body); font-size: 14px; font-weight: 300;
+      color: var(--grey); line-height: 1.9; max-width: 270px;
     }
     .footer-col-label {
       font-family: var(--display); font-size: 9px; font-weight: 600;
@@ -876,7 +872,7 @@
       .speaking-headline, .register-headline { font-size: clamp(26px, 7vw, 38px); }
 
       /* About */
-      .about-body { font-size: 14px; margin-top: 20px; }
+      .about-body { font-size: 15px; margin-top: 20px; }
       .def-block { padding: 26px 22px; }
       .def-quote { font-size: 18px; }
       .def-body { font-size: 13px; }
@@ -884,33 +880,33 @@
       /* Who we gather */
       .who-cards { grid-template-columns: 1fr; }
       .who-intro-row { gap: 20px; margin-bottom: 28px; }
-      .who-intro-body { font-size: 14px; }
+      .who-intro-body { font-size: 15px; }
       .who-card { padding: 30px 22px 26px; }
       .who-num { font-size: 48px; margin-bottom: 10px; }
       .who-title { font-size: 20px; }
-      .who-body { font-size: 13px; }
+      .who-body { font-size: 14px; }
 
       /* What we are not */
       .not-header { gap: 18px; margin-bottom: 28px; }
-      .not-header-body { font-size: 14px; }
+      .not-header-body { font-size: 15px; }
       .not-row { padding: 15px 0; }
       .not-row-left { font-size: 14px; gap: 14px; }
       .not-closing { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
       .not-closing-quote { font-size: 18px; padding-left: 18px; }
-      .not-closing-body { font-size: 13px; }
+      .not-closing-body { font-size: 14px; }
 
       /* Speaking */
       .speaking-grid { gap: 28px; }
-      .speaking-body { font-size: 14px; }
+      .speaking-body { font-size: 15px; }
       .speaking-email { font-size: 15px; margin-top: 16px; }
       .formats-panel { padding: 26px 22px; }
       .formats-label { margin-bottom: 16px; }
-      .formats-list li { font-size: 13px; padding: 11px 0; }
+      .formats-list li { font-size: 14px; padding: 11px 0; }
 
       /* Membership */
       .register-grid { gap: 32px; }
-      .register-body { font-size: 14px; }
-      .register-perks li { font-size: 13px; padding: 11px 0; }
+      .register-body { font-size: 15px; }
+      .register-perks li { font-size: 14px; padding: 11px 0; }
       .btn-register { padding: 13px 28px; font-size: 10px; }
       .member-vis { padding: 40px 24px; }
       .member-vis-name { font-size: 18px; }
@@ -920,13 +916,13 @@
       /* Get involved */
       #join { padding: 60px 20px; }
       .join-headline { font-size: clamp(30px, 8.5vw, 46px); }
-      .join-body { font-size: 14px; }
+      .join-body { font-size: 15px; }
       .join-handle { padding: 18px 28px; font-size: 17px; width: 100%; justify-content: center; }
 
       /* Footer */
       .footer-grid { grid-template-columns: 1fr; padding: 40px 20px 32px; gap: 28px; }
       .footer-bottom { padding: 16px 20px; flex-direction: column; align-items: flex-start; gap: 4px; }
-      .footer-desc { max-width: 100%; }
+      .footer-desc { max-width: 100%; font-size: 14px; }
 
       /* Sticky join */
       .sticky-join { display: block; }
@@ -945,16 +941,10 @@
 <nav id="mainNav">
   <div class="nav-inner">
     <a href="#" class="nav-logo">
-      <div class="nav-compass">
-        <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="13" cy="13" r="11.5" stroke="#c9a84c" stroke-width="0.8" opacity="0.9"/>
-          <ellipse cx="13" cy="13" rx="6" ry="11.5" stroke="#c9a84c" stroke-width="0.6" opacity="0.6"/>
-          <line x1="1.5" y1="13" x2="24.5" y2="13" stroke="#c9a84c" stroke-width="0.6" opacity="0.5"/>
-          <line x1="13"  y1="1.5" x2="13"  y2="24.5" stroke="#c9a84c" stroke-width="0.6" opacity="0.4"/>
-          <circle cx="13" cy="13" r="2" fill="#c9a84c" opacity="0.8"/>
-        </svg>
-      </div>
-      <span class="nav-wordmark">The Meridian Society</span>
+      <img src="/logo.svg"
+           onerror="this.onerror=null;this.src='/logo.png'"
+           alt="The Meridian Society"
+           class="nav-logo-img">
     </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
@@ -973,7 +963,12 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-menu-logo">The Meridian Society</div>
+  <div class="mobile-menu-logo">
+      <img src="/logo.svg"
+           onerror="this.onerror=null;this.src='/logo.png'"
+           alt="The Meridian Society"
+           class="mobile-menu-logo-img">
+    </div>
   <div class="mobile-menu-inner">
     <a href="#about"    onclick="toggleMenu()">About</a>
     <a href="#speaking" onclick="toggleMenu()">Speaking</a>
