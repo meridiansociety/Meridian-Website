@@ -288,7 +288,7 @@
     /* ─── MEMBER CARD ─── */
     .member-card {
       display: grid;
-      grid-template-columns: 160px 300px 1fr;
+      grid-template-columns: 300px 1fr;
       border: 1px solid var(--gold-border);
       margin-bottom: 2px;
       transition: border-color 0.3s, background 0.3s;
@@ -303,29 +303,6 @@
     }
     .member-card:hover { border-color: rgba(201,168,76,0.4); background: var(--surface); }
     .member-card:hover::before { transform: scaleY(1); }
-
-    /* Number column — mirrors the date column from legacy */
-    .member-num-col {
-      border-right: 1px solid var(--gold-border);
-      padding: 36px 28px;
-      display: flex; flex-direction: column;
-      justify-content: flex-start; gap: 4px;
-      flex-shrink: 0;
-    }
-    .member-num-label {
-      font-family: var(--display); font-size: 11px; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--gold); opacity: 0.85;
-    }
-    .member-num {
-      font-family: var(--serif); font-size: 56px; font-weight: 300;
-      color: var(--cream); line-height: 1; letter-spacing: -0.02em;
-    }
-    .member-num-role {
-      font-family: var(--display); font-size: 11px; font-weight: 400;
-      letter-spacing: 0.14em; color: var(--grey);
-      text-transform: uppercase; line-height: 1.5;
-    }
 
     /* Photo column */
     .member-photo-col {
@@ -459,13 +436,12 @@
 
     /* ─── TABLET ─── */
     @media (max-width: 900px) {
-      .member-card { grid-template-columns: 160px 1fr; }
-      .member-photo-col { display: none; }
-      .member-num-col {
+      .member-card { grid-template-columns: 1fr; }
+      .member-photo-col {
+        display: block;
         border-right: none; border-bottom: 1px solid var(--gold-border);
-        padding: 20px 24px; flex-direction: row; align-items: baseline; gap: 10px;
+        height: 320px;
       }
-      .member-num { font-size: 38px; }
       .member-info-col { padding: 24px 28px; }
       .member-name { font-size: 26px; }
       .member-focus { font-size: 17px; }
@@ -500,13 +476,6 @@
         border-right: none; border-bottom: 1px solid var(--gold-border);
         height: 280px;
       }
-      .member-num-col {
-        padding: 14px 20px; gap: 6px;
-        border-right: none; border-bottom: 1px solid var(--gold-border);
-        flex-direction: row; align-items: baseline;
-      }
-      .member-num { font-size: 32px; }
-      .member-num-label, .member-num-role { font-size: 11px; }
       .member-info-col { padding: 22px 20px 28px; }
       .member-name { font-size: 26px; margin-bottom: 5px; line-height: 1.1; }
       .member-title { font-size: 11px; letter-spacing: 0.14em; margin-bottom: 20px; }
@@ -626,11 +595,6 @@
 
     <!-- Magnus -->
     <div class="member-card rv" data-d="1">
-      <div class="member-num-col">
-        <div class="member-num-label">No.</div>
-        <div class="member-num">01</div>
-        <div class="member-num-role">Founder</div>
-      </div>
       <div class="member-photo-col">
         <img src="/images/team/magnus.jpg" class="member-photo" alt="Magnus Abdelnour"/>
       </div>
