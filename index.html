@@ -46,45 +46,73 @@
       overflow-x: hidden;
     }
 
-    /* ─── MOBILE MENU (original preserved) ─── */
+    /* ─── HAMBURGER & MOBILE MENU ─── */
     .hamburger {
-      display: none; flex-direction: column;
-      gap: 5px; cursor: pointer; z-index: 200;
+      display: none; flex-direction: column; justify-content: center;
+      cursor: pointer; z-index: 200;
+      width: 36px; height: 36px;
+      border: 1px solid var(--gold-border);
+      padding: 9px 8px; gap: 0;
+      transition: border-color 0.2s;
     }
-    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--gold); transition: opacity 0.2s; }
+    .hamburger:hover { border-color: var(--gold); }
+    .hamburger span {
+      display: block; width: 100%; height: 1px;
+      background: var(--gold);
+      transition: transform 0.3s ease, width 0.3s ease;
+      transform-origin: center;
+    }
+    .hamburger span:nth-child(1) { margin-bottom: 5px; }
+    .hamburger span:nth-child(2) { width: 65%; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); margin-bottom: 0; width: 100%; }
+    .hamburger.open span:nth-child(2) { transform: translateY(0) rotate(-45deg); width: 100%; }
 
     .mobile-menu {
-      display: none; position: fixed;
-      inset: 0; background: var(--black);
-      z-index: 150; flex-direction: column;
-      justify-content: center; align-items: center;
+      display: none; position: fixed; inset: 0;
+      background: var(--black); z-index: 150;
+      flex-direction: column; justify-content: center; align-items: center;
     }
     .mobile-menu.open { display: flex; }
     .mobile-menu-inner {
-      display: flex; flex-direction: column; align-items: center;
-      width: 100%; max-width: 320px;
-      border-top: 1px solid var(--gold-border);
+      display: flex; flex-direction: column; align-items: stretch;
+      width: 100%; padding: 0 32px;
     }
     .mobile-menu a {
-      color: var(--cream-60); text-decoration: none;
-      font-family: var(--serif); font-size: 1.7rem; font-weight: 300;
-      letter-spacing: 0.1em; padding: 1.1rem 0;
-      width: 100%; text-align: center;
-      border-bottom: 1px solid var(--gold-border);
-      transition: color 0.2s;
+      color: var(--cream-35); text-decoration: none;
+      font-family: var(--display); font-size: 0.75rem;
+      font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+      padding: 1.3rem 0; width: 100%;
+      border-bottom: 1px solid rgba(201,168,76,0.1);
+      transition: color 0.2s, padding-left 0.2s;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .mobile-menu a:hover, .mobile-menu a.gold { color: var(--gold-light); }
+    .mobile-menu a::after { content: "\2192"; color: var(--gold); opacity: 0; transition: opacity 0.2s; font-size: 0.8rem; }
+    .mobile-menu a:hover { color: var(--cream); padding-left: 6px; }
+    .mobile-menu a:hover::after { opacity: 1; }
+    .mobile-menu a.gold { color: var(--gold); }
+    .mobile-menu a.gold::after { opacity: 1; }
     .mobile-menu-logo {
-      font-family: var(--display); font-size: 0.7rem;
-      letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 2.5rem; opacity: 0.7;
+      font-family: var(--display); font-size: 0.65rem;
+      letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 3rem; opacity: 0.5; text-align: center;
     }
-    .mobile-close {
-      position: absolute; top: 1.5rem; right: 1.8rem;
-      font-size: 1rem; color: var(--cream); cursor: pointer;
-      opacity: 0.3; font-family: var(--body);
+    .mobile-menu-bottom {
+      position: absolute; bottom: 2.5rem; left: 32px; right: 32px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    .mobile-close:hover { opacity: 0.7; }
+    .mobile-menu-bottom-text {
+      font-family: var(--display); font-size: 8px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--grey2);
+    }
+    .mobile-menu-cta {
+      display: inline-block; padding: 10px 22px;
+      border: 1px solid var(--gold-border); color: var(--gold);
+      font-size: 9px; font-weight: 600; font-family: var(--display);
+      letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .mobile-menu-cta:hover { background: var(--gold); color: var(--black); }
+    .mobile-menu-cta::after { display: none !important; }
 
     /* ─── STICKY JOIN (original) ─── */
     .sticky-join {
@@ -794,27 +822,117 @@
       letter-spacing: 0.22em; text-transform: uppercase; color: var(--grey2);
     }
 
-    /* ─── RESPONSIVE ─── */
+    /* ─── TABLET ─── */
     @media (max-width: 1100px) {
       .about-grid, .who-intro-row, .not-header, .not-closing,
-      .speaking-grid, .register-grid { grid-template-columns: 1fr; gap: 48px; }
-      .who-cards { grid-template-columns: 1fr; }
-      .join-inner { flex-direction: column; align-items: flex-start; }
+      .speaking-grid, .register-grid { grid-template-columns: 1fr; gap: 40px; }
+      .who-cards { grid-template-columns: 1fr 1fr; }
+      .join-inner { flex-direction: column; align-items: flex-start; gap: 36px; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
       .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .not-closing { grid-template-columns: 1fr; gap: 28px; }
     }
+
+    /* ─── MOBILE ─── */
     @media (max-width: 700px) {
+      /* Nav */
       .nav-links, .nav-btn { display: none; }
       .hamburger { display: flex; }
-      .nav-inner { padding: 0 24px; }
-      .hero-body { padding: 0 24px; }
-      .hero-accent-line { left: 24px; }
-      .wrap { padding: 0 24px; }
-      #join { padding: 80px 24px; }
-      .footer-grid, .footer-bottom { padding-left: 24px; padding-right: 24px; }
-      .footer-grid { grid-template-columns: 1fr; }
+      .nav-inner { padding: 0 20px; }
+      .nav-wordmark { font-size: 10px; letter-spacing: 0.18em; }
+
+      /* Global wrap */
+      .wrap { padding: 0 20px; }
+
+      /* Hero */
+      .hero-body { padding: 52px 20px 36px; }
+      .hero-accent-line { display: none; }
+      .hero-globe { display: none; }
+      .hero-pill { padding: 5px 12px 5px 8px; margin-bottom: 28px; }
+      .hero-pill-text { font-size: 8px; letter-spacing: 0.18em; }
+      .hero-pre { font-size: 9px; letter-spacing: 0.25em; }
+      .hero-title { font-size: clamp(36px, 10.5vw, 72px); letter-spacing: -0.025em; line-height: 0.9; }
+      .hero-post { font-size: 14px; margin-top: 8px; }
+      .hero-divider { margin: 24px 0; width: 36px; }
+      .hero-desc { font-size: 14px; margin-bottom: 32px; max-width: 100%; }
+      .hero-ctas { gap: 14px; flex-wrap: wrap; }
+      .cta-main { padding: 13px 28px; font-size: 10px; }
+      .cta-ghost { font-size: 10px; }
+
+      /* Hero stats strip */
       .hero-stats { grid-template-columns: 1fr 1fr; }
+      .stat { padding: 16px 18px; }
+      .stat-val { font-size: 18px; }
+      .stat-key { font-size: 7px; letter-spacing: 0.14em; }
+
+      /* Marquee */
+      .marquee-item { padding: 0 20px; gap: 16px; font-size: 8px; }
+
+      /* Section meta */
+      .sec-meta { margin-bottom: 32px; }
+
+      /* Section headings shared */
+      .about-headline, .who-headline, .not-headline,
+      .speaking-headline, .register-headline { font-size: clamp(26px, 7vw, 38px); }
+
+      /* About */
+      .about-body { font-size: 14px; margin-top: 20px; }
+      .def-block { padding: 26px 22px; }
+      .def-quote { font-size: 18px; }
+      .def-body { font-size: 13px; }
+
+      /* Who we gather */
+      .who-cards { grid-template-columns: 1fr; }
+      .who-intro-row { gap: 20px; margin-bottom: 28px; }
+      .who-intro-body { font-size: 14px; }
+      .who-card { padding: 30px 22px 26px; }
+      .who-num { font-size: 48px; margin-bottom: 10px; }
+      .who-title { font-size: 20px; }
+      .who-body { font-size: 13px; }
+
+      /* What we are not */
+      .not-header { gap: 18px; margin-bottom: 28px; }
+      .not-header-body { font-size: 14px; }
+      .not-row { padding: 15px 0; }
+      .not-row-left { font-size: 14px; gap: 14px; }
+      .not-closing { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+      .not-closing-quote { font-size: 18px; padding-left: 18px; }
+      .not-closing-body { font-size: 13px; }
+
+      /* Speaking */
+      .speaking-grid { gap: 28px; }
+      .speaking-body { font-size: 14px; }
+      .speaking-email { font-size: 15px; margin-top: 16px; }
+      .formats-panel { padding: 26px 22px; }
+      .formats-label { margin-bottom: 16px; }
+      .formats-list li { font-size: 13px; padding: 11px 0; }
+
+      /* Membership */
+      .register-grid { gap: 32px; }
+      .register-body { font-size: 14px; }
+      .register-perks li { font-size: 13px; padding: 11px 0; }
+      .btn-register { padding: 13px 28px; font-size: 10px; }
+      .member-vis { padding: 40px 24px; }
+      .member-vis-name { font-size: 18px; }
+      .member-count-num { font-size: 40px; }
+      .member-count-box { padding: 14px 28px; }
+
+      /* Get involved */
+      #join { padding: 60px 20px; }
+      .join-headline { font-size: clamp(30px, 8.5vw, 46px); }
+      .join-body { font-size: 14px; }
+      .join-handle { padding: 18px 28px; font-size: 17px; width: 100%; justify-content: center; }
+
+      /* Footer */
+      .footer-grid { grid-template-columns: 1fr; padding: 40px 20px 32px; gap: 28px; }
+      .footer-bottom { padding: 16px 20px; flex-direction: column; align-items: flex-start; gap: 4px; }
+      .footer-desc { max-width: 100%; }
+
+      /* Sticky join */
       .sticky-join { display: block; }
+
+      /* Section padding */
+      .s { padding: 56px 0; }
     }
   </style>
 </head>
@@ -847,22 +965,26 @@
     </ul>
     <a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform"
        target="_blank" class="nav-btn">Register</a>
-    <div class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
-      <span></span><span></span><span></span>
+    <div class="hamburger" id="burgerBtn" onclick="toggleMenu()">
+      <span></span><span></span>
     </div>
   </div>
 </nav>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <div class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</div>
   <div class="mobile-menu-logo">The Meridian Society</div>
   <div class="mobile-menu-inner">
-    <a href="#about"    onclick="document.getElementById('mobileMenu').classList.remove('open')">About</a>
-    <a href="#speaking" onclick="document.getElementById('mobileMenu').classList.remove('open')">Speaking</a>
-    <a href="#register" onclick="document.getElementById('mobileMenu').classList.remove('open')">Membership</a>
-    <a href="#join"     onclick="document.getElementById('mobileMenu').classList.remove('open')">Get Involved</a>
-    <a href="/legacy.html" class="gold" onclick="document.getElementById('mobileMenu').classList.remove('open')">Legacy</a>
+    <a href="#about"    onclick="toggleMenu()">About</a>
+    <a href="#speaking" onclick="toggleMenu()">Speaking</a>
+    <a href="#register" onclick="toggleMenu()">Membership</a>
+    <a href="#join"     onclick="toggleMenu()">Get Involved</a>
+    <a href="/legacy.html" class="gold">Legacy</a>
+  </div>
+  <div class="mobile-menu-bottom">
+    <span class="mobile-menu-bottom-text">Ottawa · Est. 2025</span>
+    <a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform"
+       target="_blank" class="mobile-menu-cta" onclick="toggleMenu()">Register</a>
   </div>
 </div>
 
@@ -1052,8 +1174,8 @@
           <p class="speaking-body">
             If you have a story, insight, or path worth sharing, we want to hear about it. We would love to hear from you.
           </p>
-          <a href="mailto:themeridiansociety@gmail.com" class="speaking-email">
-            themeridiansociety@gmail.com &nbsp;→
+          <a href="/cdn-cgi/l/email-protection#2d59454840485f4449444c435e424e444859546d4a404c4441034e4240" class="speaking-email">
+            <span class="__cf_email__" data-cfemail="7e0a161b131b0c171a171f100d111d171b0a073e19131f1712501d1113">[email&#160;protected]</span> &nbsp;→
           </a>
         </div>
         <div class="formats-panel rv" data-d="2">
@@ -1178,7 +1300,7 @@
       <div class="footer-col-label">Connect</div>
       <ul class="footer-links">
         <li><a href="https://www.instagram.com/Meridian.Society" target="_blank">Instagram</a></li>
-        <li><a href="mailto:themeridiansociety@gmail.com">Email Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#fa8e929f979f88939e939b94899599939f8e83ba9d979b9396d4999597">Email Us</a></li>
       </ul>
     </div>
     <div>
@@ -1210,10 +1332,10 @@
     nav.classList.toggle('scrolled', window.scrollY > 30);
   }, { passive: true });
 
-  // ─── Sticky Join (original) ───
-  const stickyJoin    = document.getElementById('stickyJoin');
-  const heroSection   = document.querySelector('.hero');
-  const regSection    = document.getElementById('register');
+  // ─── Sticky Join ───
+  const stickyJoin  = document.getElementById('stickyJoin');
+  const heroSection = document.querySelector('.hero');
+  const regSection  = document.getElementById('register');
   window.addEventListener('scroll', () => {
     const hb = heroSection.getBoundingClientRect().bottom;
     const rb = regSection.getBoundingClientRect().bottom;
@@ -1233,7 +1355,16 @@
   }, { threshold: 0.08 });
   rvEls.forEach(el => rvObs.observe(el));
 
-  // ─── Live Member Counter (original, fully preserved) ───
+  // ─── Menu toggle ───
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn  = document.getElementById('burgerBtn');
+    const open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  // ─── Live Member Counter ───
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx12Z8U8xQUYUHYLZkgVBlzGvhvx2uqSd1WBJNBBQcP0vlbrGzxJFfqi8QWnQVHyiKS/exec';
   let currentCount = 0;
 
@@ -1268,7 +1399,7 @@
       .catch(() => {
         const el = document.getElementById('memberCount');
         if (!el.textContent || el.textContent === '') {
-          el.innerHTML = `<span id="planetLoader" style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;position:relative;"><span style="width:14px;height:14px;border:1.5px solid var(--gold);border-radius:50%;opacity:0.85;"></span><span style="position:absolute;width:38px;height:12px;border:1.5px solid var(--gold);border-radius:50%;opacity:0.6;animation:orbit 1.4s linear infinite;transform-origin:center center;"></span></span>`;
+          el.innerHTML = '<span style="display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;position:relative;"><span style="width:14px;height:14px;border:1.5px solid var(--gold);border-radius:50%;opacity:0.85;"></span><span style="position:absolute;width:38px;height:12px;border:1.5px solid var(--gold);border-radius:50%;opacity:0.6;animation:orbit 1.4s linear infinite;transform-origin:center center;"></span></span>';
         }
       });
   }
