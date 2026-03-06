@@ -3,7 +3,7 @@
 <head>
   <script defer src="/_vercel/insights/script.js"></script>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>The Meridian Society</title>
   <meta name="google-site-verification" content="google2af069010dc1ab79"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -39,7 +39,7 @@
       --body:       'Cormorant Garamond', Georgia, serif;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 60px; }
     body {
       background: var(--black);
       color: var(--cream);
@@ -486,11 +486,11 @@
       content: ''; position: absolute;
       bottom: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, var(--gold), transparent);
-      transform: scaleX(0); transform-origin: left;
+      transform: scaleY(0); transform-origin: bottom;
       transition: transform 0.45s ease;
     }
     .who-card:hover { background: var(--black); }
-    .who-card:hover::before { transform: scaleX(1); }
+    .who-card:hover::before { transform: scaleY(1); }
     .who-num {
       font-family: var(--display); font-size: 72px; font-weight: 300;
       color: rgba(201,168,76,0.08); line-height: 1;
@@ -845,6 +845,12 @@
 
     /* ─── MOBILE ─── */
     @media (max-width: 700px) {
+      /* ── Remove iOS tap highlight flash + disable touch hover shifts ── */
+      a { -webkit-tap-highlight-color: transparent; }
+      a, button { touch-action: manipulation; }
+      .mobile-menu a:hover { padding-left: 0; color: var(--cream-35); }
+      .mobile-menu a.gold:hover, .mobile-menu a.active:hover { color: var(--gold); }
+
       .nav-links, .nav-btn { display: none; }
       .hamburger { display: flex; }
       .nav-inner { padding: 0 20px; }
@@ -852,92 +858,96 @@
 
       .wrap { padding: 0 20px; }
 
-      .hero-body { padding: 52px 20px 36px; }
+      .hero-body { padding: 48px 20px 32px; }
       .hero-accent-line { display: none; }
       .hero-globe { display: none; }
-      .hero-pill { padding: 5px 12px 5px 8px; margin-bottom: 28px; }
-      .hero-pill-text { font-size: 11px; letter-spacing: 0.14em; }
+      .hero-pill { padding: 5px 12px 5px 8px; margin-bottom: 24px; }
+      .hero-pill-text { font-size: 11px; letter-spacing: 0.12em; }
       .hero-pre { font-size: 11px; letter-spacing: 0.22em; }
-      .hero-title { font-size: clamp(36px, 10.5vw, 72px); letter-spacing: 0.02em; line-height: 0.9; }
+      /* Garamond needs line-height 0.95 on mobile — 0.9 clips ascenders */
+      /* line-height 0.95 prevents Garamond ascender clipping on mobile */
+      .hero-title { font-size: clamp(36px, 10.5vw, 72px); letter-spacing: 0.02em; line-height: 0.95; }
       .hero-post { font-size: 16px; margin-top: 8px; }
-      .hero-divider { margin: 24px 0; width: 36px; }
-      /* KEY FIX: mobile hero desc */
+      .hero-divider { margin: 22px 0; width: 36px; }
       .hero-desc { font-size: 18px; font-weight: 400; margin-bottom: 32px; max-width: 100%; line-height: 1.85; }
-      .hero-ctas { gap: 14px; flex-wrap: wrap; }
-      .cta-main { padding: 13px 28px; font-size: 12px; letter-spacing: 0.14em; }
-      .cta-ghost { font-size: 12px; }
+      .hero-ctas { gap: 12px; flex-wrap: wrap; }
+      .cta-main { padding: 14px 28px; font-size: 13px; letter-spacing: 0.14em; width: 100%; text-align: center; }
+      .cta-ghost { font-size: 13px; }
 
       .hero-stats { grid-template-columns: 1fr 1fr; }
-      .stat { padding: 16px 18px; }
+      .stat { padding: 16px 16px; }
       .stat-val { font-size: 18px; }
-      .stat-key { font-size: 10px; letter-spacing: 0.12em; }
+      .stat-key { font-size: 9px; letter-spacing: 0.1em; }
 
       .marquee-item { padding: 0 20px; gap: 16px; font-size: 10px; }
 
-      .sec-meta { margin-bottom: 32px; }
+      .sec-meta { margin-bottom: 28px; }
 
       .about-headline, .who-headline, .not-headline,
       .speaking-headline, .register-headline { font-size: clamp(26px, 7vw, 38px); }
 
-      /* KEY FIX: mobile about body */
       .about-body { font-size: 18px; font-weight: 400; margin-top: 20px; line-height: 1.85; }
       .def-block { padding: 26px 22px; }
       .def-quote { font-size: 19px; }
-      /* KEY FIX: mobile def body */
       .def-body { font-size: 17px; font-weight: 400; }
 
       .who-cards { grid-template-columns: 1fr; }
-      .who-intro-row { gap: 20px; margin-bottom: 28px; }
-      /* KEY FIX: mobile who intro */
+      .who-intro-row { gap: 20px; margin-bottom: 24px; }
       .who-intro-body { font-size: 18px; font-weight: 400; }
-      .who-card { padding: 30px 22px 26px; }
-      .who-num { font-size: 48px; margin-bottom: 10px; }
+      .who-card { padding: 28px 22px 24px; }
+      /* Disable card hover effects on touch */
+      .who-card:hover { background: var(--surface2); }
+      .who-card:hover::before { transform: scaleY(0); }
+      .who-num { font-size: 44px; margin-bottom: 8px; }
       .who-title { font-size: 22px; }
-      /* KEY FIX: mobile who body */
       .who-body { font-size: 17px; font-weight: 400; }
 
-      .not-header { gap: 18px; margin-bottom: 28px; }
-      /* KEY FIX: mobile not header body */
+      .not-header { gap: 16px; margin-bottom: 24px; }
       .not-header-body { font-size: 18px; font-weight: 400; }
-      .not-row { padding: 15px 0; }
-      /* KEY FIX: mobile not row */
+      .not-row { padding: 14px 0; }
       .not-row-left { font-size: 17px; font-weight: 400; gap: 14px; }
-      .not-closing { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
+      /* Disable layout-shifting hover on touch */
+      .not-row:hover { padding-left: 0; }
+      .not-row:hover .not-row-left { color: var(--cream-60); }
+      .not-row:hover .not-x { opacity: 0.5; }
+      .not-closing { grid-template-columns: 1fr; gap: 24px; margin-top: 28px; }
       .not-closing-quote { font-size: 19px; padding-left: 18px; }
-      /* KEY FIX: mobile not closing body */
       .not-closing-body { font-size: 17px; font-weight: 400; }
 
       .speaking-grid { gap: 28px; }
-      /* KEY FIX: mobile speaking body */
       .speaking-body { font-size: 18px; font-weight: 400; }
-      .speaking-email { font-size: 16px; margin-top: 16px; }
+      /* Email wraps gracefully on narrow screens */
+      .speaking-email { font-size: 16px; margin-top: 16px; overflow-wrap: break-word; word-break: break-word; display: inline-flex; flex-wrap: wrap; }
       .formats-panel { padding: 26px 22px; }
       .formats-label { margin-bottom: 16px; }
-      /* KEY FIX: mobile formats list */
-      .formats-list li { font-size: 17px; font-weight: 400; padding: 11px 0; }
+      .formats-list li { font-size: 17px; font-weight: 400; padding: 12px 0; }
+      /* Disable layout-shifting hover on touch */
+      .formats-list li:hover { padding-left: 0; color: var(--cream-60); }
 
       .register-grid { gap: 32px; }
-      /* KEY FIX: mobile register body */
       .register-body { font-size: 18px; font-weight: 400; }
-      /* KEY FIX: mobile perks */
-      .register-perks li { font-size: 17px; font-weight: 400; padding: 11px 0; }
-      .btn-register { padding: 13px 28px; font-size: 12px; letter-spacing: 0.14em; }
+      .register-perks li { font-size: 17px; font-weight: 400; padding: 12px 0; }
+      .btn-register { padding: 14px 32px; font-size: 13px; letter-spacing: 0.14em; width: 100%; text-align: center; }
       .member-vis { padding: 40px 24px; }
       .member-vis-name { font-size: 20px; }
       .member-count-num { font-size: 40px; }
       .member-count-box { padding: 14px 28px; }
 
-      #join { padding: 60px 20px; }
+      #join { padding: 56px 20px; }
       .join-headline { font-size: clamp(30px, 8.5vw, 46px); }
-      /* KEY FIX: mobile join body */
       .join-body { font-size: 18px; font-weight: 400; }
       .join-handle { padding: 18px 28px; font-size: 19px; width: 100%; justify-content: center; }
 
-      .footer-grid { grid-template-columns: 1fr; padding: 40px 20px 32px; gap: 28px; }
+      /* ── Footer: hide Navigation column (redundant with hamburger menu) ── */
+      .footer-nav-col { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; padding: 36px 20px 28px; gap: 24px; }
+      .footer-brand { grid-column: 1 / -1; }
       .footer-bottom { padding: 16px 20px; flex-direction: column; align-items: flex-start; gap: 4px; }
-      .footer-desc { max-width: 100%; }
+      .footer-desc { max-width: 100%; font-size: 15px; }
+      .footer-links a { font-size: 15px; }
 
-      .sticky-join { display: block; }
+      /* ── Sticky join: show + respect iPhone home bar safe area ── */
+      .sticky-join { display: block; bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)); }
 
       .s { padding: 56px 0; }
     }
@@ -1290,7 +1300,7 @@
       </div>
       <p class="footer-desc">A student-run speaker forum dedicated to orienting the curious, bringing together thinkers, professionals, and the next generation of leaders.</p>
     </div>
-    <div>
+    <div class="footer-nav-col">
       <div class="footer-col-label">Navigation</div>
       <ul class="footer-links">
         <li><a href="#about">About</a></li>
