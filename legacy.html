@@ -66,6 +66,26 @@
       overflow-x: hidden;
     }
 
+
+    /* ─── PAGE TRANSITION ─── */
+    #page-transition {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--black);
+      opacity: 0; pointer-events: none;
+    }
+    #transition-line {
+      position: absolute; top: 50%; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--gold) 20%,
+        var(--gold-light) 50%,
+        var(--gold) 80%,
+        transparent 100%);
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
     /* ─── SCROLL PROGRESS BAR ─── */
     .progress-bar {
       position: fixed; top: 0; left: 0; z-index: 200;
@@ -523,6 +543,9 @@
 <body>
 
 <div class="progress-bar" id="progressBar"></div>
+<div id="page-transition"><div id="transition-line"></div></div>
+
+
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -743,6 +766,44 @@
     btn.classList.toggle('open', open);
     document.body.style.overflow = open ? 'hidden' : '';
   }
+
+  /* ─── PAGE TRANSITION ─── */
+  (function() {
+    const overlay = document.getElementById('page-transition');
+    const line    = document.getElementById('transition-line');
+
+    function enter() {
+      overlay.style.cssText = 'opacity:1; pointer-events:none; transition:none;';
+      line.style.cssText    = 'transform:scaleX(0); transition:none;';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        line.style.transition  = 'transform 0.3s cubic-bezier(0.77,0,0.18,1)';
+        line.style.transform   = 'scaleX(1)';
+        setTimeout(() => {
+          overlay.style.transition = 'opacity 0.2s ease';
+          overlay.style.opacity    = '0';
+        }, 300);
+      }));
+    }
+
+    document.addEventListener('click', function(e) {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto') ||
+          href.startsWith('http') || a.target === '_blank') return;
+      if (!href.match(/\.html/)) return;
+      e.preventDefault();
+      overlay.style.cssText = 'opacity:1; pointer-events:all; transition:opacity 0.08s ease;';
+      line.style.cssText    = 'transform:scaleX(0); transition:none;';
+      setTimeout(function() {
+        line.style.transition = 'transform 0.26s cubic-bezier(0.77,0,0.18,1)';
+        line.style.transform  = 'scaleX(1)';
+        setTimeout(function() { window.location.href = href; }, 260);
+      }, 80);
+    });
+
+    enter();
+  })();
 </script>
 
 </body>
