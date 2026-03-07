@@ -212,18 +212,19 @@
       position: fixed; inset: 0; z-index: 9999;
       background: var(--black);
       opacity: 0; pointer-events: none;
+      display: none;
     }
     #transition-line {
-      position: absolute; top: 50%; left: 0;
-      width: 100%; height: 2px;
-      background: linear-gradient(90deg,
+      position: absolute; top: 0; left: 50%;
+      width: 2px; height: 100%;
+      background: linear-gradient(180deg,
         transparent 0%,
         var(--gold) 20%,
         var(--gold-light) 50%,
         var(--gold) 80%,
         transparent 100%);
-      transform: scaleX(0);
-      transform-origin: left center;
+      transform: scaleY(0);
+      transform-origin: top center;
     }
 
     /* ─── SCROLL PROGRESS BAR ─── */
@@ -579,13 +580,13 @@
       .nav-links, .nav-btn { display: none; }
       .hamburger { display: flex; }
       .nav-inner { padding: 0 20px; }
-      .nav-wordmark { font-size: 11px; letter-spacing: 0.14em; }
+      .nav-wordmark { font-size: 12px; letter-spacing: 0.16em; }
 
       /* Layout */
-      .wrap { padding: 0 16px; }
+      .wrap { padding: 0 20px; }
 
       /* Hero */
-      .hero { padding-left: 16px; padding-right: 16px; min-height: 42vh; }
+      .hero { padding-left: 20px; padding-right: 20px; min-height: 42vh; }
       .hero-accent-line, .hero-globe { display: none; }
       .hero-content { padding: 32px 0 28px 0; }
       .hero-eyebrow {
@@ -600,7 +601,7 @@
       .hero-subtitle { font-size: 16px; margin-top: 12px; line-height: 1.6; }
 
       /* Marquee */
-      .marquee-item { padding: 0 16px; gap: 14px; font-size: 10px; letter-spacing: 0.14em; }
+      .marquee-item { padding: 0 20px; gap: 16px; font-size: 10px; letter-spacing: 0.14em; }
 
       /* Team section */
       .team-wrap { padding: 20px 0 40px; }
@@ -617,7 +618,7 @@
       .member-photo-col { display: none; }
 
       /* Info */
-      .member-info-col { padding: 20px 18px 28px; }
+      .member-info-col { padding: 20px 20px 28px; }
 
       /* Header row: name+title on left, portrait thumbnail on right */
       .member-header {
@@ -671,7 +672,7 @@
 
       /* Footer */
       .footer-inner {
-        padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+        padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
         flex-direction: column; align-items: flex-start; gap: 10px;
       }
       .footer-meta { font-size: 13px; }
@@ -690,8 +691,6 @@
 
 <div class="progress-bar" id="progressBar"></div>
 <div id="page-transition"><div id="transition-line"></div></div>
-
-
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -733,7 +732,7 @@
     <a href="/index.html#speaking" onclick="toggleMenu()">Speaking</a>
     <a href="/index.html#register" onclick="toggleMenu()">Membership</a>
     <a href="/index.html#join"     onclick="toggleMenu()">Get Involved</a>
-    <a href="/team.html" class="active gold">Team</a>
+    <a href="/team.html" class="active gold" onclick="toggleMenu()">Team</a>
     <a href="/legacy.html"         onclick="toggleMenu()">Legacy</a>
   </div>
   <div class="mobile-menu-bottom">
@@ -969,19 +968,26 @@
     const overlay = document.getElementById('page-transition');
     const line    = document.getElementById('transition-line');
 
-    function enter() {
-      overlay.style.cssText = 'opacity:1; pointer-events:none; transition:none;';
-      line.style.cssText    = 'transform:scaleX(0); transition:none;';
+    // On arrive: only play enter sweep if we came from another internal page
+    const fromInternal = sessionStorage.getItem('ms-transition');
+    sessionStorage.removeItem('ms-transition');
+
+    if (fromInternal) {
+      // Arrived via internal nav — play the reveal sweep top→bottom then fade out
+      overlay.style.cssText = 'display:block; opacity:1; pointer-events:none; transition:none;';
+      line.style.cssText    = 'transform:scaleY(0); transition:none;';
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        line.style.transition  = 'transform 0.3s cubic-bezier(0.77,0,0.18,1)';
-        line.style.transform   = 'scaleX(1)';
+        line.style.transition = 'transform 0.32s cubic-bezier(0.77,0,0.18,1)';
+        line.style.transform  = 'scaleY(1)';
         setTimeout(() => {
-          overlay.style.transition = 'opacity 0.2s ease';
+          overlay.style.transition = 'opacity 0.22s ease';
           overlay.style.opacity    = '0';
-        }, 300);
+          setTimeout(() => { overlay.style.display = 'none'; }, 220);
+        }, 320);
       }));
     }
 
+    // On exit: intercept internal .html clicks
     document.addEventListener('click', function(e) {
       const a = e.target.closest('a');
       if (!a) return;
@@ -989,17 +995,20 @@
       if (!href || href.startsWith('#') || href.startsWith('mailto') ||
           href.startsWith('http') || a.target === '_blank') return;
       if (!href.match(/\.html/)) return;
+      // Skip if already on this page
+      const dest = href.split('#')[0].replace(/^\//, '');
+      const curr = window.location.pathname.replace(/^\//, '');
+      if (dest === curr || (dest === 'index.html' && curr === '')) return;
       e.preventDefault();
-      overlay.style.cssText = 'opacity:1; pointer-events:all; transition:opacity 0.08s ease;';
-      line.style.cssText    = 'transform:scaleX(0); transition:none;';
-      setTimeout(function() {
-        line.style.transition = 'transform 0.26s cubic-bezier(0.77,0,0.18,1)';
-        line.style.transform  = 'scaleX(1)';
-        setTimeout(function() { window.location.href = href; }, 260);
-      }, 80);
+      sessionStorage.setItem('ms-transition', '1');
+      overlay.style.cssText = 'display:block; opacity:1; pointer-events:all; transition:none;';
+      line.style.cssText    = 'transform:scaleY(0); transition:none;';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        line.style.transition = 'transform 0.28s cubic-bezier(0.77,0,0.18,1)';
+        line.style.transform  = 'scaleY(1)';
+        setTimeout(function() { window.location.href = href; }, 280);
+      }));
     });
-
-    enter();
   })();
 </script>
 
