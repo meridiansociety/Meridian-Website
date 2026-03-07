@@ -186,20 +186,18 @@
     #page-transition {
       position: fixed; inset: 0; z-index: 9999;
       background: var(--black);
-      opacity: 0; pointer-events: none;
-      display: none;
+      display: none; pointer-events: none;
     }
     #transition-line {
-      position: absolute; top: 0; left: 50%;
-      width: 2px; height: 100%;
-      background: linear-gradient(180deg,
+      position: fixed; left: 0; top: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg,
         transparent 0%,
         var(--gold) 20%,
         var(--gold-light) 50%,
         var(--gold) 80%,
         transparent 100%);
-      transform: scaleY(0);
-      transform-origin: top center;
+      transform: translateY(-2px);
     }
 
     /* ─── SCROLL PROGRESS BAR ─── */
@@ -1645,26 +1643,6 @@
     const overlay = document.getElementById('page-transition');
     const line    = document.getElementById('transition-line');
 
-    // On arrive: only play enter sweep if we came from another internal page
-    const fromInternal = sessionStorage.getItem('ms-transition');
-    sessionStorage.removeItem('ms-transition');
-
-    if (fromInternal) {
-      // Arrived via internal nav — play the reveal sweep top→bottom then fade out
-      overlay.style.cssText = 'display:block; opacity:1; pointer-events:none; transition:none;';
-      line.style.cssText    = 'transform:scaleY(0); transition:none;';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        line.style.transition = 'transform 0.32s cubic-bezier(0.77,0,0.18,1)';
-        line.style.transform  = 'scaleY(1)';
-        setTimeout(() => {
-          overlay.style.transition = 'opacity 0.22s ease';
-          overlay.style.opacity    = '0';
-          setTimeout(() => { overlay.style.display = 'none'; }, 220);
-        }, 320);
-      }));
-    }
-
-    // On exit: intercept internal .html clicks
     document.addEventListener('click', function(e) {
       const a = e.target.closest('a');
       if (!a) return;
@@ -1672,18 +1650,19 @@
       if (!href || href.startsWith('#') || href.startsWith('mailto') ||
           href.startsWith('http') || a.target === '_blank') return;
       if (!href.match(/\.html/)) return;
-      // Skip if already on this page
       const dest = href.split('#')[0].replace(/^\//, '');
       const curr = window.location.pathname.replace(/^\//, '');
       if (dest === curr || (dest === 'index.html' && curr === '')) return;
       e.preventDefault();
-      sessionStorage.setItem('ms-transition', '1');
-      overlay.style.cssText = 'display:block; opacity:1; pointer-events:all; transition:none;';
-      line.style.cssText    = 'transform:scaleY(0); transition:none;';
+      // Show overlay, reset line to top
+      overlay.style.display   = 'block';
+      line.style.transition   = 'none';
+      line.style.transform    = 'translateY(-2px)';
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        line.style.transition = 'transform 0.28s cubic-bezier(0.77,0,0.18,1)';
-        line.style.transform  = 'scaleY(1)';
-        setTimeout(function() { window.location.href = href; }, 280);
+        // Sweep line down the screen
+        line.style.transition = 'transform 0.45s cubic-bezier(0.4,0,0.2,1)';
+        line.style.transform  = 'translateY(100vh)';
+        setTimeout(function() { window.location.href = href; }, 420);
       }));
     });
   })();
