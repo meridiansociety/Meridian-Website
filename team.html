@@ -184,6 +184,15 @@
     }
     .nav-btn:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
 
+    /* ─── SCROLL PROGRESS BAR ─── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; z-index: 200;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+
     /* ─── HERO ─── */
     .hero {
       min-height: 52vh;
@@ -200,6 +209,23 @@
       width: min(520px, 70vw); opacity: 0.04; pointer-events: none;
     }
     .hero-globe svg { width: 100%; height: 100%; }
+
+    /* Globe draw-in animation */
+    .hero-globe svg circle,
+    .hero-globe svg ellipse,
+    .hero-globe svg line {
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000;
+      animation: drawGlobe 2.8s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+    .hero-globe svg ellipse:nth-child(2) { animation-delay: 0.15s; }
+    .hero-globe svg ellipse:nth-child(3) { animation-delay: 0.3s; }
+    .hero-globe svg ellipse:nth-child(4) { animation-delay: 0.5s; }
+    .hero-globe svg ellipse:nth-child(5) { animation-delay: 0.65s; }
+    .hero-globe svg ellipse:nth-child(6) { animation-delay: 0.8s; }
+    .hero-globe svg line:nth-child(7)    { animation-delay: 1s; }
+    .hero-globe svg line:nth-child(8)    { animation-delay: 1.1s; }
+    @keyframes drawGlobe { to { stroke-dashoffset: 0; } }
     .hero::after {
       content: ''; position: absolute; inset: 0;
       background: radial-gradient(ellipse 55% 100% at 85% 50%, transparent, var(--black) 70%);
@@ -228,6 +254,25 @@
       font-weight: 300; letter-spacing: 0.04em; line-height: 0.95;
       color: var(--cream);
       opacity: 0; animation: riseIn 0.8s 0.25s ease forwards;
+      position: relative;
+    }
+    /* Gold shimmer sweep after fade-in */
+    .hero-title::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 35%,
+        rgba(201,168,76,0.18) 50%,
+        transparent 65%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.4s 1.1s ease forwards;
+      pointer-events: none;
+    }
+    @keyframes shimmer {
+      from { background-position: 200% 0; opacity: 1; }
+      to   { background-position: -200% 0; opacity: 0; }
     }
     .hero-title-gold { color: var(--gold); }
     .hero-subtitle {
@@ -597,6 +642,8 @@
 </head>
 <body>
 
+<div class="progress-bar" id="progressBar"></div>
+
 <!-- NAV -->
 <nav id="mainNav">
   <div class="nav-inner">
@@ -780,6 +827,15 @@
 </footer>
 
 <script>
+  // Scroll progress bar
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
+  }, { passive: true });
+
   // Scroll nav
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
