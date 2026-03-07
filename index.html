@@ -187,18 +187,19 @@
       position: fixed; inset: 0; z-index: 9999;
       background: var(--black);
       opacity: 0; pointer-events: none;
+      display: none;
     }
     #transition-line {
-      position: absolute; top: 50%; left: 0;
-      width: 100%; height: 2px;
-      background: linear-gradient(90deg,
+      position: absolute; top: 0; left: 50%;
+      width: 2px; height: 100%;
+      background: linear-gradient(180deg,
         transparent 0%,
         var(--gold) 20%,
         var(--gold-light) 50%,
         var(--gold) 80%,
         transparent 100%);
-      transform: scaleX(0);
-      transform-origin: left center;
+      transform: scaleY(0);
+      transform-origin: top center;
     }
 
     /* ─── SCROLL PROGRESS BAR ─── */
@@ -1092,8 +1093,6 @@
 <div class="progress-bar" id="progressBar"></div>
 <div id="page-transition"><div id="transition-line"></div></div>
 
-
-
 <a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform"
    target="_blank" class="sticky-join hidden" id="stickyJoin">Register</a>
 
@@ -1136,7 +1135,7 @@
     <a href="#speaking" onclick="toggleMenu()">Speaking</a>
     <a href="#register" onclick="toggleMenu()">Membership</a>
     <a href="#join"     onclick="toggleMenu()">Get Involved</a>
-    <a href="/legacy.html" class="gold">Legacy</a>
+    <a href="/legacy.html" class="gold" onclick="toggleMenu()">Legacy</a>
   </div>
   <div class="mobile-menu-bottom">
     <span class="mobile-menu-bottom-text">Ottawa · Est. 2025</span>
@@ -1331,8 +1330,8 @@
           <p class="speaking-body">
             If you have a story, insight, or path worth sharing, we want to hear about it. We would love to hear from you.
           </p>
-          <a href="/cdn-cgi/l/email-protection#7d10180f1419141c130e121e141809041e1c131c191c3d1a101c1411531e1210" class="speaking-email">
-            <span class="__cf_email__" data-cfemail="cfa2aabda6aba6aea1bca0aca6aabbb6acaea1aeabae8fa8a2aea6a3e1aca0a2">[email&#160;protected]</span> &nbsp;→
+          <a href="mailto:meridiansocietycanada@gmail.com" class="speaking-email">
+            meridiansocietycanada@gmail.com &nbsp;→
           </a>
         </div>
         <div class="formats-panel rv" data-d="2">
@@ -1455,7 +1454,7 @@
       <div class="footer-col-label">Connect</div>
       <ul class="footer-links">
         <li><a href="https://www.instagram.com/Meridian.Society" target="_blank">Instagram</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#254840574c414c444b564a464c40515c46444b444144654248444c490b464a48">Email Us</a></li>
+        <li><a href="mailto:meridiansocietycanada@gmail.com">Email Us</a></li>
       </ul>
     </div>
     <div>
@@ -1479,7 +1478,7 @@
   }
 </style>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 30);
@@ -1646,19 +1645,26 @@
     const overlay = document.getElementById('page-transition');
     const line    = document.getElementById('transition-line');
 
-    function enter() {
-      overlay.style.cssText = 'opacity:1; pointer-events:none; transition:none;';
-      line.style.cssText    = 'transform:scaleX(0); transition:none;';
+    // On arrive: only play enter sweep if we came from another internal page
+    const fromInternal = sessionStorage.getItem('ms-transition');
+    sessionStorage.removeItem('ms-transition');
+
+    if (fromInternal) {
+      // Arrived via internal nav — play the reveal sweep top→bottom then fade out
+      overlay.style.cssText = 'display:block; opacity:1; pointer-events:none; transition:none;';
+      line.style.cssText    = 'transform:scaleY(0); transition:none;';
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        line.style.transition  = 'transform 0.3s cubic-bezier(0.77,0,0.18,1)';
-        line.style.transform   = 'scaleX(1)';
+        line.style.transition = 'transform 0.32s cubic-bezier(0.77,0,0.18,1)';
+        line.style.transform  = 'scaleY(1)';
         setTimeout(() => {
-          overlay.style.transition = 'opacity 0.2s ease';
+          overlay.style.transition = 'opacity 0.22s ease';
           overlay.style.opacity    = '0';
-        }, 300);
+          setTimeout(() => { overlay.style.display = 'none'; }, 220);
+        }, 320);
       }));
     }
 
+    // On exit: intercept internal .html clicks
     document.addEventListener('click', function(e) {
       const a = e.target.closest('a');
       if (!a) return;
@@ -1666,17 +1672,20 @@
       if (!href || href.startsWith('#') || href.startsWith('mailto') ||
           href.startsWith('http') || a.target === '_blank') return;
       if (!href.match(/\.html/)) return;
+      // Skip if already on this page
+      const dest = href.split('#')[0].replace(/^\//, '');
+      const curr = window.location.pathname.replace(/^\//, '');
+      if (dest === curr || (dest === 'index.html' && curr === '')) return;
       e.preventDefault();
-      overlay.style.cssText = 'opacity:1; pointer-events:all; transition:opacity 0.08s ease;';
-      line.style.cssText    = 'transform:scaleX(0); transition:none;';
-      setTimeout(function() {
-        line.style.transition = 'transform 0.26s cubic-bezier(0.77,0,0.18,1)';
-        line.style.transform  = 'scaleX(1)';
-        setTimeout(function() { window.location.href = href; }, 260);
-      }, 80);
+      sessionStorage.setItem('ms-transition', '1');
+      overlay.style.cssText = 'display:block; opacity:1; pointer-events:all; transition:none;';
+      line.style.cssText    = 'transform:scaleY(0); transition:none;';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        line.style.transition = 'transform 0.28s cubic-bezier(0.77,0,0.18,1)';
+        line.style.transform  = 'scaleY(1)';
+        setTimeout(function() { window.location.href = href; }, 280);
+      }));
     });
-
-    enter();
   })();
 </script>
 
