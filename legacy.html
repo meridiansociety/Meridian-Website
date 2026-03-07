@@ -207,6 +207,7 @@
       position: absolute; right: -60px; top: 50%;
       transform: translateY(-50%);
       width: min(520px, 70vw); opacity: 0.04; pointer-events: none;
+      will-change: transform;
     }
     .hero-globe svg { width: 100%; height: 100%; }
 
@@ -296,6 +297,9 @@
     .marquee-track {
       display: flex; white-space: nowrap;
       animation: scroll 30s linear infinite;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
     .marquee-track:hover { animation-play-state: paused; }
     .marquee-item {
@@ -641,6 +645,15 @@
     progressBar.style.width = pct + '%';
   }, { passive: true });
 
+  // Parallax hero globe — desktop only
+  const heroGlobe = document.querySelector('.hero-globe');
+  if (heroGlobe && window.innerWidth > 700) {
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY * 0.18;
+      heroGlobe.style.transform = `translateY(calc(-50% - ${offset}px))`;
+    }, { passive: true });
+  }
+
   // Scroll nav
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
@@ -653,6 +666,50 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); rvObs.unobserve(e.target); } });
   }, { threshold: 0.08 });
   rvEls.forEach(el => rvObs.observe(el));
+
+  // Pull-to-dismiss mobile drawer — suppresses transition during drag to prevent jitter
+  (function() {
+    const menu = document.getElementById('mobileMenu');
+    let startX = 0, startY = 0, dragging = false;
+
+    function resetDrag() {
+      dragging = false;
+      menu.style.transition = '';
+      menu.style.transform  = '';
+    }
+
+    menu.addEventListener('touchstart', e => {
+      if (!menu.classList.contains('open')) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dragging = true;
+      menu.style.transition = 'none';
+    }, { passive: true });
+
+    menu.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      const dx = e.touches[0].clientX - startX;
+      const dy = Math.abs(e.touches[0].clientY - startY);
+      if (dx > 0 && dx > dy) {
+        menu.style.transform = `translateX(${dx}px)`;
+      }
+    }, { passive: true });
+
+    menu.addEventListener('touchend', e => {
+      if (!dragging) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      dragging = false;
+      menu.style.transition = '';
+      if (dx > 72) {
+        menu.style.transform = '';
+        toggleMenu();
+      } else {
+        menu.style.transform = '';
+      }
+    }, { passive: true });
+
+    menu.addEventListener('touchcancel', resetDrag, { passive: true });
+  })();
 
   // Mobile menu
   function toggleMenu() {
