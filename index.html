@@ -160,6 +160,15 @@
     .mobile-menu-cta:hover { background: var(--gold); color: var(--black); }
     .mobile-menu-cta::after { display: none !important; }
 
+    /* ─── SCROLL PROGRESS BAR ─── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; z-index: 200;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+
     /* ─── STICKY JOIN ─── */
     .sticky-join {
       display: none; position: fixed;
@@ -307,6 +316,25 @@
       font-weight: 300; letter-spacing: 0.04em;
       line-height: 0.88; color: var(--cream);
       opacity: 0; animation: riseIn 0.8s 0.35s ease forwards;
+      position: relative;
+    }
+    /* Gold shimmer sweep after fade-in */
+    .hero-title::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        105deg,
+        transparent 35%,
+        rgba(201,168,76,0.18) 50%,
+        transparent 65%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.4s 1.25s ease forwards;
+      pointer-events: none;
+    }
+    @keyframes shimmer {
+      from { background-position: 200% 0; opacity: 1; }
+      to   { background-position: -200% 0; opacity: 0; }
     }
     .hero-title-gold { color: var(--gold); }
     .hero-post {
@@ -1000,6 +1028,8 @@
 </head>
 <body>
 
+<div class="progress-bar" id="progressBar"></div>
+
 <a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform"
    target="_blank" class="sticky-join hidden" id="stickyJoin">Register</a>
 
@@ -1234,9 +1264,11 @@
             The Meridian Society regularly hosts presentations, open conversations and informal gatherings where professionals, alumni, and thinkers share their experiences and perspectives.
           </p>
           <p class="speaking-body">
-            If you have a story, insight, or path worth sharing, we want to hear about it. Reach out to us, using the email below. 
+            If you have a story, insight, or path worth sharing, we want to hear about it. We would love to hear from you.
           </p>
-          <!--email_off--><a href="mailto:meridiansocietycanada@gmail.com" class="speaking-email">meridiansocietycanada@gmail.com &nbsp;→</a><!--/email_off-->
+          <a href="/cdn-cgi/l/email-protection#7d10180f1419141c130e121e141809041e1c131c191c3d1a101c1411531e1210" class="speaking-email">
+            <span class="__cf_email__" data-cfemail="cfa2aabda6aba6aea1bca0aca6aabbb6acaea1aeabae8fa8a2aea6a3e1aca0a2">[email&#160;protected]</span> &nbsp;→
+          </a>
         </div>
         <div class="formats-panel rv" data-d="2">
           <div class="formats-label">Event Formats We Host</div>
@@ -1358,7 +1390,7 @@
       <div class="footer-col-label">Connect</div>
       <ul class="footer-links">
         <li><a href="https://www.instagram.com/Meridian.Society" target="_blank">Instagram</a></li>
-        <li><!--email_off--><a href="mailto:meridiansocietycanada@gmail.com">Email Us</a><!--/email_off--></li>
+        <li><a href="/cdn-cgi/l/email-protection#254840574c414c444b564a464c40515c46444b444144654248444c490b464a48">Email Us</a></li>
       </ul>
     </div>
     <div>
@@ -1382,10 +1414,19 @@
   }
 </style>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const nav = document.getElementById('mainNav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  // Scroll progress bar
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = pct + '%';
   }, { passive: true });
 
   const stickyJoin  = document.getElementById('stickyJoin');
