@@ -220,6 +220,7 @@
       transition: color 0.2s; line-height: 60px;
     }
     .nav-links a:hover { color: var(--cream); }
+    .nav-links a.nav-active { color: var(--gold); }
     .nav-links .legacy { color: rgba(201,168,76,0.8); }
     .nav-links .legacy:hover { color: var(--gold); }
     .nav-btn {
@@ -249,6 +250,7 @@
       transform: translateY(-52%);
       width: min(700px, 80vw); height: auto;
       pointer-events: none;
+      will-change: transform;
     }
     .hero-globe svg circle,
     .hero-globe svg ellipse,
@@ -425,6 +427,9 @@
     .marquee-track {
       display: flex; white-space: nowrap;
       animation: scroll 30s linear infinite;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
     }
     .marquee-track:hover { animation-play-state: paused; }
     .marquee-item {
@@ -1428,6 +1433,80 @@
     const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     progressBar.style.width = pct + '%';
   }, { passive: true });
+
+  // Parallax hero globe — desktop only
+  const heroGlobe = document.querySelector('.hero-globe');
+  if (heroGlobe && window.innerWidth > 700) {
+    window.addEventListener('scroll', () => {
+      const offset = window.scrollY * 0.18;
+      heroGlobe.style.transform = `translateY(calc(-52% - ${offset}px))`;
+    }, { passive: true });
+  }
+
+  // Active nav link highlight — lower threshold so short sections still fire
+  const navSections = [
+    { id: 'about',    link: document.querySelector('.nav-links a[href="#about"]') },
+    { id: 'speaking', link: document.querySelector('.nav-links a[href="#speaking"]') },
+    { id: 'register', link: document.querySelector('.nav-links a[href="#register"]') },
+    { id: 'join',     link: document.querySelector('.nav-links a[href="#join"]') },
+  ];
+  const navHighlightObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const match = navSections.find(s => s.id === entry.target.id);
+      if (match && match.link && entry.isIntersecting) {
+        navSections.forEach(s => s.link && s.link.classList.remove('nav-active'));
+        match.link.classList.add('nav-active');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -10% 0px' });
+  navSections.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (el) navHighlightObs.observe(el);
+  });
+
+  // Pull-to-dismiss mobile drawer — suppresses transition during drag to prevent jitter
+  (function() {
+    const menu = document.getElementById('mobileMenu');
+    let startX = 0, startY = 0, dragging = false;
+
+    function resetDrag() {
+      dragging = false;
+      menu.style.transition = '';
+      menu.style.transform  = '';
+    }
+
+    menu.addEventListener('touchstart', e => {
+      if (!menu.classList.contains('open')) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dragging = true;
+      menu.style.transition = 'none'; // suppress CSS transition while dragging
+    }, { passive: true });
+
+    menu.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      const dx = e.touches[0].clientX - startX;
+      const dy = Math.abs(e.touches[0].clientY - startY);
+      if (dx > 0 && dx > dy) {
+        menu.style.transform = `translateX(${dx}px)`;
+      }
+    }, { passive: true });
+
+    menu.addEventListener('touchend', e => {
+      if (!dragging) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      dragging = false;
+      menu.style.transition = ''; // restore CSS transition
+      if (dx > 72) {
+        menu.style.transform = '';
+        toggleMenu();
+      } else {
+        menu.style.transform = ''; // snap back
+      }
+    }, { passive: true });
+
+    menu.addEventListener('touchcancel', resetDrag, { passive: true });
+  })();
 
   const stickyJoin  = document.getElementById('stickyJoin');
   const heroSection = document.querySelector('.hero');
