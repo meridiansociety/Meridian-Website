@@ -67,23 +67,7 @@
     }
 
 
-    /* ─── PAGE TRANSITION ─── */
-    #page-transition {
-      position: fixed; inset: 0; z-index: 9999;
-      background: var(--black);
-      display: none; pointer-events: none;
-    }
-    #transition-line {
-      position: fixed; left: 0; top: 0;
-      width: 100%; height: 2px;
-      background: linear-gradient(90deg,
-        transparent 0%,
-        var(--gold) 20%,
-        var(--gold-light) 50%,
-        var(--gold) 80%,
-        transparent 100%);
-      transform: translateY(-2px);
-    }
+
 
     /* ─── SCROLL PROGRESS BAR ─── */
     .progress-bar {
@@ -542,7 +526,6 @@
 <body>
 
 <div class="progress-bar" id="progressBar"></div>
-<div id="page-transition"><div id="transition-line"></div></div>
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -764,34 +747,7 @@
     document.body.style.overflow = open ? 'hidden' : '';
   }
 
-  /* ─── PAGE TRANSITION ─── */
-  (function() {
-    const overlay = document.getElementById('page-transition');
-    const line    = document.getElementById('transition-line');
 
-    document.addEventListener('click', function(e) {
-      const a = e.target.closest('a');
-      if (!a) return;
-      const href = a.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('mailto') ||
-          href.startsWith('http') || a.target === '_blank') return;
-      if (!href.match(/\.html/)) return;
-      const dest = href.split('#')[0].replace(/^\//, '');
-      const curr = window.location.pathname.replace(/^\//, '');
-      if (dest === curr || (dest === 'index.html' && curr === '')) return;
-      e.preventDefault();
-      // Show overlay, reset line to top
-      overlay.style.display   = 'block';
-      line.style.transition   = 'none';
-      line.style.transform    = 'translateY(-2px)';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        // Sweep line down the screen
-        line.style.transition = 'transform 0.45s cubic-bezier(0.4,0,0.2,1)';
-        line.style.transform  = 'translateY(100vh)';
-        setTimeout(function() { window.location.href = href; }, 420);
-      }));
-    });
-  })();
 </script>
 
 </body>
