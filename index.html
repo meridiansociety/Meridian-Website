@@ -328,7 +328,7 @@
     .arc-btn:hover .arc-icon { color: var(--black); }
 
     /* ─────────────────────────────────
-       HERO — PARTICLE SPHERE
+       HERO — INTERACTIVE 3D GLOBE
     ───────────────────────────────── */
     .hero {
       position: relative; min-height: 100svh;
@@ -345,12 +345,16 @@
     .hero-canvas-wrap {
       position: absolute; inset: 0; z-index: 0;
     }
-    #particleCanvas { width: 100%; height: 100%; display: block; }
+    #globeCanvas { width: 100%; height: 100%; display: block; cursor: grab; }
+    #globeCanvas:active { cursor: grabbing; }
+    /* Prevent text selection when dragging globe */
+    .hero.dragging, .hero.dragging * { user-select: none; -webkit-user-select: none; }
     .hero-vignette {
       position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background:
-        radial-gradient(ellipse 50% 65% at 50% 50%, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.82) 60%, var(--black) 100%),
-        linear-gradient(to bottom, rgba(8,8,8,0.6) 0%, rgba(8,8,8,0.2) 18%, transparent 40%, transparent 72%, var(--black) 100%);
+        radial-gradient(ellipse 55% 70% at 50% 50%, rgba(8,8,8,0.22) 0%, rgba(8,8,8,0.55) 55%, var(--black) 100%),
+        radial-gradient(ellipse 60% 40% at 50% 48%, rgba(8,8,8,0.72) 0%, rgba(8,8,8,0.45) 45%, transparent 70%),
+        linear-gradient(to bottom, rgba(8,8,8,0.65) 0%, rgba(8,8,8,0.15) 20%, transparent 38%, transparent 70%, var(--black) 100%);
     }
     .hero-rail {
       position: absolute; left: 52px; top: 0; bottom: 0; z-index: 3; width: 1px;
@@ -373,6 +377,7 @@
     .hero-eyebrow-text {
       font-family: var(--sans); font-size: 11px; font-weight: 500;
       letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); opacity: 0.75;
+      text-shadow: 0 0 20px rgba(0,0,0,0.9), 0 2px 8px rgba(0,0,0,0.8);
     }
 
     /* Title */
@@ -381,6 +386,7 @@
       font-weight: 300; letter-spacing: 0.6em; text-transform: uppercase;
       color: var(--cream-20); margin-bottom: 4px;
       opacity: 0; animation: riseIn 0.7s 0.75s ease forwards;
+      text-shadow: 0 0 24px rgba(0,0,0,1), 0 2px 8px rgba(0,0,0,0.9);
     }
     .hero-title {
       font-family: var(--serif);
@@ -389,6 +395,7 @@
       color: var(--cream);
       opacity: 0; animation: riseIn 0.9s 0.9s ease forwards;
       position: relative;
+      text-shadow: 0 0 40px rgba(0,0,0,0.95), 0 4px 24px rgba(0,0,0,0.85), 0 2px 6px rgba(0,0,0,0.9);
     }
     .hero-title-gold { color: var(--gold); display: block; }
     .hero-title::after {
@@ -406,6 +413,7 @@
       font-style: italic; font-weight: 300; color: var(--cream-45);
       letter-spacing: 0.06em; margin-top: 12px;
       opacity: 0; animation: riseIn 0.7s 1.05s ease forwards;
+      text-shadow: 0 0 20px rgba(0,0,0,0.95), 0 2px 10px rgba(0,0,0,0.85);
     }
 
     /* Divider */
@@ -426,6 +434,7 @@
       font-weight: 400; color: var(--cream-45);
       max-width: 500px; line-height: 1.9; margin-bottom: 44px;
       opacity: 0; animation: riseIn 0.7s 1.3s ease forwards;
+      text-shadow: 0 0 20px rgba(0,0,0,0.95), 0 2px 10px rgba(0,0,0,0.8);
     }
     .hero-ctas {
       display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
@@ -518,7 +527,7 @@
     /* ─────────────────────────────────
        SHARED UTILS
     ───────────────────────────────── */
-    .wrap { max-width: 1440px; margin: 0 auto; padding: 0 52px; }
+    .wrap { max-width: 1440px; margin: 0 auto; padding: 48px 52px; }
 
     /* Decorative section divider — replaces plain 1px rule */
     .sec-divider {
@@ -568,7 +577,7 @@
     /* ─────────────────────────────────
        §01 ABOUT
     ───────────────────────────────── */
-    #about { padding: 48px 0; }
+    #about {}
     .about-layout {
       display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: start;
     }
@@ -612,7 +621,7 @@
     /* ─────────────────────────────────
        §02 WHO — EDITORIAL LIST
     ───────────────────────────────── */
-    #who { padding: 48px 0; background: var(--surface); }
+    #who { background: var(--surface); }
 
     .who-intro {
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
@@ -657,78 +666,142 @@
     /* ─────────────────────────────────
        FIRST EVENT TEASER
     ───────────────────────────────── */
-    #first-event { padding: 48px 0; background: var(--surface); }
+    #first-event { background: var(--black); }
 
-    .event-teaser {
-      display: grid; grid-template-columns: 1fr auto;
-      align-items: center; gap: 40px;
-      border: 1px solid var(--gold-border);
-      padding: 40px 48px;
+    .event-card {
       position: relative; overflow: hidden;
-      transition: border-color 0.3s;
+      border: 1px solid var(--gold-border);
+      background: var(--surface);
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      min-height: 320px;
     }
-    .event-teaser:hover { border-color: var(--gold-border2); }
-    .event-teaser::before {
+    /* Gold top accent */
+    .event-card::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light) 40%, transparent);
+      z-index: 2;
     }
-    .event-teaser-left { display: flex; flex-direction: column; gap: 16px; }
-    .event-teaser-badges {
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    /* Ghost "01" background number */
+    .event-card::after {
+      content: '01';
+      position: absolute; right: 300px; bottom: -20px;
+      font-family: var(--sans); font-size: 220px; font-weight: 700;
+      color: rgba(201,168,76,0.04); line-height: 1;
+      letter-spacing: -0.04em; pointer-events: none; user-select: none;
+      z-index: 0;
     }
-    .event-badge {
+
+    /* Left — main content */
+    .event-card-main {
+      padding: 48px 52px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; z-index: 1;
+      border-right: 1px solid var(--gold-border);
+    }
+
+    .event-card-top { display: flex; flex-direction: column; gap: 20px; }
+
+    .event-status {
+      display: inline-flex; align-items: center; gap: 8px;
+      width: fit-content;
+    }
+    .event-status-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+      animation: livePulse 2s ease-in-out infinite; flex-shrink: 0;
+    }
+    .event-status-text {
       font-family: var(--sans); font-size: 9px; font-weight: 700;
-      letter-spacing: 0.26em; text-transform: uppercase;
-      padding: 5px 12px; border: 1px solid var(--gold-border2);
-      color: var(--gold);
+      letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
     }
-    .event-badge.upcoming {
-      background: var(--gold); color: var(--black);
-      border-color: var(--gold); animation: badgePulse 3s ease-in-out infinite;
+
+    .event-card-title {
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.8vw, 56px);
+      font-weight: 300; line-height: 1.05; color: var(--cream);
     }
-    @keyframes badgePulse {
-      0%,100% { opacity: 1; }
-      50%      { opacity: 0.7; }
+    .event-card-title em { color: var(--gold); font-style: italic; }
+
+    .event-card-desc {
+      font-family: var(--serif); font-size: 16px; font-weight: 400;
+      color: var(--cream-45); line-height: 1.8; max-width: 520px;
     }
-    .event-teaser-title {
-      font-family: var(--serif); font-size: clamp(24px, 2.8vw, 40px);
-      font-weight: 300; color: var(--cream); line-height: 1.1;
+
+    .event-card-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px; padding-top: 32px;
+      border-top: 1px solid rgba(201,168,76,0.08);
+      margin-top: 32px;
     }
-    .event-teaser-title em { color: var(--gold); font-style: italic; }
-    .event-teaser-meta {
-      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    .event-card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .event-tag {
+      font-family: var(--sans); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 5px 12px; border: 1px solid var(--gold-border);
+      color: var(--cream-45);
     }
-    .event-meta-item {
-      display: flex; align-items: center; gap: 8px;
-      font-family: var(--sans); font-size: 10px; font-weight: 500;
-      letter-spacing: 0.18em; text-transform: uppercase; color: var(--grey);
-    }
-    .event-meta-dot {
-      width: 3px; height: 3px; background: var(--gold);
-      border-radius: 50%; opacity: 0.5; flex-shrink: 0;
-    }
-    .event-teaser-cta {
+    .event-card-cta {
       display: inline-flex; align-items: center; gap: 10px;
-      padding: 13px 28px; flex-shrink: 0;
-      border: 1px solid var(--gold-border2); color: var(--gold);
+      padding: 12px 28px;
+      background: var(--gold); color: var(--black);
       text-decoration: none; font-family: var(--sans);
       font-size: 10px; font-weight: 700;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      transition: all 0.25s; position: relative; overflow: hidden;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      transition: background 0.25s, transform 0.2s;
+      flex-shrink: 0;
     }
-    .event-teaser-cta::before {
-      content: ''; position: absolute; inset: 0;
-      background: var(--gold); transform: translateX(-100%);
-      transition: transform 0.25s ease; z-index: 0;
-    }
-    .event-teaser-cta span { position: relative; z-index: 1; }
-    .event-teaser-cta:hover { color: var(--black); border-color: var(--gold); }
-    .event-teaser-cta:hover::before { transform: translateX(0); }
+    .event-card-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
 
+    /* Right — details panel */
+    .event-card-panel {
+      padding: 48px 36px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; z-index: 1;
+      background: rgba(201,168,76,0.03);
+    }
+    .event-panel-label {
+      font-family: var(--sans); font-size: 8px; font-weight: 700;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.6; margin-bottom: 10px;
+    }
+    .event-panel-value {
+      font-family: var(--serif); font-size: clamp(16px, 1.8vw, 24px);
+      font-weight: 300; color: var(--cream); line-height: 1.2;
+    }
+    .event-panel-value.tba {
+      font-style: italic; color: var(--cream-45);
+      font-size: clamp(15px, 1.5vw, 20px);
+    }
+    .event-panel-row { display: flex; flex-direction: column; gap: 6px; }
+    .event-panel-divider {
+      height: 1px; background: var(--gold-border); margin: 20px 0;
+    }
+
+    @media (max-width: 1100px) {
+      .event-card { grid-template-columns: 1fr; min-height: auto; }
+      .event-card::after { display: none; }
+      .event-card-main { border-right: none; border-bottom: 1px solid var(--gold-border); padding: 36px 36px; }
+      .event-card-panel { padding: 32px 36px; }
+    }
     @media (max-width: 700px) {
-      .event-teaser { grid-template-columns: 1fr; padding: 28px 24px; gap: 24px; }
-      .event-teaser-cta { width: 100%; justify-content: center; }
+      .event-card { grid-template-columns: 1fr; min-height: auto; }
+      .event-card::after { display: none; }
+      .event-card-main {
+        border-right: none;
+        border-bottom: 1px solid var(--gold-border);
+        padding: 28px 24px;
+      }
+      .event-card-panel { padding: 24px 24px; }
+      .event-card-bottom {
+        flex-direction: column; align-items: flex-start; gap: 14px;
+        margin-top: 24px; padding-top: 24px;
+      }
+      .event-card-tags { gap: 6px; }
+      .event-card-cta { width: 100%; justify-content: center; }
+      .event-panel-value { font-size: 18px; }
+      .event-panel-value.tba { font-size: 16px; }
+      .event-panel-divider { margin: 14px 0; }
     }
 
     .who-row-num {
@@ -771,7 +844,7 @@
     /* ─────────────────────────────────
        §03 NOT
     ───────────────────────────────── */
-    #not { padding: 48px 0; }
+    #not {}
     .not-intro {
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
       margin-bottom: 36px;
@@ -820,7 +893,7 @@
     /* ─────────────────────────────────
        §04 SPEAKING
     ───────────────────────────────── */
-    #speaking { padding: 48px 0; background: var(--surface); }
+    #speaking { background: var(--surface); }
     .speaking-layout {
       display: grid; grid-template-columns: 1fr 340px; gap: 80px; align-items: start;
     }
@@ -873,7 +946,7 @@
     /* ─────────────────────────────────
        §05 MEMBERSHIP
     ───────────────────────────────── */
-    #register { padding: 48px 0; }
+    #register {}
     .register-layout {
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
     }
@@ -1148,7 +1221,8 @@
       .stat-val { font-size: 18px; }
       .stat-lbl { font-size: 8px; }
 
-      #about, #who, #not, #speaking, #register { padding: 36px 0; }
+      #about, #who, #not, #speaking, #register, #first-event { padding: 0; }
+      .wrap { padding: 32px 20px; }
       .about-headline, .who-headline, .not-headline,
       .speaking-headline, .register-headline { font-size: clamp(24px, 7vw, 36px); }
       .sec-head { margin-bottom: 32px; }
@@ -1292,7 +1366,7 @@
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero" aria-label="Hero">
   <div class="hero-canvas-wrap" aria-hidden="true">
-    <canvas id="particleCanvas"></canvas>
+    <canvas id="globeCanvas"></canvas>
   </div>
   <div class="hero-vignette" aria-hidden="true"></div>
   <div class="hero-rail"     aria-hidden="true"></div>
@@ -1350,7 +1424,7 @@
 
 <!-- ═══════════ §01 ABOUT ═══════════ -->
 <section id="about" aria-labelledby="about-h">
-  <div class="wrap" style="padding: 48px 52px;">
+  <div class="wrap">
     <div class="sec-head rv">
       <span class="sec-tag">About the Society</span>
       <div class="sec-rule"></div>
@@ -1387,50 +1461,75 @@
 
 <!-- ═══════════ FIRST EVENT ═══════════ -->
 <section id="first-event" aria-labelledby="event-h">
-  <div class="wrap" style="padding: 48px 52px;">
+  <div class="wrap">
     <div class="sec-head rv">
       <span class="sec-tag">Upcoming</span>
       <div class="sec-rule"></div>
       <span class="sec-num">—</span>
     </div>
-    <div class="event-teaser rv">
-      <div class="event-teaser-left">
-        <div class="event-teaser-badges">
-          <span class="event-badge upcoming">Upcoming</span>
-          <span class="event-badge">Ottawa</span>
-          <span class="event-badge">Speaker Event</span>
+    <div class="event-card rv">
+
+      <!-- Left — main content -->
+      <div class="event-card-main">
+        <div class="event-card-top">
+          <div class="event-status">
+            <div class="event-status-dot"></div>
+            <span class="event-status-text">Registration Open</span>
+          </div>
+          <h2 class="event-card-title" id="event-h">
+            Our <em>First Event</em><br>is Coming.
+          </h2>
+          <p class="event-card-desc">
+            The Meridian Society's inaugural gathering — an evening of conversation, perspective, and connection between students, alumni, and professionals in Ottawa.
+          </p>
         </div>
-        <h2 class="event-teaser-title" id="event-h">
-          Our <em>First Event</em> is Coming.
-        </h2>
-        <div class="event-teaser-meta">
-          <div class="event-meta-item">
-            <div class="event-meta-dot"></div>
-            Spring 2025
+        <div class="event-card-bottom">
+          <div class="event-card-tags">
+            <span class="event-tag">Speaker Event</span>
+            <span class="event-tag">Open Conversation</span>
+            <span class="event-tag">Ottawa</span>
           </div>
-          <div class="event-meta-item">
-            <div class="event-meta-dot"></div>
-            Ottawa, Canada
-          </div>
-          <div class="event-meta-item">
-            <div class="event-meta-dot"></div>
-            Speaker &amp; Open Conversation
-          </div>
-          <div class="event-meta-item">
-            <div class="event-meta-dot"></div>
-            Details TBA
-          </div>
+          <a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform"
+             target="_blank" rel="noopener" class="event-card-cta">
+            Register for Updates
+          </a>
         </div>
       </div>
-      <a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform"
-         target="_blank" rel="noopener" class="event-teaser-cta">
-        <span>Register for Updates</span>
-      </a>
+
+      <!-- Right — details panel -->
+      <div class="event-card-panel">
+        <div>
+          <div class="event-panel-row">
+            <div class="event-panel-label">When</div>
+            <div class="event-panel-value tba">Spring 2025</div>
+          </div>
+          <div class="event-panel-divider"></div>
+          <div class="event-panel-row">
+            <div class="event-panel-label">Where</div>
+            <div class="event-panel-value">Ottawa,<br>Canada</div>
+          </div>
+          <div class="event-panel-divider"></div>
+          <div class="event-panel-row">
+            <div class="event-panel-label">Format</div>
+            <div class="event-panel-value tba">Speaker &amp;<br>Open Conversation</div>
+          </div>
+          <div class="event-panel-divider"></div>
+          <div class="event-panel-row">
+            <div class="event-panel-label">Speaker</div>
+            <div class="event-panel-value tba">To Be Announced</div>
+          </div>
+        </div>
+        <div style="margin-top: 28px;">
+          <div class="event-panel-label">Entry</div>
+          <div class="event-panel-value" style="color: var(--gold);">Free — Members Only</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 <section id="who" aria-labelledby="who-h">
-  <div class="wrap" style="padding: 48px 52px;">
+  <div class="wrap">
     <div class="sec-head rv">
       <span class="sec-tag">Who We Gather</span>
       <div class="sec-rule"></div>
@@ -1497,7 +1596,7 @@
 
 <!-- ═══════════ §03 WHAT WE ARE NOT ═══════════ -->
 <section id="not" aria-labelledby="not-h">
-  <div class="wrap" style="padding: 48px 52px;">
+  <div class="wrap">
     <div class="sec-head rv">
       <span class="sec-tag">What We Are Not</span>
       <div class="sec-rule"></div>
@@ -1533,7 +1632,7 @@
 
 <!-- ═══════════ §04 SPEAKING ═══════════ -->
 <section id="speaking" aria-labelledby="speaking-h">
-  <div class="wrap" style="padding: 48px 52px;">
+  <div class="wrap">
     <div class="sec-head rv">
       <span class="sec-tag">Speaking at The Meridian Society</span>
       <div class="sec-rule"></div>
@@ -1545,7 +1644,7 @@
         <p class="speaking-body">The Meridian Society is building a program of presentations, open conversations, and informal gatherings where professionals, alumni, and thinkers share their experiences and perspectives.</p>
         <p class="speaking-body">If you have a story, insight, or path worth sharing, we want to hear about it.</p>
         <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-          <a href="mailto:meridiansocietycanada@gmail.com" class="event-teaser-cta">
+          <a href="mailto:meridiansocietycanada@gmail.com" class="event-card-cta">
             <span>Get in Touch</span>
           </a>
           <span style="font-family:var(--sans);font-size:9px;font-weight:400;letter-spacing:0.16em;color:var(--grey);">
@@ -1579,7 +1678,7 @@
 
 <!-- ═══════════ §05 MEMBERSHIP ═══════════ -->
 <section id="register" aria-labelledby="register-h">
-  <div class="wrap" style="padding: 48px 52px;">
+  <div class="wrap">
     <div class="sec-head rv">
       <span class="sec-tag">Membership</span>
       <div class="sec-rule"></div>
@@ -1719,207 +1818,284 @@
   }
 </style>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-// ── ORBITAL RINGS HERO ─────────────────────────────────────────
+// ── INTERACTIVE 3D GLOBE ────────────────────────────────────────
 (function() {
-  const canvas = document.getElementById('particleCanvas');
-  const ctx    = canvas.getContext('2d');
-  let W, H, CX, CY;
-  let raf, startTime = null;
+  const GOLD = 0xc9a84c;
+  const canvas = document.getElementById('globeCanvas');
+  const heroEl = document.querySelector('.hero');
+  const W = () => heroEl.offsetWidth;
+  const H = () => heroEl.offsetHeight;
 
-  function resize() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-    CX = W / 2; CY = H / 2;
-  }
+  // ── RENDERER ────────────────────────────────────────────────
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W(), H());
+  renderer.setClearColor(0x000000, 0);
 
-  // Ring definitions — tilt, speed, size, node count
-  const RINGS = [
-    { radiusF: 0.28, tiltX: 0.42, tiltZ: 0.18, speed:  0.22, nodes: 1, nodeSize: 3.5, lineW: 0.9, alpha: 0.55 },
-    { radiusF: 0.42, tiltX: -0.55, tiltZ: 0.35, speed: -0.14, nodes: 2, nodeSize: 2.5, lineW: 0.7, alpha: 0.38 },
-    { radiusF: 0.58, tiltX: 0.28, tiltZ: -0.5,  speed:  0.09, nodes: 1, nodeSize: 2.0, lineW: 0.6, alpha: 0.25 },
-    { radiusF: 0.72, tiltX: -0.2, tiltZ: 0.62,  speed: -0.06, nodes: 3, nodeSize: 1.5, lineW: 0.5, alpha: 0.15 },
-  ];
+  // ── SCENE / CAMERA ──────────────────────────────────────────
+  const scene  = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, W() / H(), 0.1, 100);
+  camera.position.set(0, -0.15, 4.2);
 
-  // Project a 3D point onto 2D canvas using simple oblique projection
-  function project(x, y, z, tiltX, tiltZ) {
-    // Rotate around X axis by tiltX
-    const y1 = y * Math.cos(tiltX) - z * Math.sin(tiltX);
-    const z1 = y * Math.sin(tiltX) + z * Math.cos(tiltX);
-    // Rotate around Z axis by tiltZ
-    const x2 = x * Math.cos(tiltZ) - y1 * Math.sin(tiltZ);
-    const y2 = x * Math.sin(tiltZ) + y1 * Math.cos(tiltZ);
-    return { x: x2, y: y2, depth: z1 };
-  }
+  const RADIUS = 1;
 
-  function drawAura(alpha) {
-    const r = Math.min(W, H) * 0.55;
-    const g = ctx.createRadialGradient(CX, CY, 0, CX, CY, r);
-    g.addColorStop(0,   `rgba(201,168,76,${alpha * 0.08})`);
-    g.addColorStop(0.5, `rgba(201,168,76,${alpha * 0.03})`);
-    g.addColorStop(1,   'rgba(201,168,76,0)');
-    ctx.beginPath();
-    ctx.arc(CX, CY, r, 0, Math.PI * 2);
-    ctx.fillStyle = g;
-    ctx.fill();
-  }
+  // ── GLOBE LINES ─────────────────────────────────────────────
+  function makeGlobeLines() {
+    // Uses same geoToVec3 as country borders so grid aligns exactly
+    const group    = new THREE.Group();
+    const SEG      = 180;
+    const LAT_STEP = 15; // every 15 degrees → 11 lines
+    const LON_STEP = 20; // every 20 degrees → 18 lines
 
-  function drawCentreDot(alpha) {
-    // Pulsing centre point
-    const pulse = 0.6 + 0.4 * Math.sin(Date.now() * 0.002);
-    ctx.beginPath();
-    ctx.arc(CX, CY, 2.5, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(201,168,76,${alpha * pulse * 0.9})`;
-    ctx.fill();
-    // Halo
-    ctx.beginPath();
-    ctx.arc(CX, CY, 6, 0, Math.PI * 2);
-    ctx.strokeStyle = `rgba(201,168,76,${alpha * pulse * 0.2})`;
-    ctx.lineWidth = 1;
-    ctx.stroke();
-  }
-
-  function drawRing(ring, elapsed, fadeIn) {
-    const R  = Math.min(W, H) * ring.radiusF;
-    const angle = elapsed * ring.speed;
-    const SEGMENTS = 180;
-    const alpha = fadeIn * ring.alpha;
-
-    // Sample all points on the ring ellipse
-    const pts = [];
-    for (let i = 0; i <= SEGMENTS; i++) {
-      const a = (i / SEGMENTS) * Math.PI * 2;
-      const x3 = Math.cos(a) * R;
-      const y3 = 0;
-      const z3 = Math.sin(a) * R;
-      const p = project(x3, y3, z3, ring.tiltX, ring.tiltZ);
-      pts.push({ sx: CX + p.x, sy: CY + p.y, depth: p.depth });
-    }
-
-    // Draw ring segments with depth-based opacity (back = dimmer, front = brighter)
-    for (let i = 0; i < SEGMENTS; i++) {
-      const p0 = pts[i];
-      const p1 = pts[i + 1];
-      const depth = (p0.depth / R + 1) / 2; // 0=back, 1=front
-      const segAlpha = alpha * (0.25 + 0.75 * depth);
-      ctx.beginPath();
-      ctx.moveTo(p0.sx, p0.sy);
-      ctx.lineTo(p1.sx, p1.sy);
-      ctx.strokeStyle = `rgba(201,168,76,${segAlpha})`;
-      ctx.lineWidth = ring.lineW * (0.5 + 0.5 * depth);
-      ctx.stroke();
-    }
-
-    // Draw nodes travelling along the ring
-    for (let n = 0; n < ring.nodes; n++) {
-      const nodeAngle = angle + (n / ring.nodes) * Math.PI * 2;
-      const nx = Math.cos(nodeAngle) * R;
-      const ny = 0;
-      const nz = Math.sin(nodeAngle) * R;
-      const np = project(nx, ny, nz, ring.tiltX, ring.tiltZ);
-      const depth = (np.depth / R + 1) / 2;
-
-      // Only draw nodes on the front half (depth > 0.3) to look 3D
-      if (depth < 0.2) continue;
-
-      const sx = CX + np.x;
-      const sy = CY + np.y;
-      const nodeAlpha = fadeIn * depth;
-      const nodeR = ring.nodeSize * (0.4 + 0.6 * depth);
-
-      // Node glow
-      const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, nodeR * 4);
-      glow.addColorStop(0, `rgba(201,168,76,${nodeAlpha * 0.4})`);
-      glow.addColorStop(1, 'rgba(201,168,76,0)');
-      ctx.beginPath();
-      ctx.arc(sx, sy, nodeR * 4, 0, Math.PI * 2);
-      ctx.fillStyle = glow;
-      ctx.fill();
-
-      // Node dot
-      ctx.beginPath();
-      ctx.arc(sx, sy, nodeR, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(201,168,76,${nodeAlpha})`;
-      ctx.fill();
-
-      // Trail — draw a short arc behind the node
-      const trailLen = 0.3; // radians
-      const trailPts = 20;
-      ctx.beginPath();
-      for (let t = 0; t <= trailPts; t++) {
-        const ta = nodeAngle - (t / trailPts) * trailLen;
-        const tx = Math.cos(ta) * R;
-        const tz = Math.sin(ta) * R;
-        const tp = project(tx, 0, tz, ring.tiltX, ring.tiltZ);
-        const td = (tp.depth / R + 1) / 2;
-        const tsx = CX + tp.x;
-        const tsy = CY + tp.y;
-        if (td < 0.2) { ctx.moveTo(tsx, tsy); continue; }
-        const trailAlpha = fadeIn * td * (1 - t / trailPts) * 0.5;
-        if (t === 0) ctx.moveTo(tsx, tsy);
-        else ctx.lineTo(tsx, tsy);
+    // Latitude parallels
+    for (let lat = -75; lat <= 75; lat += LAT_STEP) {
+      const pts = [];
+      for (let j = 0; j <= SEG; j++) {
+        const lon = -180 + (j / SEG) * 360;
+        pts.push(geoToVec3(lon, lat));
       }
-      ctx.strokeStyle = `rgba(201,168,76,${fadeIn * depth * 0.3})`;
-      ctx.lineWidth = ring.lineW * 1.5;
-      ctx.stroke();
+      const mat  = new THREE.LineBasicMaterial({ color: GOLD, transparent: true, opacity: 0 });
+      const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat);
+      line._isEquator = (lat === 0);
+      group.add(line);
     }
-  }
 
-  // Subtle connecting lines between ring intersection points
-  function drawConnectors(elapsed, fadeIn) {
-    // Draw thin spokes from centre to where each ring would be at its nearest point
-    const spokeCount = 8;
-    for (let i = 0; i < spokeCount; i++) {
-      const a = (i / spokeCount) * Math.PI * 2 + elapsed * 0.015;
-      const outerR = Math.min(W, H) * 0.74;
-      const pulse = 0.5 + 0.5 * Math.sin(elapsed * 0.3 + i * 0.8);
-      ctx.beginPath();
-      ctx.moveTo(CX, CY);
-      ctx.lineTo(CX + Math.cos(a) * outerR, CY + Math.sin(a) * outerR);
-      ctx.strokeStyle = `rgba(201,168,76,${fadeIn * 0.03 * pulse})`;
-      ctx.lineWidth = 0.5;
-      ctx.stroke();
+    // Longitude meridians
+    for (let lon = -180; lon < 180; lon += LON_STEP) {
+      const pts = [];
+      for (let j = 0; j <= SEG; j++) {
+        const lat = -90 + (j / SEG) * 180;
+        pts.push(geoToVec3(lon, lat));
+      }
+      const mat  = new THREE.LineBasicMaterial({ color: GOLD, transparent: true, opacity: 0 });
+      const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), mat);
+      group.add(line);
     }
+
+    return group;
   }
 
-  function drawFrame(elapsed) {
-    const fadeIn = Math.min(elapsed / 2.2, 1);
-
-    ctx.clearRect(0, 0, W, H);
-    drawAura(fadeIn);
-    drawConnectors(elapsed, fadeIn);
-
-    // Draw rings back to front (sort by tiltX for approximate depth)
-    [...RINGS]
-      .sort((a, b) => Math.abs(b.tiltX) - Math.abs(a.tiltX))
-      .forEach(ring => drawRing(ring, elapsed, fadeIn));
-
-    drawCentreDot(fadeIn);
+  // ── COUNTRY BORDERS (TopoJSON) ────────────────────────────
+  // Returns a placeholder group immediately; populates async
+  // Accurate spherical projection
+  // lon=0, lat=0 → faces +Z (Atlantic/Africa toward camera at load)
+  // +Y = north pole up
+  function geoToVec3(lon, lat) {
+    const phi   = lat * (Math.PI / 180);
+    const theta = lon * (Math.PI / 180);
+    return new THREE.Vector3(
+      RADIUS * Math.cos(phi) * Math.sin(theta),
+      RADIUS * Math.sin(phi),
+      RADIUS * Math.cos(phi) * Math.cos(theta)
+    );
   }
+
+  function makeCountryBorders() {
+    const group = new THREE.Group();
+    group._ready = false;
+
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+      .then(r => r.json())
+      .then(topo => {
+        const rawArcs = topo.arcs;
+        const sc = topo.transform.scale;
+        const tr = topo.transform.translate;
+
+        // TopoJSON delta-encoding decoder
+        function decodeArc(idx) {
+          const reversed = idx < 0;
+          const src = rawArcs[reversed ? ~idx : idx];
+          let ax = 0, ay = 0;
+          const pts = src.map(d => {
+            ax += d[0];
+            ay += d[1];
+            return [ax * sc[0] + tr[0], ay * sc[1] + tr[1]];
+          });
+          return reversed ? pts.reverse() : pts;
+        }
+
+        const mat = new THREE.LineBasicMaterial({
+          color: GOLD, transparent: true, opacity: 0,
+        });
+
+        topo.objects.countries.geometries.forEach(geom => {
+          const polys = geom.type === 'Polygon'
+            ? [geom.arcs]
+            : geom.type === 'MultiPolygon' ? geom.arcs : [];
+
+          polys.forEach(poly => {
+            poly.forEach(ring => {
+              const pts = [];
+              ring.forEach(arcIdx => {
+                decodeArc(arcIdx).forEach(([lon, lat]) => {
+                  if (lon >= -180 && lon <= 180 && lat >= -90 && lat <= 90) {
+                    pts.push(geoToVec3(lon, lat));
+                  }
+                });
+              });
+              if (pts.length < 2) return;
+              pts.push(pts[0].clone()); // close ring
+              group.add(new THREE.Line(
+                new THREE.BufferGeometry().setFromPoints(pts),
+                mat.clone()
+              ));
+            });
+          });
+        });
+
+        group._ready = true;
+      })
+      .catch(err => console.warn('Globe border fetch failed:', err));
+
+    return group;
+  }
+
+  // ── ATMOSPHERE ──────────────────────────────────────────────
+  function makeAtmosphere() {
+    return new THREE.Mesh(
+      new THREE.SphereGeometry(RADIUS * 1.18, 64, 64),
+      new THREE.MeshBasicMaterial({
+        color: GOLD, transparent: true, opacity: 0,
+        side: THREE.BackSide, depthWrite: false,
+      })
+    );
+  }
+
+  // ── OTTAWA DOT ──────────────────────────────────────────────
+  function makeOttawaDot() {
+    // Ottawa: 45.42°N, 75.69°W — using same geoToVec3 convention
+    const pos   = geoToVec3(-75.69, 45.42);
+    const x = pos.x, y = pos.y, z = pos.z;
+    const group = new THREE.Group();
+    const core  = new THREE.Mesh(
+      new THREE.SphereGeometry(0.018, 16, 16),
+      new THREE.MeshBasicMaterial({ color: 0xf0dfa0, transparent: true, opacity: 0 })
+    );
+    core.position.set(x, y, z);
+    const ring = new THREE.Mesh(
+      new THREE.RingGeometry(0.022, 0.030, 32),
+      new THREE.MeshBasicMaterial({ color: GOLD, transparent: true, opacity: 0, side: THREE.DoubleSide })
+    );
+    ring.position.set(x, y, z);
+    ring.lookAt(0, 0, 0);
+    group.add(core, ring);
+    group._core = core; group._ring = ring;
+    return group;
+  }
+
+  const globeLines = makeGlobeLines();
+  const countryBorders = makeCountryBorders();
+  const atmosphere = makeAtmosphere();
+  const ottawaDot  = makeOttawaDot();
+  const globeGroup = new THREE.Group();
+  globeGroup.add(globeLines, countryBorders, atmosphere, ottawaDot);
+  scene.add(globeGroup);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+  const dLight = new THREE.DirectionalLight(0xc9a84c, 0.6);
+  dLight.position.set(5, 3, 5);
+  scene.add(dLight);
+
+  // ── DRAG INTERACTION ────────────────────────────────────────
+  let isDragging = false, autoRotate = true;
+  let prevMouse  = { x: 0, y: 0 };
+  let rotVelX = 0, rotVelY = 0;
+
+  heroEl.addEventListener('mousedown', e => {
+    isDragging = true; autoRotate = false;
+    heroEl.classList.add('dragging');
+    prevMouse  = { x: e.clientX, y: e.clientY };
+  });
+  window.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    rotVelY += (e.clientX - prevMouse.x) * 0.002;
+    rotVelX += (e.clientY - prevMouse.y) * 0.002;
+    prevMouse = { x: e.clientX, y: e.clientY };
+  });
+  window.addEventListener('mouseup', () => {
+    isDragging = false;
+    heroEl.classList.remove('dragging');
+    setTimeout(() => { autoRotate = true; }, 3000);
+  });
+
+  let prevTouch = null;
+  heroEl.addEventListener('touchstart', e => {
+    autoRotate = false;
+    heroEl.classList.add('dragging');
+    prevTouch  = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }, { passive: true });
+  heroEl.addEventListener('touchmove', e => {
+    if (!prevTouch) return;
+    rotVelY += (e.touches[0].clientX - prevTouch.x) * 0.002;
+    rotVelX += (e.touches[0].clientY - prevTouch.y) * 0.002;
+    prevTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }, { passive: true });
+  heroEl.addEventListener('touchend', () => {
+    prevTouch = null;
+    heroEl.classList.remove('dragging');
+    setTimeout(() => { autoRotate = true; }, 3000);
+  }, { passive: true });
+
+  // ── FADE & ANIMATE ──────────────────────────────────────────
+  function setOpacity(v) {
+    globeLines.children.forEach(l => {
+      l.material.opacity = v * (l._isEquator ? 0.95 : 0.58);
+    });
+    if (countryBorders._ready) {
+      countryBorders.children.forEach(l => { l.material.opacity = v * 0.75; });
+    }
+    atmosphere.material.opacity = v * 0.16;
+    ottawaDot._core.material.opacity = v;
+    ottawaDot._ring.material.opacity = v * 0.7;
+  }
+
+  let startTime = null, raf;
 
   function animate(ts) {
-    if (!startTime) startTime = ts;
-    drawFrame((ts - startTime) / 1000);
     raf = requestAnimationFrame(animate);
+    if (!startTime) startTime = ts;
+    const elapsed = (ts - startTime) / 1000;
+    const fadeIn  = Math.min(elapsed / 2.5, 1);
+
+    setOpacity(fadeIn);
+
+    if (autoRotate) rotVelY += 0.00018;
+
+    globeGroup.rotation.y += rotVelY;
+    globeGroup.rotation.x += rotVelX;
+    globeGroup.rotation.x = Math.max(-0.8, Math.min(0.8, globeGroup.rotation.x));
+
+    rotVelY *= 0.90;
+    rotVelX *= 0.90;
+
+    // Ottawa pulse ring
+    const pulse = 0.5 + 0.5 * Math.sin(elapsed * 2.5);
+    ottawaDot._ring.scale.setScalar(1 + pulse * 0.5);
+    ottawaDot._ring.material.opacity = fadeIn * pulse * 0.5;
+
+    renderer.render(scene, camera);
   }
 
-  const ro = new ResizeObserver(resize);
-  ro.observe(canvas);
-  resize();
+  // ── RESIZE ──────────────────────────────────────────────────
+  const ro = new ResizeObserver(() => {
+    camera.aspect = W() / H();
+    camera.updateProjectionMatrix();
+    renderer.setSize(W(), H());
+  });
+  ro.observe(heroEl);
 
+  // ── REDUCED MOTION ──────────────────────────────────────────
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!prefersReduced) {
+  if (prefersReduced) {
+    autoRotate = false; setOpacity(1); renderer.render(scene, camera);
+  } else {
     raf = requestAnimationFrame(animate);
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        cancelAnimationFrame(raf);
-      } else {
-        startTime = null;
-        raf = requestAnimationFrame(animate);
-      }
+      if (document.hidden) { cancelAnimationFrame(raf); }
+      else { startTime = null; raf = requestAnimationFrame(animate); }
     });
-  } else {
-    drawFrame(2.2);
   }
 })();
 
