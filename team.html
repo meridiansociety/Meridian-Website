@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>The Team — The Meridian Society | Student-Run Speaker Forum Ottawa</title>
   <meta name="description" content="Meet the leadership behind The Meridian Society. Our student-run team in Ottawa organizes premier speaker forums, intellectual gatherings, and networking events for students and professionals." />
-  <meta name="keywords" content="The Meridian Society team, Ottawa student leaders, student speaker forum organizers, Magnus Abdelnour, Colin Sherwood, student society Ottawa, Carleton University student events, Ottawa networking society, intellectual gatherings Ottawa" />
+  <meta name="keywords" content="The Meridian Society team, Ottawa student leaders, student speaker forum organizers, Magnus Abdelnour, Colin Sherwood, student society Ottawa, Carleton University student events, uOttawa student speaker series, University of Ottawa, Algonquin College, Nepean, Riverside South, Barrhaven, Downtown Ottawa, Bank St Ottawa, Westboro, Glebe, Sandy Hill, Hintonburg, Little Italy Ottawa, Old Ottawa South, Rockcliffe Park, Vanier, Kanata, Orleans, Stittsville, Manotick, Ottawa South, Ottawa West, Ottawa East, Centretown, Lowertown, ByWard Market, Bank St, Elgin St, Wellington West, Carling Ave, Laurier Ave, Colonel By Drive, Law students Ottawa, Business students Ottawa, Policy students Ottawa, Media students Ottawa, Journalism students Ottawa, International Affairs Ottawa, Global Studies Ottawa, Philosophy students Ottawa, Economics students Ottawa, Political Science Ottawa, Criminology students Ottawa, Legal studies Ottawa, Networking events Ottawa, Professional development students, Leadership workshops Ottawa, Student clubs Carleton, Student societies uOttawa, Algonquin College clubs, Academic forums Ottawa, Intellectual community Ottawa, Speaker series Canada, Student-led initiatives, Career networking Ottawa, Alumni engagement Ottawa, Public speaking Ottawa, Civic engagement students, Social sciences forum, Humanities forum, Entrepreneurship students Ottawa, Future leaders Ottawa" />
   <meta name="author" content="The Meridian Society" />
   <meta name="geo.region" content="CA-ON" />
   <meta name="geo.placename" content="Ottawa" />
@@ -40,39 +40,53 @@
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "mainEntity": {
-      "@type": "EducationalOrganization",
-      "name": "The Meridian Society",
-      "location": {
-        "@type": "Place",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Ottawa",
-          "addressRegion": "ON",
-          "addressCountry": "CA"
-        }
-      },
-      "employee": [
-        {
-          "@type": "Person",
-          "name": "Magnus Abdelnour",
-          "jobTitle": "Founder & President",
-          "description": "Founder of The Meridian Society, focusing on Global and International Studies at Carleton University.",
-          "sameAs": "https://www.linkedin.com/in/magnus-a-9b5b50378"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@id": "https://themeridiansociety.vercel.app/team.html#magnus",
+        "@type": "Person",
+        "name": "Magnus Abdelnour",
+        "jobTitle": "Founder & President",
+        "affiliation": {
+          "@type": "EducationalOrganization",
+          "name": "The Meridian Society",
+          "url": "https://themeridiansociety.vercel.app"
         },
-        {
-          "@type": "Person",
-          "name": "Colin Sherwood",
-          "jobTitle": "Event Coordinator",
-          "description": "Event Coordinator for The Meridian Society, studying Criminology and Criminal Justice at Carleton University.",
-          "sameAs": "https://www.instagram.com/colinsherwood34"
-        }
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Carleton University"
+        },
+        "description": "Founder and President of The Meridian Society, a student-run speaker forum in Ottawa. Specializing in Global and International Studies.",
+        "url": "https://themeridiansociety.vercel.app/team.html",
+        "sameAs": [
+          "https://www.linkedin.com/in/magnus-a-9b5b50378",
+          "https://themeridiansociety.vercel.app/team.html"
+        ],
+        "image": "https://themeridiansociety.vercel.app/images/team/magnus.jpg"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://themeridiansociety.vercel.app/team.html#colin",
+      "name": "Colin Sherwood",
+      "jobTitle": "Event Coordinator",
+      "affiliation": {
+        "@type": "EducationalOrganization",
+        "name": "The Meridian Society"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Carleton University"
+      },
+      "url": "https://themeridiansociety.vercel.app/team.html",
+      "sameAs": [
+        "https://www.instagram.com/colinsherwood34"
       ]
     }
-  }
+  ]
   </script>
 
   <!-- Fonts -->
@@ -343,11 +357,11 @@
       <span class="nav-wordmark">The Meridian Society</span>
     </a>
     <ul class="nav-links">
-      <li><a href="/#about">About</a></li>
-      <li><a href="/#speaking">Speaking</a></li>
-      <li><a href="/#register">Membership</a></li>
+      <li><a href="/#about">About the Society</a></li>
+      <li><a href="/#speaking">Speaking Opportunities</a></li>
+      <li><a href="/#register">Membership Registration</a></li>
       <li><a href="/#join">Get Involved</a></li>
-      <li><a href="/team.html" class="active">Team</a></li>
+      <li><a href="/team.html" class="active">Our Team</a></li>
     </ul>
     <a href="#" class="nav-cta" data-register>
       <span>Register</span>
@@ -396,12 +410,12 @@
     <div class="member-grid">
       
       <!-- Magnus -->
-      <div class="member-card rv">
+      <div class="member-card rv" id="magnus">
         <div class="member-photo-col">
-          <img src="/images/team/magnus.jpg" class="member-photo" alt="Magnus Abdelnour" loading="lazy" />
+          <img src="/images/team/magnus.jpg" class="member-photo" alt="Magnus Abdelnour - Founder & President of The Meridian Society" loading="lazy" />
         </div>
         <div class="member-info-col">
-          <div class="member-name">Magnus Abdelnour</div>
+          <h2 class="member-name">Magnus Abdelnour</h2>
           <div class="member-title">Founder &amp; President</div>
           <div class="member-social">
             <a href="https://www.linkedin.com/in/magnus-a-9b5b50378" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -426,12 +440,12 @@
       </div>
 
       <!-- Colin -->
-      <div class="member-card rv">
+      <div class="member-card rv" id="colin">
         <div class="member-photo-col">
-          <img src="/images/team/colin.jpg" class="member-photo" alt="Colin Sherwood" loading="lazy" />
+          <img src="/images/team/colin.jpg" class="member-photo" alt="Colin Sherwood - Event Coordinator of The Meridian Society" loading="lazy" />
         </div>
         <div class="member-info-col">
-          <div class="member-name">Colin Sherwood</div>
+          <h2 class="member-name">Colin Sherwood</h2>
           <div class="member-title">Event Coordinator</div>
           <div class="member-social">
             <a href="https://www.instagram.com/colinsherwood34" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -471,9 +485,9 @@
       <div>
         <div class="footer-col-head">Society</div>
         <ul class="footer-links">
-          <li><a href="/#about">About</a></li>
-          <li><a href="/#speaking">Speaking</a></li>
-          <li><a href="/team.html">The Team</a></li>
+          <li><a href="/#about">About the Society</a></li>
+          <li><a href="/#speaking">Speaking Opportunities</a></li>
+          <li><a href="/team.html">Meet the Team</a></li>
         </ul>
       </div>
       <div>
