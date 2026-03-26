@@ -1,0 +1,28 @@
+/*
+  # Security Headers
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  
+  # Performance & Caching
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  
+  # Content Security Policy (permissive for external fonts and scripts)
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' /_vercel/insights/script.js cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' /_vercel/insights/
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/site.webmanifest
+  Content-Type: application/manifest+json
+  Cache-Control: public, max-age=604800
+
+/robots.txt
+  Content-Type: text/plain
+  Cache-Control: public, max-age=604800
+
+/404.html
+  Status: 404
+  Cache-Control: public, max-age=3600
