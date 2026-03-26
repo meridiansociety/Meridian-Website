@@ -536,7 +536,7 @@
       display: none; flex-direction: column; justify-content: center;
       align-items: flex-end; cursor: pointer;
       background: none; border: none;
-      width: 40px; height: 40px; gap: 5px; padding: 0;
+      width: 44px; height: 44px; gap: 5px; padding: 0;
     }
     .hamburger span {
       display: block; height: 1px; background: var(--gold);
@@ -583,7 +583,7 @@
     }
     .mob-links a {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 0; border-bottom: 1px solid rgba(201,168,76,0.10); /* was .07 */
+      padding: 22px 0; border-bottom: 1px solid rgba(201,168,76,0.10); /* was .07 */
       text-decoration: none; font-family: var(--sans);
       font-size: 20px; font-weight: 400;
       letter-spacing: 0.1em; text-transform: uppercase;
@@ -1545,7 +1545,7 @@
       .hero-stats { grid-template-columns: 1fr 1fr; }
       .hero-stat { padding: 14px 16px; }
       .stat-val { font-size: 18px; }
-      .stat-lbl { font-size: 8px; }
+      .stat-lbl { font-size: 10px; }
 
       #about, #who, #not, #speaking, #register, #first-event { padding: 0; }
       .wrap { padding: 32px 20px; }
@@ -1578,7 +1578,7 @@
         color: var(--cream-45); line-height: 1.75;
         padding: 0;
       }
-      .who-row.open .who-row-drop { max-height: 120px; opacity: 1; padding-bottom: 12px; }
+      .who-row.open .who-row-drop { max-height: 300px; opacity: 1; padding-bottom: 12px; }
       .who-row.open { background: rgba(201,168,76,0.03); }
 
       .not-intro { gap: 14px; margin-bottom: 24px; }
@@ -1605,8 +1605,9 @@
       .footer-bottom { padding: 14px 20px; flex-direction: column; align-items: flex-start; gap: 4px; }
       .footer-cta-row { flex-direction: column; width: 100%; }
       .footer-cta-main, .footer-cta-ig { width: 100%; justify-content: center; }
+      .footer-links a { display: block; padding: 5px 0; }
 
-      .arc-btn { display: none; }
+      .arc-btn { display: block; bottom: calc(2rem + env(safe-area-inset-bottom, 0px)); }
       .sticky-join { display: block; bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px)); }
 
       /* On mobile: kill transition delays, simpler reveals = less jank */
@@ -2499,6 +2500,16 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
 
   fetchCount();
   setInterval(fetchCount, 30000);
+
+  // Fallback: if count hasn't loaded after 8s, hide spinner and show dash
+  setTimeout(function() {
+    const loader = document.getElementById('countLoader');
+    if (loader) {
+      hideLoader();
+      const el = document.getElementById('memberCount');
+      if (el && !el.textContent.trim()) el.textContent = '—';
+    }
+  }, 8000);
 })();
 
 // ─────────────────────────────────────────────────────────────────
