@@ -1,6 +1,32 @@
+# ═══════════════════════════════════════════════════════════════
+# The Meridian Society — robots.txt
+# https://meridiansociety.ca/robots.txt
+# Updated : 2026-03-25
+# ═══════════════════════════════════════════════════════════════
+
+# Allow all well-behaved crawlers
 User-agent: *
 Allow: /
 
+# Googlebot — explicit asset permissions for full rendering
+User-agent: Googlebot
+Allow: /
+Allow: /favicon.svg
+Allow: /favicon-32x32.png
+Allow: /favicon-16x16.png
+Allow: /apple-touch-icon.png
+Allow: /og-image.png
+Allow: /site.webmanifest
+
+# Allow OG image for rich results
+User-agent: Googlebot-Image
+Allow: /og-image.png
+
+# Bing / DuckDuckGo / Cortana
+User-agent: Bingbot
+Allow: /
+
+# Block AI training crawlers
 User-agent: GPTBot
 Disallow: /
 
@@ -19,12 +45,7 @@ Disallow: /
 User-agent: cohere-ai
 Disallow: /
 
-User-agent: Omgilibot
-Disallow: /
-
-User-agent: FacebookBot
-Disallow: /
-
+# Block aggressive SEO scrapers
 User-agent: AhrefsBot
 Disallow: /
 
@@ -37,4 +58,5 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
+# Sitemap declaration — most important line
 Sitemap: https://meridiansociety.ca/sitemap.xml
