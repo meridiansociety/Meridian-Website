@@ -89,11 +89,31 @@
   {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
+    "@id": "https://meridiansociety.ca/#organization",
     "name": "The Meridian Society",
+    "alternateName": "Meridian Society",
     "url": "https://meridiansociety.ca/",
-    "logo": "https://meridiansociety.ca/og-image.png",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://meridiansociety.ca/og-image.png",
+      "width": 1200,
+      "height": 630
+    },
+    "image": "https://meridiansociety.ca/og-image.png",
     "description": "A student-run speaker forum in Ottawa dedicated to bringing motivated students face to face with the professionals, alumni, and scholars who can expand their world and mindset.",
     "foundingDate": "2025",
+    "areaServed": {
+      "@type": "City",
+      "name": "Ottawa",
+      "sameAs": "https://www.wikidata.org/wiki/Q1930"
+    },
+    "knowsAbout": [
+      "Student speaker forums",
+      "Public speaking",
+      "Student leadership",
+      "Professional development",
+      "Ottawa student community"
+    ],
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Ottawa",
@@ -316,13 +336,24 @@
   {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
+    "@id": "https://meridiansociety.ca/#profilepage",
+    "url": "https://meridiansociety.ca/",
+    "name": "The Meridian Society — Ottawa Student Speaker Forum",
+    "dateCreated": "2025-01-01",
+    "dateModified": "2026-03-25",
     "mainEntity": {
       "@type": "EducationalOrganization",
+      "@id": "https://meridiansociety.ca/#organization",
       "name": "The Meridian Society",
+      "alternateName": "Meridian Society",
       "description": "A student-run speaker forum in Ottawa dedicated to bringing motivated students face to face with professionals, alumni, and scholars.",
       "image": "https://meridiansociety.ca/og-image.png",
+      "url": "https://meridiansociety.ca/",
+      "email": "meridiansocietycanada@gmail.com",
+      "foundingDate": "2025",
       "sameAs": [
-        "https://www.instagram.com/Meridian.Society"
+        "https://www.instagram.com/Meridian.Society",
+        "https://linktr.ee/meridiansociety"
       ]
     }
   }
