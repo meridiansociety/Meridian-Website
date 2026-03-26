@@ -1,7 +1,7 @@
 # ═══════════════════════════════════════════════════════════════
 # The Meridian Society — robots.txt
 # https://meridiansociety.ca/robots.txt
-# Updated : 2026-03-25
+# Updated : 2026-03-26
 # ═══════════════════════════════════════════════════════════════
 
 # Allow all well-behaved crawlers
@@ -11,16 +11,17 @@ Allow: /
 # Googlebot — explicit asset permissions for full rendering
 User-agent: Googlebot
 Allow: /
-Allow: /favicon.svg
-Allow: /favicon-32x32.png
-Allow: /favicon-16x16.png
-Allow: /apple-touch-icon.png
-Allow: /og-image.png
+Allow: /assets/favicons/favicon.svg
+Allow: /assets/favicons/favicon-48x48.png
+Allow: /assets/favicons/favicon-32x32.png
+Allow: /assets/favicons/favicon-16x16.png
+Allow: /assets/favicons/apple-touch-icon.png
+Allow: /assets/og-image.png
 Allow: /site.webmanifest
 
 # Allow OG image for rich results
 User-agent: Googlebot-Image
-Allow: /og-image.png
+Allow: /assets/og-image.png
 
 # Bing / DuckDuckGo / Cortana
 User-agent: Bingbot
