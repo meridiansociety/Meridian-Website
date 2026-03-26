@@ -1,66 +1,6 @@
-# ═══════════════════════════════════════════════════════════════
-# The Meridian Society — robots.txt
-# https://themeridiansociety.vercel.app/robots.txt
-#
-# Purpose : Control how search engine crawlers index this site.
-# Updated : 2026-03-25
-#
-# Specification: https://www.robotstxt.org/robotstxt.html
-# Google docs  : https://developers.google.com/search/docs/crawling-indexing/robots/intro
-# ═══════════════════════════════════════════════════════════════
-
-
-# ───────────────────────────────────────────────────────────────
-# 1. ALLOW ALL MAJOR SEARCH ENGINE CRAWLERS
-#    Full access to the entire site for all well-behaved bots.
-#    This is the correct default for a public-facing site with
-#    no private or authenticated content.
-# ───────────────────────────────────────────────────────────────
 User-agent: *
 Allow: /
 
-# ───────────────────────────────────────────────────────────────
-# 2. GOOGLEBOT — EXPLICIT PERMISSIONS
-#    Googlebot is the primary crawler. Explicit Allow rules
-#    ensure Google indexes the homepage and all static assets
-#    (fonts, images, JS, CSS) needed to render the page.
-#    Google uses rendered HTML for indexing, so blocking assets
-#    would prevent it from seeing your full content.
-# ───────────────────────────────────────────────────────────────
-User-agent: Googlebot
-Allow: /
-Allow: /favicon.svg
-Allow: /favicon-32x32.png
-Allow: /favicon-16x16.png
-Allow: /apple-touch-icon.png
-Allow: /og-image.png
-Allow: /site.webmanifest
-
-# ───────────────────────────────────────────────────────────────
-# 3. GOOGLEBOT-IMAGE — ALLOW OG IMAGE FOR RICH RESULTS
-#    Explicitly permits Google's image crawler to index your
-#    Open Graph image, which is used in rich search results
-#    and Google Discover cards.
-# ───────────────────────────────────────────────────────────────
-User-agent: Googlebot-Image
-Allow: /og-image.png
-
-# ───────────────────────────────────────────────────────────────
-# 4. BINGBOT — MICROSOFT SEARCH
-#    Bing powers Microsoft Edge, Cortana, and DuckDuckGo
-#    results. Full access ensures coverage across all
-#    major search platforms.
-# ───────────────────────────────────────────────────────────────
-User-agent: Bingbot
-Allow: /
-
-# ───────────────────────────────────────────────────────────────
-# 5. BLOCK AI TRAINING CRAWLERS
-#    These bots scrape content to train large language models.
-#    Blocking them protects your original content from being
-#    used as training data without consent, while having no
-#    effect on your search engine rankings.
-# ───────────────────────────────────────────────────────────────
 User-agent: GPTBot
 Disallow: /
 
@@ -85,12 +25,6 @@ Disallow: /
 User-agent: FacebookBot
 Disallow: /
 
-# ───────────────────────────────────────────────────────────────
-# 6. BLOCK AGGRESSIVE SEO SCRAPERS
-#    These are commercial SEO audit tools that crawl sites
-#    aggressively. Blocking them reduces unnecessary server
-#    load without affecting your actual search rankings.
-# ───────────────────────────────────────────────────────────────
 User-agent: AhrefsBot
 Disallow: /
 
@@ -103,11 +37,4 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
-# ───────────────────────────────────────────────────────────────
-# 7. SITEMAP DECLARATION
-#    Explicitly points all crawlers to your sitemap.
-#    This is the most important line in this file — it ensures
-#    Google and Bing discover and process your sitemap
-#    automatically, without requiring a manual submission.
-# ───────────────────────────────────────────────────────────────
-Sitemap: https://themeridiansociety.vercel.app/sitemap.xml
+Sitemap: https://meridiansociety.ca/sitemap.xml
