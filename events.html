@@ -312,7 +312,7 @@
     /* PAGE HEADER / HERO */
     .page-header {
       position: relative;
-      min-height: 80vh;
+      min-height: 50vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -321,6 +321,7 @@
       overflow: hidden;
       contain: layout style;
       margin-top: 68px;
+      border-bottom: 1px solid var(--gold-border);
     }
 
     /* Grain texture */
@@ -358,7 +359,7 @@
       display: inline-flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 44px;
+      margin-bottom: 24px;
       opacity: 0;
       animation: riseIn 0.7s 0.5s ease forwards;
     }
@@ -383,10 +384,10 @@
 
     .page-header h1 {
       font-family: var(--serif);
-      font-size: clamp(70px, 13vw, 140px);
+      font-size: clamp(48px, 8vw, 84px);
       font-weight: 300;
       letter-spacing: 0.04em;
-      line-height: 0.87;
+      line-height: 0.95;
       color: var(--cream);
       margin-bottom: 12px;
       opacity: 0;
@@ -396,11 +397,11 @@
 
     .page-header p {
       font-family: var(--serif);
-      font-size: clamp(17px, 2vw, 28px);
+      font-size: clamp(16px, 1.8vw, 20px);
       font-style: italic;
       font-weight: 300;
       color: var(--cream-45);
-      max-width: 600px;
+      max-width: 500px;
       margin: 0 auto;
       opacity: 0;
       animation: riseIn 0.7s 1.05s ease forwards;
@@ -484,8 +485,8 @@
       border: 1px solid var(--gold-border);
       background: var(--surface);
       display: grid;
-      grid-template-columns: 1fr 280px;
-      min-height: 320px;
+      grid-template-columns: 1fr 240px;
+      min-height: 280px;
     }
     .event-card::before {
       content: '';
@@ -505,7 +506,7 @@
     }
 
     .event-card-main {
-      padding: 48px 52px;
+      padding: 32px 40px;
       display: flex; flex-direction: column; justify-content: space-between;
       position: relative; z-index: 1;
       border-right: 1px solid var(--gold-border);
@@ -528,8 +529,8 @@
 
     .event-card-title {
       font-family: var(--serif);
-      font-size: clamp(32px, 3.8vw, 56px);
-      font-weight: 300; line-height: 1.05; color: var(--cream);
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 300; line-height: 1.1; color: var(--cream);
     }
     .event-card-title em { color: var(--gold); font-style: italic; }
 
@@ -564,7 +565,7 @@
     .event-card-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
 
     .event-card-panel {
-      padding: 48px 36px;
+      padding: 32px 28px;
       display: flex; flex-direction: column; justify-content: space-between;
       position: relative; z-index: 1;
       background: rgba(201,168,76,0.04);
@@ -575,7 +576,7 @@
       color: var(--gold); opacity: 0.80; margin-bottom: 10px;
     }
     .event-panel-value {
-      font-family: var(--serif); font-size: clamp(16px, 1.8vw, 24px);
+      font-family: var(--serif); font-size: clamp(15px, 1.6vw, 20px);
       font-weight: 300; color: var(--cream); line-height: 1.2;
     }
     .event-panel-value.tba {
@@ -584,7 +585,7 @@
     }
     .event-panel-row { display: flex; flex-direction: column; gap: 6px; }
     .event-panel-divider {
-      height: 1px; background: var(--gold-border); margin: 20px 0;
+      height: 1px; background: var(--gold-border); margin: 12px 0;
     }
     .event-panel-entry { margin-top: 28px; }
     .event-panel-value--gold { color: var(--gold); }
