@@ -222,92 +222,128 @@
       color: var(--black);
     }
 
-    /* HAMBURGER */
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; cursor: pointer; }
-    .hamburger span { width: 22px; height: 1.5px; background: var(--cream); transition: all 0.3s; }
-    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background: var(--gold); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); background: var(--gold); }
+    /* HAMBURGER — identical to index.html */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      align-items: flex-end; cursor: pointer;
+      background: none; border: none;
+      width: 44px; height: 44px; gap: 5px; padding: 0;
+    }
+    .hamburger span {
+      display: block; height: 1px; background: var(--gold);
+      transition: transform 0.3s ease, width 0.3s ease;
+    }
+    .hamburger span:nth-child(1) { width: 24px; }
+    .hamburger span:nth-child(2) { width: 14px; }
+    .hamburger.open span:nth-child(1) { width: 24px; transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { width: 24px; transform: translateY(-6px) rotate(-45deg); }
 
-    /* MOBILE MENU */
+    /* MOBILE DRAWER — identical to index.html */
     .mob-backdrop {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-      z-index: 198; opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
+      position: fixed; inset: 0; z-index: 190;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
     .mob-backdrop.open { opacity: 1; pointer-events: all; }
 
     .mob-drawer {
-      position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 85vw);
-      background: var(--dark); border-left: 1px solid var(--gold-border);
-      z-index: 199; transform: translateX(100%);
-      transition: transform 0.35s ease;
-      display: flex; flex-direction: column;
-      padding: 80px 32px 32px;
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: 280px; z-index: 191;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-left: 1px solid var(--gold-border);
+      transform: translateX(100%);
+      transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: -8px 0 32px rgba(0,0,0,0.4);
+    }
+    .mob-drawer::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
     .mob-drawer.open { transform: translateX(0); }
 
     .mob-wordmark {
-      font-family: var(--sans); font-size: 11px; font-weight: 600;
-      letter-spacing: 0.26em; text-transform: uppercase; color: var(--cream);
-      margin-bottom: 32px;
+      position: absolute; top: 72px; left: 0; right: 0; padding: 0 28px;
+      font-family: var(--sans); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.5;
     }
 
     .mob-links {
-      display: flex; flex-direction: column; gap: 0;
+      position: absolute; top: 116px; left: 0; right: 0;
+      padding: 0 28px; display: flex; flex-direction: column;
     }
     .mob-links a {
-      display: block; padding: 16px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-family: var(--serif); font-size: 28px; font-weight: 300;
-      color: var(--cream); text-decoration: none;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0; border-bottom: 1px solid rgba(201,168,76,0.10);
+      text-decoration: none; font-family: var(--sans);
+      font-size: 20px; font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(245,240,232,0.60);
+      transition: color 0.2s;
     }
-    .mob-arrow { margin-left: 8px; opacity: 0.5; }
+    .mob-links a:last-child { border-bottom: none; }
+    .mob-links a:hover { color: var(--cream); }
+
+    .mob-arrow {
+      font-size: 13px; color: var(--gold);
+      opacity: 0; transform: translateX(-5px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .mob-links a:hover .mob-arrow { opacity: 1; transform: translateX(0); }
 
     .mob-bottom {
-      margin-top: auto; padding-top: 32px;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 20px 28px;
+      padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid rgba(201,168,76,0.10);
+      display: flex; flex-direction: column; gap: 12px;
     }
     .mob-meta {
-      display: block; font-family: var(--sans); font-size: 10px;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--cream-45); margin-bottom: 16px;
+      font-family: var(--sans); font-size: 9px; font-weight: 500;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: #666; text-align: center;
     }
     .mob-cta {
-      display: block; padding: 14px 0; text-align: center;
-      background: var(--gold); color: var(--black);
-      font-family: var(--sans); font-size: 11px; font-weight: 700;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      text-decoration: none;
+      display: block; text-align: center; padding: 14px 20px;
+      border: 1px solid rgba(201,168,76,0.4); color: var(--gold);
+      font-family: var(--sans); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; transition: background 0.2s, color 0.2s;
     }
+    .mob-cta:hover { background: var(--gold); color: #0a0a0a; }
 
-    /* BACK TO TOP */
+    /* BACK TO TOP ARC — identical to index.html */
     .arc-btn {
-      position: fixed; bottom: 32px; right: 32px;
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 98;
       width: 52px; height: 52px;
-      background: transparent; border: none;
-      cursor: pointer; z-index: 150;
       opacity: 0; pointer-events: none;
-      transform: translateY(20px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      cursor: pointer; background: none; border: none;
     }
     .arc-btn.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
-    .arc-btn svg { width: 100%; height: 100%; }
-
-    /* STICKY JOIN */
-    .sticky-join {
-      position: fixed; bottom: 32px; left: 32px;
-      padding: 12px 28px;
-      background: var(--gold); color: var(--black);
-      font-family: var(--sans); font-size: 10px; font-weight: 700;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      text-decoration: none;
-      z-index: 150;
-      opacity: 0; pointer-events: none;
-      transform: translateY(20px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
+    .arc-btn svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .arc-track { fill: none; stroke: rgba(201,168,76,0.22); stroke-width: 1.5; }
+    .arc-fill  { fill: none; stroke: var(--gold); stroke-width: 1.5;
+                 stroke-dasharray: 138; stroke-dashoffset: 138; }
+    .arc-inner {
+      position: absolute; inset: 10px;
+      border: 1px solid rgba(201,168,76,0.28); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(8,8,8,0.92);
+      transition: background 0.2s, border-color 0.2s;
     }
-    .sticky-join.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
+    .arc-btn:hover .arc-inner { background: var(--gold); border-color: var(--gold); }
+    .arc-icon {
+      font-size: 11px; color: var(--gold); line-height: 1;
+      transition: color 0.2s;
+    }
+    .arc-btn:hover .arc-icon { color: var(--black); }
+
+
 
     /* PAGE HEADER / HERO */
     .page-header {
@@ -786,8 +822,7 @@
       .footer-top { padding: 0 20px; }
       .footer-bottom { padding: 0 20px; }
 
-      .sticky-join { left: 20px; bottom: 20px; }
-      .arc-btn { right: 20px; bottom: 20px; width: 48px; height: 48px; }
+      .arc-btn { right: 1rem; bottom: 1rem; width: 48px; height: 48px; }
 
       section { padding: 60px 0; }
       .sec-head { margin-bottom: 40px; }
@@ -799,19 +834,17 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 <div class="progress" id="progressBar" aria-hidden="true"></div>
 
-<!-- Back to top arc -->
+<!-- Back to top arc — identical to index.html -->
 <button class="arc-btn" id="arcBtn" aria-label="Back to top">
   <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="26" cy="26" r="25" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-    <circle id="arcFill" cx="26" cy="26" r="25" stroke="currentColor" stroke-width="2" stroke-dasharray="157" stroke-dashoffset="157" stroke-linecap="round"/>
-    <path d="M26 8v20M20 20l6-6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle class="arc-track" cx="26" cy="26" r="22"/>
+    <circle class="arc-fill"  id="arcFill" cx="26" cy="26" r="22"/>
   </svg>
+  <div class="arc-inner">
+    <span class="arc-icon">↑</span>
+  </div>
 </button>
 
-<!-- Sticky join -->
-<a href="https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform"
-   target="_blank" rel="noopener noreferrer" class="sticky-join" id="stickyJoin"
-   data-register aria-label="Register as a member">Register</a>
 
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="mainNav" aria-label="Main navigation">
@@ -831,7 +864,7 @@
       <span>Register</span>
     </a>
     <button class="hamburger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
-      <span></span><span></span><span></span>
+      <span></span><span></span>
     </button>
   </div>
 </nav>
@@ -968,7 +1001,7 @@
       <div class="footer-col-head">Connect</div>
       <ul class="footer-links">
         <li><a href="https://www.instagram.com/Meridian.Society" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="mailto:meridiansocietycanada@gmail.com">Email Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#432e26312a272a222d302c202a26373a20222d22272203242e222a2f6d202c2e">Email Us</a></li>
       </ul>
     </div>
     <div>
@@ -985,7 +1018,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 'use strict';
 
 const REGISTER_URL = 'https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform';
@@ -1005,7 +1038,6 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
   const bar        = document.getElementById('progressBar');
   const arcBtn     = document.getElementById('arcBtn');
   const arcFill    = document.getElementById('arcFill');
-  const stickyJoin = document.getElementById('stickyJoin');
 
   const CIRC = 2 * Math.PI * 22;
   arcFill.style.strokeDasharray  = String(CIRC);
@@ -1022,7 +1054,6 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
 
     nav.classList.toggle('scrolled', window.scrollY > 40);
     arcBtn.classList.toggle('visible', window.scrollY > 200);
-    stickyJoin.classList.toggle('visible', window.scrollY > 200);
   }
 
   function onScroll() {
@@ -1110,13 +1141,12 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
   }, { passive: true });
 
   drawer.addEventListener('touchend', function(e) {
-    const endX = e.changedTouches[0].clientX;
-    if (endX - startX > 80) {
-      window.closeMenu();
-    }
+    const deltaX = e.changedTouches[0].clientX - startX;
+    // Swipe right more than 60px closes the drawer
+    if (deltaX > 60) window.closeMenu();
   }, { passive: true });
 })();
-</script>
 
+</script>
 </body>
 </html>
