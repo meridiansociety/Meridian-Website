@@ -2,60 +2,68 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!--
-    The Meridian Society — Sitemap
-    Canonical domain : https://meridiansociety.ca/
-    Last updated     : 2026-03-25
-  -->
+<!--
+  The Meridian Society — Sitemap
+  Canonical domain : https://meridiansociety.ca/
+  Last updated     : 2026-03-27
+-->
 
-  <!-- Homepage — priority 1.0 -->
-  <url>
-    <loc>https://meridiansociety.ca/</loc>
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en-CA" href="https://meridiansociety.ca/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://meridiansociety.ca/" />
-  </url>
+<!-- Homepage — priority 1.0 -->
+<url>
+  <loc>https://meridiansociety.ca/</loc>
+  <lastmod>2026-03-27</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.0</priority>
+  <xhtml:link rel="alternate" hreflang="en-CA" href="https://meridiansociety.ca/" />
+  <xhtml:link rel="alternate" hreflang="x-default" href="https://meridiansociety.ca/" />
+</url>
 
-  <!-- Conversion section — priority 0.9 -->
-  <url>
-    <loc>https://meridiansociety.ca/#register</loc>
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
+<!-- Conversion section — priority 0.9 -->
+<url>
+  <loc>https://meridiansociety.ca/#register</loc>
+  <lastmod>2026-03-27</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+</url>
 
-  <!-- Core content section — priority 0.8 -->
-  <url>
-    <loc>https://meridiansociety.ca/#about</loc>
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+<!-- Core content section — priority 0.8 -->
+<url>
+  <loc>https://meridiansociety.ca/#about</loc>
+  <lastmod>2026-03-27</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
 
-  <!-- Supporting content — priority 0.7 -->
-  <url>
-    <loc>https://meridiansociety.ca/#who</loc>
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+<!-- Events page — priority 0.8 -->
+<url>
+  <loc>https://meridiansociety.ca/events.html</loc>
+  <lastmod>2026-03-27</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
 
-  <!-- Speaking opportunities — priority 0.7 -->
-  <url>
-    <loc>https://meridiansociety.ca/#speaking</loc>
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+<!-- Supporting content — priority 0.7 -->
+<url>
+  <loc>https://meridiansociety.ca/#who</loc>
+  <lastmod>2026-03-27</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+</url>
 
-  <!-- Social / offsite link section — priority 0.6 -->
-  <url>
-    <loc>https://meridiansociety.ca/#join</loc>
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
+<!-- Speaking opportunities — priority 0.7 -->
+<url>
+  <loc>https://meridiansociety.ca/#speaking</loc>
+  <lastmod>2026-03-27</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<!-- Social / offsite link section — priority 0.6 -->
+<url>
+  <loc>https://meridiansociety.ca/#join</loc>
+  <lastmod>2026-03-27</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.6</priority>
+</url>
 
 </urlset>
