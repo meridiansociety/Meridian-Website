@@ -1263,7 +1263,6 @@
       <p class="page-header-pre">Student Speaker Forum</p>
 
       <h1 class="page-header-title">
-        Our
         <em>Events</em>
       </h1>
 
@@ -1423,10 +1422,12 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
 
     const title = el('h2', 'event-card-title');
     title.id = 'events-h';
-    title.textContent = ev.title;
+    title.innerHTML = ev.title;
     top.appendChild(title);
 
-    top.appendChild(el('p', 'event-card-desc', ev.desc));
+    const desc = el('p', 'event-card-desc');
+    desc.innerHTML = ev.desc;
+    top.appendChild(desc);
     main.appendChild(top);
 
     const bottom = el('div', 'event-card-bottom');
