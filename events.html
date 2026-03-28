@@ -1451,7 +1451,9 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
       .forEach(function(pair, i) {
         const row = el('div', 'event-panel-row');
         row.appendChild(el('div', 'event-panel-label', pair[0]));
-        row.appendChild(el('div', 'event-panel-value tba', pair[1]));
+        const val = el('div', 'event-panel-value tba');
+        val.innerHTML = pair[1];
+        row.appendChild(val);
         details.appendChild(row);
         if (i < 3) details.appendChild(el('div', 'event-panel-divider'));
       });
@@ -1460,8 +1462,10 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
 
     const entry = el('div', 'event-panel-entry');
     entry.appendChild(el('div', 'event-panel-label', 'Entry'));
-    entry.appendChild(el('div', 'event-panel-value event-panel-value--gold', ev.entry));
+    const entryVal = el('div', 'event-panel-value event-panel-value--gold');
+    entryVal.innerHTML = ev.entry;
     panel.appendChild(entry);
+    entry.appendChild(entryVal);
 
     card.appendChild(main);
     card.appendChild(panel);
