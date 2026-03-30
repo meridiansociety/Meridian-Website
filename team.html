@@ -504,7 +504,7 @@
       text-align: center;
       background: var(--black);
       overflow: hidden;
-      contain: layout style;
+      contain: paint;
       padding-top: 68px;
       border-bottom: 1px solid var(--gold-border);
     }
@@ -668,8 +668,8 @@
     .member-photo-wrap {
       position: relative;
       /* Fixed ID-card dimensions — narrow portrait */
-      width: 72px;
-      height: 90px;
+      width: 96px;
+      height: 120px;
       flex-shrink: 0;
       overflow: hidden;
       background: #0d0d0d;
@@ -719,7 +719,7 @@
     .member-role {
       font-family: var(--sans); font-size: 9px; font-weight: 700;
       letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 20px;
+      color: var(--gold);
     }
 
     /* Studies — italic serif quote */
@@ -1056,8 +1056,8 @@
                   class="member-photo"
                   alt="Magnus Abdelnour, Founder and President of The Meridian Society"
                   loading="eager"
-                  width="72"
-                  height="90"
+                  width="96"
+                  height="120"
                 />
               </div>
               <div>
@@ -1086,8 +1086,8 @@
                   class="member-photo"
                   alt="Colin Sherwood, Event Coordinator of The Meridian Society"
                   loading="lazy"
-                  width="72"
-                  height="90"
+                  width="96"
+                  height="120"
                 />
               </div>
               <div>
@@ -1223,7 +1223,9 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
     const progress = h > 0 ? (window.scrollY / h) * 100 : 0;
 
     bar.style.width = progress + '%';
-    arcFill.style.strokeDashoffset = String(Math.max(0, CIRC - (window.scrollY / h) * CIRC));
+    arcFill.style.strokeDashoffset = h > 0
+      ? String(Math.max(0, CIRC - (window.scrollY / h) * CIRC))
+      : String(CIRC);
 
     nav.classList.toggle('scrolled', window.scrollY > 40);
     arcBtn.classList.toggle('visible', window.scrollY > 200);
