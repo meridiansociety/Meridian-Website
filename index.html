@@ -359,267 +359,15 @@
   }
   </script>
 
-  <script src="/events-data.js"></script>
+  <script src="/js/events-data.js"></script>
+  <link rel="stylesheet" href="/css/base.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
   <style>
     /*
-     * The Meridian Society — Main Stylesheet
-     * Sections:
-     *   1. Reset & Custom Properties
-     *   2. Focus / Skip Link / Progress Bar
-     *   3. Navigation (desktop + hamburger)
-     *   4. Mobile Drawer
-     *   5. Sticky Join / Back-to-Top Arc
-     *   6. Hero Section
-     *   7. Marquee
-     *   8. Shared Utilities
-     *   9. §01 About
-     *  10. §02 Who We Gather
-     *  11. First Event Teaser
-     *  12. §03 What We Are Not
-     *  13. §04 Speaking
-     *  14. §05 Membership
-     *  15. Get Involved Strip
-     *  16. Footer
-     *  17. Responsive Breakpoints
-     *  18. Print
-     *  19. Utility Classes
+     * The Meridian Society — Homepage Styles
+     * Shared tokens/nav/base loaded from /css/base.css and /css/nav.css.
+     * This block contains only index-specific styles.
      */
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /*
-     * Design tokens
-     * Registration form URL: https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform
-     */
-    :root {
-      --black:        #080808;
-      --dark:         #0d0d0d;
-      --surface:      #111111;
-      --surface2:     #161616;
-      --gold:         #c9a84c;
-      --gold-light:   #e2c47a;
-      --gold-pale:    #f0dfa0;
-      --gold-dim:     rgba(201,168,76,0.09);
-      --gold-border:  rgba(201,168,76,0.22);  /* was .16 — more visible borders */
-      --gold-border2: rgba(201,168,76,0.38);  /* was .28 — better button outlines */
-      --cream:        #f5f0e8;
-      --cream-70:     rgba(245,240,232,0.85);  /* was .70 */
-      --cream-45:     rgba(245,240,232,0.72);  /* was .45 — KEY readability fix */
-      --cream-20:     rgba(245,240,232,0.60);  /* was .20 — nav links now legible */
-      --grey:         #888;                    /* was #666 — fails contrast on dark bg */
-      --grey2:        #555;                    /* was #3a3a3a */
-      --serif:        'Cormorant Garamond', Georgia, serif;
-      --sans:         'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
-    }
-
-    html { scroll-behavior: smooth; scroll-padding-top: 68px; }
-
-    body {
-      background: var(--black);
-      color: var(--cream);
-      font-family: var(--serif);
-      font-weight: 400;
-      line-height: 1.7;
-      overflow-x: hidden;
-      /* Prevent subpixel rendering jank on mobile */
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-
-    /* ── FOCUS VISIBLE ── */
-    :focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 3px;
-    }
-
-    /* ── SKIP LINK ── */
-    .skip-link {
-      position: absolute; top: -100px; left: 20px; z-index: 9999;
-      padding: 10px 20px; background: var(--gold); color: var(--black);
-      font-family: var(--sans); font-size: 11px; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;
-      transition: top 0.2s;
-    }
-    .skip-link:focus { top: 8px; }
-
-    /* ── PROGRESS BAR ── */
-    .progress {
-      position: fixed; top: 0; left: 0; z-index: 400;
-      height: 1px; width: 0%;
-      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
-      /* No transition — updated via RAF, transition adds lag */
-      pointer-events: none;
-      will-change: width;
-    }
-
-    /* ─────────────────────────────────
-       NAV
-    ───────────────────────────────── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 200; height: 68px;
-      display: flex; align-items: center;
-      transition: background 0.5s, border-color 0.5s;
-      border-bottom: 1px solid transparent;
-    }
-    nav.scrolled {
-      background: rgba(8,8,8,0.85);
-      border-color: var(--gold-border);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    }
-    .nav-inner {
-      width: 100%; max-width: 1440px; margin: 0 auto;
-      padding: 0 52px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo {
-      display: flex; align-items: center;
-      text-decoration: none; flex-shrink: 0;
-    }
-    .nav-wordmark {
-      font-family: var(--sans); font-size: 13px; font-weight: 600;
-      letter-spacing: 0.26em; text-transform: uppercase; color: var(--cream);
-      transition: transform 0.3s ease;
-      transform-style: preserve-3d;
-    }
-    .nav-logo:hover .nav-wordmark {
-      transform: perspective(1000px) rotateX(2deg) rotateY(-3deg);
-    }
-    .nav-links { display: flex; align-items: center; list-style: none; gap: 2px; }
-    .nav-links a {
-      display: block; padding: 8px 16px;
-      font-family: var(--sans); font-size: 11px; font-weight: 600; /* was 500 */
-      letter-spacing: 0.18em; text-transform: uppercase;
-      text-decoration: none; color: var(--cream-20); /* now 0.60 opacity */
-      transition: color 0.25s; position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: 3px; left: 16px; right: 16px;
-      height: 1px; background: var(--gold);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-    .nav-links a:hover { color: var(--cream); }
-    .nav-links a:hover::after,
-    .nav-links a.nav-active::after { transform: scaleX(1); }
-    .nav-links a.nav-active { color: var(--gold); }
-
-    .nav-cta {
-      display: inline-flex; align-items: center;
-      padding: 9px 22px;
-      border: 1px solid var(--gold-border2);
-      color: var(--gold); text-decoration: none;
-      font-family: var(--sans); font-size: 11px; font-weight: 700; /* was 600 */
-      letter-spacing: 0.2em; text-transform: uppercase;
-      transition: all 0.3s; white-space: nowrap;
-      position: relative; overflow: hidden;
-    }
-    .nav-cta::before {
-      content: ''; position: absolute; inset: 0;
-      background: var(--gold); transform: translateX(-100%);
-      transition: transform 0.3s ease; z-index: 0;
-    }
-    .nav-cta span { position: relative; z-index: 1; }
-    .nav-cta {
-      transform-style: preserve-3d;
-      transition: all 0.3s ease;
-    }
-    .nav-cta:hover {
-      color: var(--black); border-color: var(--gold);
-      transform: perspective(1000px) translateY(-3px) rotateX(1deg);
-    }
-    .nav-cta:hover::before { transform: translateX(0); }
-
-    /* ── HAMBURGER ── */
-    .hamburger {
-      display: none; flex-direction: column; justify-content: center;
-      align-items: flex-end; cursor: pointer;
-      background: none; border: none;
-      width: 44px; height: 44px; gap: 5px; padding: 0;
-    }
-    .hamburger span {
-      display: block; height: 1px; background: var(--gold);
-      transition: transform 0.3s ease, width 0.3s ease;
-    }
-    .hamburger span:nth-child(1) { width: 24px; }
-    .hamburger span:nth-child(2) { width: 14px; }
-    .hamburger.open span:nth-child(1) { width: 24px; transform: translateY(6px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { width: 24px; transform: translateY(-6px) rotate(-45deg); }
-
-    /* ── MOBILE DRAWER ── */
-    .mob-backdrop {
-      position: fixed; inset: 0; z-index: 190;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-    }
-    .mob-backdrop.open { opacity: 1; pointer-events: all; }
-    .mob-drawer {
-      position: fixed; top: 0; right: 0; bottom: 0;
-      width: 280px; z-index: 191;
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-left: 1px solid var(--gold-border);
-      transform: translateX(100%);
-      transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
-      box-shadow: -8px 0 32px rgba(0,0,0,0.4);
-    }
-    .mob-drawer::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-    .mob-drawer.open { transform: translateX(0); }
-    .mob-wordmark {
-      position: absolute; top: 72px; left: 0; right: 0; padding: 0 28px;
-      font-family: var(--sans); font-size: 9px; font-weight: 600;
-      letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--gold); opacity: 0.5; /* was 0.35 */
-    }
-    .mob-links {
-      position: absolute; top: 116px; left: 0; right: 0;
-      padding: 0 28px; display: flex; flex-direction: column;
-    }
-    .mob-links a {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 0; border-bottom: 1px solid rgba(201,168,76,0.10); /* was .07 */
-      text-decoration: none; font-family: var(--sans);
-      font-size: 20px; font-weight: 400;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(245,240,232,0.60); /* was 0.40 */
-      transition: color 0.2s;
-    }
-    .mob-links a:last-child { border-bottom: none; }
-    .mob-links a:hover { color: var(--cream); }
-    .mob-arrow {
-      font-size: 13px; color: var(--gold);
-      opacity: 0; transform: translateX(-5px);
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .mob-links a:hover .mob-arrow { opacity: 1; transform: translateX(0); }
-    .mob-bottom {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 20px 28px;
-      padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-      border-top: 1px solid rgba(201,168,76,0.10);
-      display: flex; flex-direction: column; gap: 12px;
-    }
-    .mob-meta {
-      font-family: var(--sans); font-size: 9px; font-weight: 500;
-      letter-spacing: 0.24em; text-transform: uppercase;
-      color: #666; text-align: center; /* was #444 */
-    }
-    .mob-cta {
-      display: block; text-align: center; padding: 14px 20px;
-      border: 1px solid rgba(201,168,76,0.4); color: var(--gold); /* was .3 */
-      font-family: var(--sans); font-size: 11px; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      text-decoration: none; transition: background 0.2s, color 0.2s;
-    }
-    .mob-cta:hover { background: var(--gold); color: #0a0a0a; }
 
     /* ── STICKY JOIN ── */
     /* Hidden by default; shown via JS .visible class on mobile */
@@ -644,34 +392,6 @@
       transform: translateX(-50%) translateY(0) scale(1);
     }
     .sticky-join:hover { background: var(--gold); color: var(--black); }
-
-    /* ── BACK TO TOP ARC ── */
-    .arc-btn {
-      position: fixed; bottom: 2rem; right: 2rem; z-index: 98;
-      width: 52px; height: 52px;
-      opacity: 0; pointer-events: none;
-      transform: translateY(10px);
-      transition: opacity 0.3s, transform 0.3s;
-      cursor: pointer; background: none; border: none;
-    }
-    .arc-btn.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
-    .arc-btn svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-    .arc-track { fill: none; stroke: rgba(201,168,76,0.22); stroke-width: 1.5; } /* was .15 */
-    .arc-fill  { fill: none; stroke: var(--gold); stroke-width: 1.5;
-                 stroke-dasharray: 138; stroke-dashoffset: 138; }
-    .arc-inner {
-      position: absolute; inset: 10px;
-      border: 1px solid rgba(201,168,76,0.28); border-radius: 50%; /* was .20 */
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(8,8,8,0.92);
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .arc-btn:hover .arc-inner { background: var(--gold); border-color: var(--gold); }
-    .arc-icon {
-      font-size: 11px; color: var(--gold); line-height: 1;
-      transition: color 0.2s;
-    }
-    .arc-btn:hover .arc-icon { color: var(--black); }
 
     /* ─────────────────────────────────
        HERO — INTERACTIVE 3D GLOBE
@@ -881,11 +601,6 @@
     .stat-lbl {
       font-family: var(--sans); font-size: 9px; font-weight: 600; /* was 500 */
       letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); /* now #888 */
-    }
-
-    @keyframes riseIn {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ─────────────────────────────────
@@ -1560,14 +1275,6 @@
     }
 
     @media (max-width: 700px) {
-      a { -webkit-tap-highlight-color: transparent; }
-      button { touch-action: manipulation; }
-
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-      .nav-inner { padding: 0 20px; }
-      .nav-wordmark { font-size: 11px; }
-
       .wrap { padding: 0 20px; }
       .hero-rail { display: none; }
       .hero-content { padding: 80px 20px 48px; }
@@ -1655,12 +1362,9 @@
       .footer-links a { transition: color 0.15s; }
     }
 
+    /* prefers-reduced-motion base rule is in /css/base.css */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      /* Make everything fully visible immediately if motion is reduced */
+      /* Make hero animations immediately visible */
       .rv, .hero-eyebrow, .hero-pre, .hero-title, .hero-sub,
       .hero-div, .hero-desc, .hero-ctas, .hero-stats {
         opacity: 1 !important;
@@ -1731,10 +1435,7 @@
       border: 1.5px solid var(--gold); border-radius: 50%; opacity: 0.4;
       animation: orbitRing 1.4s linear infinite;
       transform-origin: center center;
-    }
-    @keyframes orbitRing {
-      from { transform: rotateX(70deg) rotateZ(0deg); }
-      to   { transform: rotateX(70deg) rotateZ(360deg); }
+      /* @keyframes orbitRing is in /css/base.css */
     }
   </style>
 </head>
@@ -2237,6 +1938,9 @@
   </div>
 </footer>
 
+<!-- Shared site script: REGISTER_URL, scroll handler, scroll reveal, mobile menu -->
+<script src="/js/site.js"></script>
+
 <!-- Three.js loaded async — globe renders after page content is visible -->
 <!-- SRI hash verified against cdnjs three.js r128 build -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
@@ -2244,113 +1948,20 @@
         integrity="sha384-CI3ELBVUz9XQO+97x6nwMDPosPR5XvsxW2ua7N1Xeygeh1IxtgqtCkGfQY9WWdHu"></script>
 <script>
 /**
- * The Meridian Society — Main Script
+ * The Meridian Society — Homepage Script
+ * Shared functionality (scroll, reveal, nav, register URL) is in /js/site.js.
+ * This block handles index-specific features only.
  *
- * Modules (all IIFEs unless noted):
- *   1. Scroll handler   — RAF-batched: nav, progress bar, arc btn, sticky join
- *   2. Scroll reveal    — IntersectionObserver for .rv elements
- *   3. Active nav link  — IntersectionObserver for section highlighting
- *   4. Mobile menu      — open/close/focus-trap/Escape key
- *   5. Pull-to-dismiss  — swipe-right gesture on mobile drawer
- *   6. Who accordion    — expand/collapse rows on mobile
- *   7. Member count     — fetches live count from Google Apps Script
- *   8. Globe            — Three.js interactive 3D globe (global fn, deferred)
+ * Modules:
+ *   1. Active nav link  — IntersectionObserver for section highlighting
+ *   2. Who accordion    — expand/collapse rows on mobile
+ *   3. Member count     — fetches live count from Google Apps Script
+ *   4. Globe            — Three.js interactive 3D globe (global fn, deferred)
  */
 'use strict';
 
 // ─────────────────────────────────────────────────────────────────
-// SHARED CONSTANTS
-// Update REGISTER_URL here to change all registration links at once
-// ─────────────────────────────────────────────────────────────────
-const REGISTER_URL = 'https://docs.google.com/forms/d/1qThcXHxzfuW4uNVkZbHGhHwlDsy8x-YGtpHpOLnqTl4/viewform';
-
-// Populate all registration links from the single constant above
-document.querySelectorAll('a[data-register]').forEach(function(el) {
-  el.href = REGISTER_URL;
-});
-
-// ─────────────────────────────────────────────────────────────────
-// 1. SCROLL HANDLER — unified RAF-batched scroll handler
-// All scroll side-effects are batched into a single rAF callback
-// instead of multiple competing scroll event listeners
-// ─────────────────────────────────────────────────────────────────
-(function() {
-  let ticking = false;
-  let scrollY = window.scrollY;
-
-  const nav        = document.getElementById('mainNav');
-  const bar        = document.getElementById('progressBar');
-  const arcBtn     = document.getElementById('arcBtn');
-  const arcFill    = document.getElementById('arcFill');
-  const stickyJoin = document.getElementById('stickyJoin');
-  const heroEl     = document.querySelector('.hero');
-  const registerEl = document.getElementById('register');
-
-  const CIRC = 2 * Math.PI * 22;
-  arcFill.style.strokeDasharray  = String(CIRC);
-  arcFill.style.strokeDashoffset = String(CIRC);
-
-  function onScroll() {
-    scrollY = window.scrollY;
-    if (!ticking) {
-      requestAnimationFrame(function() {
-        const docH = document.documentElement.scrollHeight - window.innerHeight;
-        const pct  = docH > 0 ? scrollY / docH : 0;
-
-        // Nav
-        nav.classList.toggle('scrolled', scrollY > 30);
-
-        // Progress bar
-        bar.style.width = (pct * 100) + '%';
-
-        // Arc scroll indicator
-        arcFill.style.strokeDashoffset = String(CIRC * (1 - pct));
-        arcBtn.classList.toggle('visible', scrollY > 400);
-
-        // Sticky join — only compute getBoundingClientRect if elements exist
-        if (heroEl && registerEl) {
-          const hb = heroEl.getBoundingClientRect().bottom;
-          const rb = registerEl.getBoundingClientRect().bottom;
-          stickyJoin.classList.toggle('visible', hb < 0 && rb > 0);
-        }
-
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  // Back to top
-  arcBtn.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  // Reset ticking flag when tab becomes visible again
-  document.addEventListener('visibilitychange', function() {
-    if (!document.hidden) ticking = false;
-  });
-})();
-
-// ─────────────────────────────────────────────────────────────────
-// 2. SCROLL REVEAL — single IntersectionObserver, threshold 0.01
-// ─────────────────────────────────────────────────────────────────
-(function() {
-  const rvEls = document.querySelectorAll('.rv');
-  const obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('on');
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.01, rootMargin: '0px 0px -40px 0px' });
-  rvEls.forEach(function(el) { obs.observe(el); });
-})();
-
-// ─────────────────────────────────────────────────────────────────
-// 3. ACTIVE NAV LINK
+// 1. ACTIVE NAV LINK
 // ─────────────────────────────────────────────────────────────────
 (function() {
   const navLinkMap = {
@@ -2375,85 +1986,7 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
 })();
 
 // ─────────────────────────────────────────────────────────────────
-// 4. MOBILE MENU
-// ─────────────────────────────────────────────────────────────────
-(function() {
-  const mobileMenu = document.getElementById('mobileMenu');
-  const backdrop   = document.getElementById('menuBackdrop');
-  const burger     = document.getElementById('burgerBtn');
-
-  function openMenu() {
-    mobileMenu.classList.add('open');
-    backdrop.classList.add('open');
-    burger.classList.add('open');
-    burger.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-    // Move focus into drawer for keyboard/screen-reader users
-    const firstLink = mobileMenu.querySelector('a, button');
-    if (firstLink) firstLink.focus();
-  }
-
-  function closeMenu() {
-    mobileMenu.classList.remove('open');
-    backdrop.classList.remove('open');
-    burger.classList.remove('open');
-    burger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-    burger.focus();
-  }
-
-  // Expose closeMenu globally so inline onclick handlers still work
-  window.closeMenu = closeMenu;
-
-  burger.addEventListener('click', function() {
-    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
-  });
-  backdrop.addEventListener('click', closeMenu);
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeMenu();
-  });
-})();
-
-// ─────────────────────────────────────────────────────────────────
-// 5. PULL-TO-DISMISS (swipe-right gesture on mobile drawer)
-// ─────────────────────────────────────────────────────────────────
-(function() {
-  const drawer = document.getElementById('mobileMenu');
-  let startX = 0, startY = 0, dragging = false;
-
-  drawer.addEventListener('touchstart', function(e) {
-    if (!drawer.classList.contains('open')) return;
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    dragging = true;
-    drawer.style.transition = 'none';
-  }, { passive: true });
-
-  drawer.addEventListener('touchmove', function(e) {
-    if (!dragging) return;
-    const dx = e.touches[0].clientX - startX;
-    const dy = Math.abs(e.touches[0].clientY - startY);
-    if (dx > 0 && dx > dy) drawer.style.transform = 'translateX(' + dx + 'px)';
-  }, { passive: true });
-
-  drawer.addEventListener('touchend', function(e) {
-    if (!dragging) return;
-    const dx = e.changedTouches[0].clientX - startX;
-    dragging = false;
-    drawer.style.transition = '';
-    if (dx > 72) { drawer.style.transform = ''; window.closeMenu(); }
-    else drawer.style.transform = '';
-  }, { passive: true });
-
-  drawer.addEventListener('touchcancel', function() {
-    dragging = false;
-    drawer.style.transition = '';
-    drawer.style.transform = '';
-  }, { passive: true });
-})();
-
-// ─────────────────────────────────────────────────────────────────
-// 6. WHO ROW ACCORDION (mobile)
+// 2. WHO ROW ACCORDION (mobile)
 // ─────────────────────────────────────────────────────────────────
 (function() {
   const isMobile = () => window.innerWidth <= 700;
@@ -2484,7 +2017,7 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
 })();
 
 // ─────────────────────────────────────────────────────────────────
-// 7. MEMBER COUNT
+// 3. MEMBER COUNT
 // ─────────────────────────────────────────────────────────────────
 (function() {
   const APPS_URL = 'https://script.google.com/macros/s/AKfycbx12Z8U8xQUYUHYLZkgVBlzGvhvx2uqSd1WBJNBBQcP0vlbrGzxJFfqi8QWnQVHyiKS/exec';
@@ -2544,7 +2077,7 @@ document.querySelectorAll('a[data-register]').forEach(function(el) {
 })();
 
 // ─────────────────────────────────────────────────────────────────
-// 8. INTERACTIVE 3D GLOBE
+// 4. INTERACTIVE 3D GLOBE
 // Deferred init — waits for Three.js to load, then starts
 // Lower pixel ratio cap on mobile (1.5 vs 2) = ~44% fewer pixels
 // IntersectionObserver pauses RAF when globe is off-screen
