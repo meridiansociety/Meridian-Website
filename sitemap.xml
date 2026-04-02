@@ -5,13 +5,13 @@
 <!--
   The Meridian Society — Sitemap
   Canonical domain : https://meridiansociety.ca/
-  Last updated     : 2026-03-27
+  Last updated     : 2026-04-02
 -->
 
 <!-- Homepage — priority 1.0 -->
 <url>
   <loc>https://meridiansociety.ca/</loc>
-  <lastmod>2026-03-27</lastmod>
+  <lastmod>2026-04-02</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
   <xhtml:link rel="alternate" hreflang="en-CA" href="https://meridiansociety.ca/" />
@@ -21,7 +21,7 @@
 <!-- Events page — priority 0.8 -->
 <url>
   <loc>https://meridiansociety.ca/events.html</loc>
-  <lastmod>2026-03-27</lastmod>
+  <lastmod>2026-04-02</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.8</priority>
 </url>
@@ -29,7 +29,7 @@
 <!-- Team page — priority 0.7 -->
 <url>
   <loc>https://meridiansociety.ca/team.html</loc>
-  <lastmod>2026-03-27</lastmod>
+  <lastmod>2026-04-02</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>

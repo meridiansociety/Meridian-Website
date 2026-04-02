@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -17,6 +17,7 @@
   <link rel="canonical" href="https://meridiansociety.ca/" />
   <link rel="alternate" hreflang="en-CA" href="https://meridiansociety.ca/" />
   <link rel="alternate" hreflang="x-default" href="https://meridiansociety.ca/" />
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
@@ -83,6 +84,8 @@
       "name": "The Meridian Society"
     },
     "keywords": "Ottawa student forum, speaker series Ottawa, student networking Ottawa, professional networking students, Ottawa student club, free student events Ottawa, alumni speaker series, career talks Ottawa",
+    "datePublished": "2025-01-01",
+    "dateModified": "2026-04-02",
     "inLanguage": "en-CA"
   }
   </script>
@@ -129,10 +132,7 @@
     },
       "sameAs": [
         "https://www.instagram.com/Meridian.Society",
-        "https://linktr.ee/meridiansociety",
-        "https://carleton.ca/",
-        "https://www.uottawa.ca/",
-        "https://www.algonquincollege.com/"
+        "https://linktr.ee/meridiansociety"
       ]
   }
   </script>
@@ -147,6 +147,12 @@
     "endDate": "2026-09-20T21:00:00-04:00",
     "eventStatus": "https://schema.org/EventScheduled",
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "isAccessibleForFree": true,
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student",
+      "audienceType": "University and college students in Ottawa"
+    },
     "location": {
       "@type": "Place",
       "name": "Carleton University (Specific Venue TBD)",
@@ -177,7 +183,7 @@
       "validFrom": "2025-01-01T00:00:00-05:00"
     },
     "performer": {
-      "@type": "PerformingGroup",
+      "@type": "Person",
       "name": "To Be Announced"
     }
   }
@@ -187,9 +193,18 @@
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": "https://meridiansociety.ca/#website",
     "name": "The Meridian Society",
     "url": "https://meridiansociety.ca/",
-    "description": "A student-run speaker forum in Ottawa dedicated to bringing motivated students face to face with professionals, alumni, and scholars."
+    "description": "A student-run speaker forum in Ottawa dedicated to bringing motivated students face to face with professionals, alumni, and scholars.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://meridiansociety.ca/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
   }
   </script>
 
@@ -337,7 +352,7 @@
     "url": "https://meridiansociety.ca/",
     "name": "The Meridian Society — Ottawa Student Speaker Forum",
     "dateCreated": "2025-01-01",
-    "dateModified": "2026-03-25",
+    "dateModified": "2026-04-02",
     "mainEntity": {
       "@type": "EducationalOrganization",
       "@id": "https://meridiansociety.ca/#organization",
@@ -350,10 +365,7 @@
       "foundingDate": "2025",
       "sameAs": [
         "https://www.instagram.com/Meridian.Society",
-        "https://linktr.ee/meridiansociety",
-        "https://carleton.ca/",
-        "https://www.uottawa.ca/",
-        "https://www.algonquincollege.com/"
+        "https://linktr.ee/meridiansociety"
       ]
     }
   }
