@@ -13,12 +13,12 @@
   --dark:         #0d0d0d;
   --surface:      #111111;
   --surface2:     #161616;
-  --gold:         #c9a84c;
-  --gold-light:   #e2c47a;
+  --gold:         #d4af50;
+  --gold-light:   #e8cc7a;
   --gold-pale:    #f0dfa0;
-  --gold-dim:     rgba(201,168,76,0.09);
-  --gold-border:  rgba(201,168,76,0.22);
-  --gold-border2: rgba(201,168,76,0.38);
+  --gold-dim:     rgba(212,175,80,0.15);
+  --gold-border:  rgba(212,175,80,0.38);
+  --gold-border2: rgba(212,175,80,0.60);
   --cream:        #111111;
   --cream-70:     rgba(17,17,17,0.90);
   --cream-45:     rgba(17,17,17,0.82);
