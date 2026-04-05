@@ -13,11 +13,11 @@ nav {
   border-bottom: 1px solid transparent;
 }
 nav.scrolled {
-  background: rgba(8,8,8,0.85);
+  background: rgba(255,255,255,0.90);
   border-color: var(--gold-border);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
 }
 .nav-inner {
   width: 100%; max-width: 1440px; margin: 0 auto;
@@ -108,7 +108,7 @@ nav.scrolled {
 .mob-drawer {
   position: fixed; top: 0; right: 0; bottom: 0;
   width: 280px; z-index: 191;
-  background: rgba(10,10,10,0.92);
+  background: rgba(255,255,255,0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-left: 1px solid var(--gold-border);
@@ -138,7 +138,7 @@ nav.scrolled {
   text-decoration: none; font-family: var(--sans);
   font-size: 20px; font-weight: 400;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(245,240,232,0.60);
+  color: rgba(26,26,26,0.75);
   transition: color 0.2s;
 }
 .mob-links a:last-child { border-bottom: none; }
@@ -161,7 +161,7 @@ nav.scrolled {
 .mob-meta {
   font-family: var(--sans); font-size: 9px; font-weight: 500;
   letter-spacing: 0.24em; text-transform: uppercase;
-  color: #666; text-align: center;
+  color: #555555; text-align: center;
 }
 .mob-cta {
   display: block; text-align: center; padding: 14px 20px;
@@ -170,7 +170,7 @@ nav.scrolled {
   letter-spacing: 0.2em; text-transform: uppercase;
   text-decoration: none; transition: background 0.2s, color 0.2s;
 }
-.mob-cta:hover { background: var(--gold); color: #0a0a0a; }
+.mob-cta:hover { background: var(--gold); color: #FFFFFF; }
 
 /* ── MOBILE RESPONSIVE ── */
 @media (max-width: 700px) {

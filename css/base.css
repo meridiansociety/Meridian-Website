@@ -9,22 +9,22 @@
 
 /* ── DESIGN TOKENS ── */
 :root {
-  --black:        #080808;
-  --dark:         #0d0d0d;
-  --surface:      #111111;
-  --surface2:     #161616;
+  --black:        #FFFFFF;
+  --dark:         #F7F5F0;
+  --surface:      #F7F5F0;
+  --surface2:     #FAFAF7;
   --gold:         #c9a84c;
   --gold-light:   #e2c47a;
   --gold-pale:    #f0dfa0;
   --gold-dim:     rgba(201,168,76,0.09);
   --gold-border:  rgba(201,168,76,0.22);
   --gold-border2: rgba(201,168,76,0.38);
-  --cream:        #f5f0e8;
-  --cream-70:     rgba(245,240,232,0.85);
-  --cream-45:     rgba(245,240,232,0.72);
-  --cream-20:     rgba(245,240,232,0.60);
-  --grey:         #888;
-  --grey2:        #555;
+  --cream:        #1A1A1A;
+  --cream-70:     rgba(26,26,26,0.85);
+  --cream-45:     rgba(26,26,26,0.72);
+  --cream-20:     rgba(26,26,26,0.75);
+  --grey:         #555555;
+  --grey2:        #333333;
   --serif:        'Cormorant Garamond', Georgia, serif;
   --sans:         'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
 }
@@ -87,7 +87,7 @@ body {
   position: absolute; inset: 10px;
   border: 1px solid rgba(201,168,76,0.28); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(8,8,8,0.92);
+  background: rgba(255,255,255,0.92);
   transition: background 0.2s, border-color 0.2s;
 }
 .arc-btn:hover .arc-inner { background: var(--gold); border-color: var(--gold); }
