@@ -98,6 +98,19 @@ section {
   background: linear-gradient(to bottom, transparent 5%, var(--gold-border) 20%, var(--gold-border) 80%, transparent 95%);
 }
 
+/* Corner ornaments */
+.page-header-corners {
+  position: absolute; inset: 24px; z-index: 3; pointer-events: none;
+}
+.page-header-corners span {
+  position: absolute; width: 28px; height: 28px;
+  border-color: var(--gold-border2); border-style: solid;
+}
+.page-header-corners span:nth-child(1) { top: 0;    left: 0;  border-width: 1px 0 0 1px; }
+.page-header-corners span:nth-child(2) { top: 0;    right: 0; border-width: 1px 1px 0 0; }
+.page-header-corners span:nth-child(3) { bottom: 0; left: 0;  border-width: 0 0 1px 1px; }
+.page-header-corners span:nth-child(4) { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
 .page-header-content {
   position: relative; z-index: 4;
   padding: 60px 48px 60px;
