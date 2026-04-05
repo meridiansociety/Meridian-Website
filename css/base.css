@@ -9,10 +9,10 @@
 
 /* ── DESIGN TOKENS ── */
 :root {
-  --black:        #FFFFFF;
-  --dark:         #F7F5F0;
-  --surface:      #F7F5F0;
-  --surface2:     #FAFAF7;
+  --black:        #EDE8DF;
+  --dark:         #E5DFD4;
+  --surface:      #E8E2D8;
+  --surface2:     #EBE6DC;
   --gold:         #c9a84c;
   --gold-light:   #e2c47a;
   --gold-pale:    #f0dfa0;
@@ -87,7 +87,7 @@ body {
   position: absolute; inset: 10px;
   border: 1px solid rgba(201,168,76,0.28); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(255,255,255,0.92);
+  background: rgba(237,232,223,0.95);
   transition: background 0.2s, border-color 0.2s;
 }
 .arc-btn:hover .arc-inner { background: var(--gold); border-color: var(--gold); }
