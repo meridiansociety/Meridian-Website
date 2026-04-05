@@ -103,8 +103,8 @@ section {
   content: '';
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background-image:
-    linear-gradient(rgba(201,168,76,0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201,168,76,0.07) 1px, transparent 1px);
+    linear-gradient(rgba(201,168,76,0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.18) 1px, transparent 1px);
   background-size: 52px 52px;
 }
 
