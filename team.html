@@ -327,7 +327,7 @@
       border: 1px solid var(--gold-border);
       overflow: hidden;
       position: relative;
-      transition: border-color 0.4s ease;
+      transition: border-color 0.4s ease, transform 0.3s ease;
       --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --cream-20: rgba(245,240,232,0.75); --grey: #888; --black: #080808;
     }
     /* Gold top accent line — mirrors events card style */
@@ -339,6 +339,7 @@
     }
     .member-card:hover {
       border-color: var(--gold-border2);
+      transform: translateY(-4px);
     }
 
     /* Photo — ID-card style: small fixed portrait, sits inside the body column */
@@ -360,10 +361,8 @@
       /* No zoom on hover — keeps the ID-card stillness */
       display: block;
       /* Slight desaturation keeps focus on the text */
-      filter: grayscale(20%);
       transition: filter 0.4s ease;
     }
-    .member-card:hover .member-photo { filter: grayscale(0%); }
 
     /* Placeholder shown when no photo is set */
     .member-photo-placeholder {
