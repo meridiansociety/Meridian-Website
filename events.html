@@ -288,7 +288,7 @@
      */
 
     /* EVENT CARD */
-    #first-event { background: var(--black); }
+    #first-event { background: var(--black); --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --grey: #888; --black: #080808; }
 
     .event-card {
       position: relative; overflow: hidden;
@@ -297,6 +297,7 @@
       display: grid;
       grid-template-columns: 1fr 200px;
       min-height: 240px;
+      --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --black: #080808;
     }
     .event-card::before {
       content: '';
@@ -414,6 +415,7 @@
       border: 1px solid var(--gold-border);
       background: var(--surface);
       position: relative; overflow: hidden;
+      --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --black: #080808;
     }
     .event-empty-state::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;

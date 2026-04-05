@@ -623,6 +623,7 @@
       border-top: 1px solid var(--gold-border);
       border-bottom: 1px solid var(--gold-border);
       height: 38px; display: flex; align-items: center;
+      --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --black: #080808;
     }
     .marquee-track {
       display: flex; white-space: nowrap;
@@ -633,7 +634,7 @@
     .marquee-item {
       padding: 0 40px; display: flex; align-items: center; gap: 24px;
       font-family: var(--sans); font-size: 10px; font-weight: 600; /* was 500 */
-      letter-spacing: 0.26em; text-transform: uppercase; color: #555555; /* was var(--grey) #666 */
+      letter-spacing: 0.26em; text-transform: uppercase; color: #777777; /* dark bg — lightened */
     }
     .mgem { color: var(--gold); opacity: 0.75; font-size: 8px; } /* was 0.6 */
     @keyframes mscroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -710,6 +711,7 @@
     .def-block {
       background: var(--surface); border: 1px solid var(--gold-border);
       padding: 40px 36px; position: relative; overflow: hidden;
+      --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --cream-20: rgba(245,240,232,0.75); --black: #080808;
     }
     .def-block::before {
       content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 2px;
@@ -734,7 +736,7 @@
     /* ─────────────────────────────────
        §02 WHO — EDITORIAL LIST
     ───────────────────────────────── */
-    #who { background: var(--surface); }
+    #who { background: var(--surface); --cream: #f5f0e8; --cream-70: rgba(245,240,232,0.85); --cream-45: rgba(245,240,232,0.72); --cream-20: rgba(245,240,232,0.75); --grey: #888; --black: #080808; }
 
     .who-intro {
       display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
@@ -781,7 +783,7 @@
     /* ─────────────────────────────────
        FIRST EVENT TEASER
     ───────────────────────────────── */
-    #first-event { background: var(--black); }
+    #first-event { background: var(--black); --cream: #f5f0e8; --cream-70: rgba(245,240,232,0.85); --cream-45: rgba(245,240,232,0.72); --cream-20: rgba(245,240,232,0.75); --grey: #888; --grey2: #555; --black: #080808; }
 
     .event-card {
       position: relative; overflow: hidden;
@@ -977,7 +979,7 @@
     /* ─────────────────────────────────
        §04 SPEAKING
     ───────────────────────────────── */
-    #speaking { background: var(--surface); }
+    #speaking { background: var(--surface); --cream: #f5f0e8; --cream-70: rgba(245,240,232,0.85); --cream-45: rgba(245,240,232,0.72); --cream-20: rgba(245,240,232,0.75); --grey: #888; --grey2: #555; --black: #080808; }
     .speaking-layout {
       display: grid; grid-template-columns: 1fr 340px; gap: 80px; align-items: start;
     }
@@ -1001,6 +1003,7 @@
     .formats-panel {
       background: var(--black); border: 1px solid var(--gold-border);
       padding: 36px 30px; position: relative; overflow: hidden;
+      --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --black: #080808;
     }
     .formats-panel::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
@@ -1077,6 +1080,7 @@
     /* Member panel */
     .member-panel {
       background: var(--surface); border: 1px solid var(--gold-border);
+      --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --grey: #888; --black: #080808;
       padding: 36px 32px; display: flex; flex-direction: column;
       align-items: center; text-align: center; position: relative; overflow: hidden;
     }
@@ -1130,6 +1134,7 @@
     #join {
       padding: 48px 52px; position: relative; overflow: hidden;
       border-top: 1px solid var(--gold-border); background: var(--surface);
+      --cream: #f5f0e8; --cream-70: rgba(245,240,232,0.85); --cream-45: rgba(245,240,232,0.72); --black: #080808;
     }
     #join::before {
       content: ''; position: absolute; inset: 0;
@@ -1173,7 +1178,7 @@
     /* ─────────────────────────────────
        FOOTER
     ───────────────────────────────── */
-    footer { background: var(--dark); }
+    footer { background: var(--dark); --cream: #f5f0e8; --cream-70: rgba(245,240,232,0.85); --cream-45: rgba(245,240,232,0.72); --grey: #888; --grey2: #555; --black: #080808; }
 
     .footer-hero {
       border-bottom: 1px solid var(--gold-border);
@@ -1207,7 +1212,7 @@
     .footer-coords {
       display: flex; align-items: center; gap: 20px;
       font-family: var(--sans); font-size: 9px; font-weight: 500;
-      letter-spacing: 0.2em; text-transform: uppercase; color: #555555; /* was var(--grey) #666 */
+      letter-spacing: 0.2em; text-transform: uppercase; color: #888888;
     }
     .footer-coords-dot { width: 3px; height: 3px; background: var(--gold); border-radius: 50%; opacity: 0.65; } /* was .5 */
     .footer-cta-row {
@@ -1235,11 +1240,11 @@
       max-width: 1440px; margin: 0 auto;
       padding: 56px 52px 40px;
       display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 56px; border-bottom: 1px solid rgba(0,0,0,0.08);
+      gap: 56px; border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .footer-brand-desc {
       font-family: var(--serif); font-size: 15px; font-weight: 400;
-      color: #555555; line-height: 1.85; max-width: 260px; margin-top: 8px; /* was var(--grey) #666 */
+      color: #888888; line-height: 1.85; max-width: 260px; margin-top: 8px;
     }
     .footer-col-head {
       font-family: var(--sans); font-size: 9px; font-weight: 700;
@@ -1250,7 +1255,7 @@
     .footer-links li + li { margin-top: 9px; }
     .footer-links a {
       font-family: var(--serif); font-size: 15px; font-weight: 400;
-      color: #555555; text-decoration: none; transition: color 0.2s; /* was #666 */
+      color: #888888; text-decoration: none; transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--cream); }
     .footer-bottom {
@@ -1259,11 +1264,11 @@
     }
     .footer-copy {
       font-family: var(--sans); font-size: 10px; font-weight: 400;
-      color: #333333; letter-spacing: 0.1em; /* was var(--grey2) #3a3a3a — barely visible */
+      color: #666666; letter-spacing: 0.1em;
     }
     .footer-meta {
       font-family: var(--sans); font-size: 9px; font-weight: 500;
-      letter-spacing: 0.2em; text-transform: uppercase; color: #333333; /* was var(--grey2) */
+      letter-spacing: 0.2em; text-transform: uppercase; color: #666666;
     }
 
     /* ─────────────────────────────────
