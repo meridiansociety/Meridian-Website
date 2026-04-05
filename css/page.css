@@ -98,6 +98,16 @@ section {
   background: linear-gradient(to bottom, transparent 5%, var(--gold-border) 20%, var(--gold-border) 80%, transparent 95%);
 }
 
+/* Grid pattern */
+.page-header::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.07) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
 /* Corner ornaments */
 .page-header-corners {
   position: absolute; inset: 24px; z-index: 3; pointer-events: none;
