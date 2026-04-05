@@ -10,7 +10,7 @@ nav {
   z-index: 200; height: 68px;
   display: flex; align-items: center;
   transition: background 0.5s, border-color 0.5s;
-  border-bottom: 1px solid var(--gold-border);
+  border-bottom: var(--gold-bw) solid var(--gold-border);
   background: rgba(10,10,10,0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -66,7 +66,7 @@ nav.scrolled {
 .nav-cta {
   display: inline-flex; align-items: center;
   padding: 9px 22px;
-  border: 1px solid var(--gold-border2);
+  border: var(--gold-bw) solid var(--gold-border2);
   color: var(--gold); text-decoration: none;
   font-family: var(--sans); font-size: 11px; font-weight: 700;
   letter-spacing: 0.2em; text-transform: uppercase;
@@ -118,7 +118,7 @@ nav.scrolled {
   background: rgba(10,10,10,0.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-left: 1px solid var(--gold-border);
+  border-left: var(--gold-bw) solid var(--gold-border);
   transform: translateX(100%);
   transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
   box-shadow: -8px 0 32px rgba(0,0,0,0.6);

@@ -387,7 +387,7 @@
       display: none; position: fixed;
       bottom: 1.4rem; left: 50%; z-index: 99;
       padding: 0.85rem 2.8rem;
-      background: var(--black); border: 1px solid var(--gold-border2);
+      background: var(--black); border: var(--gold-bw) solid var(--gold-border2);
       color: var(--gold); text-decoration: none;
       font-family: var(--sans); font-size: 11px; font-weight: 700; /* was 600 */
       letter-spacing: 0.24em; text-transform: uppercase;
@@ -559,7 +559,7 @@
 .hero-ig-btn {
   display: inline-flex; align-items: center; justify-content: center;
   width: 48px; height: 48px; flex-shrink: 0;
-  border: 1px solid var(--gold-border2);
+  border: var(--gold-bw) solid var(--gold-border2);
   text-decoration: none;
   position: relative; overflow: hidden;
   transform-style: preserve-3d;
@@ -591,11 +591,11 @@
     .hero-stats {
       position: relative; z-index: 4;
       display: grid; grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--gold-border);
+      border-top: var(--gold-bw) solid var(--gold-border);
       opacity: 0; animation: riseIn 0.7s 1.6s ease forwards;
     }
     .hero-stat {
-      padding: 20px 32px; border-right: 1px solid var(--gold-border);
+      padding: 20px 32px; border-right: var(--gold-bw) solid var(--gold-border);
       transition: background 0.3s; cursor: default; position: relative;
     }
     .hero-stat:last-child { border-right: none; }
@@ -620,8 +620,8 @@
     ───────────────────────────────── */
     .marquee {
       overflow: hidden; background: var(--surface);
-      border-top: 1px solid var(--gold-border);
-      border-bottom: 1px solid var(--gold-border);
+      border-top: var(--gold-bw) solid var(--gold-border);
+      border-bottom: var(--gold-bw) solid var(--gold-border);
       height: 38px; display: flex; align-items: center;
       --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --black: #080808;
     }
@@ -695,7 +695,7 @@
     .about-layout {
       display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: start;
     }
-    .about-left { padding-right: 72px; border-right: 1px solid var(--gold-border); }
+    .about-left { padding-right: 72px; border-right: var(--gold-bw) solid var(--gold-border); }
     .about-right { padding-left: 72px; }
 
     .about-headline {
@@ -709,7 +709,7 @@
     }
 
     .def-block {
-      background: var(--surface); border: 1px solid var(--gold-border);
+      background: var(--surface); border: var(--gold-bw) solid var(--gold-border);
       padding: 40px 36px; position: relative; overflow: hidden;
       --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --cream-20: rgba(245,240,232,0.75); --black: #080808;
     }
@@ -726,7 +726,7 @@
       font-family: var(--serif); font-size: clamp(18px, 1.7vw, 23px);
       font-style: italic; font-weight: 300; color: var(--cream);
       line-height: 1.5; margin-bottom: 22px;
-      border-bottom: 1px solid var(--gold-border); padding-bottom: 22px;
+      border-bottom: var(--gold-bw) solid var(--gold-border); padding-bottom: 22px;
     }
     .def-body {
       font-family: var(--serif); font-size: 16px; font-weight: 400;
@@ -752,7 +752,7 @@
       color: var(--cream-45); line-height: 1.9;
     }
 
-    .who-list { border-top: 1px solid var(--gold-border); }
+    .who-list { border-top: var(--gold-bw) solid var(--gold-border); }
 
     .who-row {
       display: grid;
@@ -787,7 +787,7 @@
 
     .event-card {
       position: relative; overflow: hidden;
-      border: 1px solid var(--gold-border);
+      border: var(--gold-bw) solid var(--gold-border);
       background: var(--surface);
       display: grid;
       grid-template-columns: 1fr 280px;
@@ -813,7 +813,7 @@
       padding: 48px 52px;
       display: flex; flex-direction: column; justify-content: space-between;
       position: relative; z-index: 1;
-      border-right: 1px solid var(--gold-border);
+      border-right: var(--gold-bw) solid var(--gold-border);
     }
 
     .event-card-top { display: flex; flex-direction: column; gap: 20px; }
@@ -853,7 +853,7 @@
     .event-tag {
       font-family: var(--sans); font-size: 9px; font-weight: 600;
       letter-spacing: 0.22em; text-transform: uppercase;
-      padding: 5px 12px; border: 1px solid var(--gold-border);
+      padding: 5px 12px; border: var(--gold-bw) solid var(--gold-border);
       color: var(--cream-45);
     }
     .event-card-cta {
@@ -919,7 +919,7 @@
       font-family: var(--sans); font-size: 9px; font-weight: 600;
       letter-spacing: 0.24em; text-transform: uppercase;
       color: var(--gold); opacity: 0;
-      border: 1px solid var(--gold-border);
+      border: var(--gold-bw) solid var(--gold-border);
       padding: 5px 12px; white-space: nowrap;
       transition: opacity 0.25s;
     }
@@ -944,7 +944,7 @@
       font-family: var(--serif); font-size: 17px; font-weight: 400;
       color: var(--cream-45); line-height: 1.9;
     }
-    .not-list { border-top: 1px solid var(--gold-border); }
+    .not-list { border-top: var(--gold-bw) solid var(--gold-border); }
     .not-item {
       display: flex; align-items: center; padding: 17px 0;
       border-bottom: 1px solid rgba(0,0,0,0.08);
@@ -1002,7 +1002,7 @@
     }
     .speaking-email:hover { color: var(--gold); border-color: var(--gold); }
     .formats-panel {
-      background: var(--surface); border: 1px solid var(--gold-border);
+      background: var(--surface); border: var(--gold-bw) solid var(--gold-border);
       padding: 36px 30px; position: relative; overflow: hidden;
       --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --black: #080808;
     }
@@ -1063,7 +1063,7 @@
     .btn-register {
       display: inline-flex; align-items: center; gap: 10px;
       padding: 13px 34px;
-      border: 1px solid var(--gold-border2); color: var(--gold);
+      border: var(--gold-bw) solid var(--gold-border2); color: var(--gold);
       text-decoration: none; font-family: var(--sans);
       font-size: 11px; font-weight: 700;
       letter-spacing: 0.2em; text-transform: uppercase;
@@ -1080,7 +1080,7 @@
 
     /* Member panel */
     .member-panel {
-      background: var(--surface); border: 1px solid var(--gold-border);
+      background: var(--surface); border: var(--gold-bw) solid var(--gold-border);
       --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --grey: #888; --black: #080808;
       padding: 36px 32px; display: flex; flex-direction: column;
       align-items: center; text-align: center; position: relative; overflow: hidden;
@@ -1105,7 +1105,7 @@
       color: var(--grey); margin-bottom: 24px; z-index: 1; /* now #888 */
     }
     .member-count-box {
-      border: 1px solid var(--gold-border); padding: 14px 36px; margin-bottom: 16px;
+      border: var(--gold-bw) solid var(--gold-border); padding: 14px 36px; margin-bottom: 16px;
       display: flex; flex-direction: column; align-items: center; gap: 6px;
       z-index: 1; transition: border-color 0.3s;
     }
@@ -1134,7 +1134,7 @@
     ───────────────────────────────── */
     #join {
       padding: 48px 52px; position: relative; overflow: hidden;
-      border-top: 1px solid var(--gold-border); background: var(--surface);
+      border-top: var(--gold-bw) solid var(--gold-border); background: var(--surface);
       --cream: #f5f0e8; --cream-70: rgba(245,240,232,0.85); --cream-45: rgba(245,240,232,0.72); --black: #080808;
     }
     #join::before {
@@ -1160,7 +1160,7 @@
     .join-handle {
       display: inline-flex; align-items: center; gap: 14px;
       text-decoration: none; flex-shrink: 0;
-      border: 1px solid var(--gold-border);
+      border: var(--gold-bw) solid var(--gold-border);
       padding: 24px 52px;
       font-family: var(--serif); font-size: 19px; font-style: italic;
       color: var(--cream); transition: all 0.35s; position: relative; overflow: hidden;
@@ -1182,7 +1182,7 @@
     footer { background: var(--dark); --cream: #f5f0e8; --cream-70: rgba(245,240,232,0.85); --cream-45: rgba(245,240,232,0.72); --grey: #888; --grey2: #555; --black: #080808; }
 
     .footer-hero {
-      border-bottom: 1px solid var(--gold-border);
+      border-bottom: var(--gold-bw) solid var(--gold-border);
       padding: 56px 52px 52px;
       position: relative; overflow: hidden;
     }
@@ -1229,7 +1229,7 @@
     .footer-cta-main:hover { background: var(--gold-light); }
     .footer-cta-ig {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 24px; border: 1px solid var(--gold-border);
+      padding: 13px 24px; border: var(--gold-bw) solid var(--gold-border);
       color: var(--cream-45); text-decoration: none; /* now 0.72 */
       font-family: var(--sans); font-size: 11px; font-weight: 500;
       letter-spacing: 0.18em; text-transform: uppercase;
@@ -1277,7 +1277,7 @@
     ───────────────────────────────── */
     @media (max-width: 1100px) {
       .about-layout { grid-template-columns: 1fr; }
-      .about-left { padding-right: 0; border-right: none; border-bottom: 1px solid var(--gold-border); padding-bottom: 48px; margin-bottom: 0; }
+      .about-left { padding-right: 0; border-right: none; border-bottom: var(--gold-bw) solid var(--gold-border); padding-bottom: 48px; margin-bottom: 0; }
       .about-right { padding-left: 0; padding-top: 48px; }
       .who-intro, .not-intro, .not-coda,
       .speaking-layout, .register-layout { grid-template-columns: 1fr; gap: 44px; }
@@ -1395,13 +1395,13 @@
     @media (max-width: 1100px) {
       .event-card { grid-template-columns: 1fr; min-height: auto; }
       .event-card::after { display: none; }
-      .event-card-main { border-right: none; border-bottom: 1px solid var(--gold-border); padding: 36px 36px; }
+      .event-card-main { border-right: none; border-bottom: var(--gold-bw) solid var(--gold-border); padding: 36px 36px; }
       .event-card-panel { padding: 32px 36px; }
     }
     @media (max-width: 700px) {
       .event-card { grid-template-columns: 1fr; min-height: auto; }
       .event-card::after { display: none; }
-      .event-card-main { border-right: none; border-bottom: 1px solid var(--gold-border); padding: 28px 24px; }
+      .event-card-main { border-right: none; border-bottom: var(--gold-bw) solid var(--gold-border); padding: 28px 24px; }
       .event-card-panel { padding: 24px 24px; }
       .event-card-bottom { flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 24px; padding-top: 24px; }
       .event-card-tags { gap: 6px; }

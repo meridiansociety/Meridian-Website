@@ -324,7 +324,7 @@
       display: flex;
       flex-direction: column;
       background: var(--surface);
-      border: 1px solid var(--gold-border);
+      border: var(--gold-bw) solid var(--gold-border);
       overflow: hidden;
       position: relative;
       transition: border-color 0.4s ease, transform 0.3s ease;
@@ -351,7 +351,7 @@
       flex-shrink: 0;
       overflow: hidden;
       background: #0d0d0d;
-      border: 1px solid var(--gold-border);
+      border: var(--gold-bw) solid var(--gold-border);
       /* Subtle inset shadow mimics a photo inlay */
       box-shadow: inset 0 0 0 1px rgba(0,0,0,0.4);
     }
@@ -402,7 +402,7 @@
     .member-studies {
       font-family: var(--serif); font-size: 14px; font-style: italic;
       color: var(--cream-45); line-height: 1.55;
-      border-left: 1px solid var(--gold-border);
+      border-left: var(--gold-bw) solid var(--gold-border);
       padding-left: 14px; margin-bottom: 18px;
     }
 
@@ -420,7 +420,7 @@
     .member-social a {
       display: flex; align-items: center; justify-content: center;
       width: 34px; height: 34px;
-      border: 1px solid var(--gold-border); color: var(--gold);
+      border: var(--gold-bw) solid var(--gold-border); color: var(--gold);
       background: rgba(201,168,76,0.04);
       transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
@@ -472,8 +472,8 @@
     }
     .marquee {
       overflow: hidden; background: var(--surface);
-      border-top: 1px solid var(--gold-border);
-      border-bottom: 1px solid var(--gold-border);
+      border-top: var(--gold-bw) solid var(--gold-border);
+      border-bottom: var(--gold-bw) solid var(--gold-border);
       height: 38px; display: flex; align-items: center;
       --cream: #f5f0e8; --cream-45: rgba(245,240,232,0.72); --black: #080808;
     }
