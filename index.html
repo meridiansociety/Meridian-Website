@@ -651,20 +651,20 @@
     }
     .sec-divider::before,
     .sec-divider::after {
-      content: ''; flex: 1; height: 1px; background: rgba(17,17,17,0.12);
+      content: ''; flex: 1; height: 2px; background: rgba(17,17,17,0.15);
     }
     .sec-divider-inner {
       display: flex; align-items: center; gap: 10px;
       padding: 0 20px;
     }
     .sec-divider-diamond {
-      width: 5px; height: 5px; border: 1px solid rgba(17,17,17,0.25);
+      width: 6px; height: 6px; border: 1px solid rgba(17,17,17,0.35);
       transform: rotate(45deg);
     }
-    .sec-divider-diamond.fill { background: rgba(17,17,17,0.35); opacity: 1; border: none; }
+    .sec-divider-diamond.fill { background: rgba(17,17,17,0.45); opacity: 1; border: none; }
     .sec-divider-text {
-      font-family: var(--sans); font-size: 8px; font-weight: 600;
-      letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream); opacity: 0.4;
+      font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream); opacity: 0.6;
     }
 
     /* Section header row */
@@ -672,14 +672,14 @@
       display: flex; align-items: center; gap: 20px; margin-bottom: 36px;
     }
     .sec-tag {
-      font-family: var(--sans); font-size: 9px; font-weight: 700;
-      letter-spacing: 0.32em; text-transform: uppercase; color: var(--cream);
-      opacity: 0.55; white-space: nowrap; flex-shrink: 0;
+      font-family: var(--sans); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--cream);
+      opacity: 0.75; white-space: nowrap; flex-shrink: 0;
     }
-    .sec-rule { flex: 1; height: 1px; background: rgba(17,17,17,0.15); }
+    .sec-rule { flex: 1; height: 2px; background: rgba(17,17,17,0.18); }
     .sec-num {
-      font-family: var(--sans); font-size: 9px; font-weight: 400;
-      letter-spacing: 0.2em; color: var(--cream); opacity: 0.35; flex-shrink: 0;
+      font-family: var(--sans); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2em; color: var(--cream); opacity: 0.5; flex-shrink: 0;
     }
 
     /* Scroll reveal — simplified, no delay stagger on mobile for perf */
