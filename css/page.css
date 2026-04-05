@@ -88,9 +88,9 @@ section {
 .page-header-vignette {
   position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background:
-    radial-gradient(ellipse 55% 70% at 50% 50%, rgba(226,218,208,0.10) 0%, rgba(226,218,208,0.30) 55%, var(--black) 100%),
-    radial-gradient(ellipse 60% 40% at 50% 48%, rgba(226,218,208,0.15) 0%, rgba(226,218,208,0.05) 45%, transparent 70%),
-    linear-gradient(to bottom, rgba(226,218,208,0.25) 0%, rgba(226,218,208,0.05) 20%, transparent 38%, transparent 70%, var(--black) 100%);
+    radial-gradient(ellipse 55% 70% at 50% 50%, rgba(240,235,227,0.08) 0%, rgba(240,235,227,0.22) 55%, var(--black) 100%),
+    radial-gradient(ellipse 60% 40% at 50% 48%, rgba(240,235,227,0.12) 0%, rgba(240,235,227,0.04) 45%, transparent 70%),
+    linear-gradient(to bottom, rgba(240,235,227,0.20) 0%, rgba(240,235,227,0.04) 20%, transparent 38%, transparent 70%, var(--black) 100%);
 }
 
 .page-header-rail {
