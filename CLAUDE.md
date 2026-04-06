@@ -52,25 +52,28 @@ assets/
 ## Design Tokens (`:root` in `css/base.css`)
 
 ```css
---black:        #080808      /* page background */
+--black:        #F0EBE3      /* page background — warm cream (variable name is legacy) */
 --dark:         #0d0d0d
 --surface:      #111111      /* card / footer / explore-strip background */
 --surface2:     #161616
---gold:         #c9a84c      /* primary accent */
---gold-light:   #e2c47a
+--gold:         #d4af50      /* primary accent */
+--gold-light:   #e8cc7a
 --gold-pale:    #f0dfa0
---gold-dim:     rgba(201,168,76,0.09)
---gold-border:  rgba(201,168,76,0.22)   /* standard border */
---gold-border2: rgba(201,168,76,0.38)   /* stronger border */
---cream:        #f5f0e8      /* primary text */
---cream-70:     rgba(245,240,232,0.85)
---cream-45:     rgba(245,240,232,0.72)  /* secondary text */
---cream-20:     rgba(245,240,232,0.60)  /* muted text */
---grey:         #888
---grey2:        #555
+--gold-dim:     rgba(212,175,80,0.15)
+--gold-border:  rgba(212,175,80,0.38)   /* standard border */
+--gold-border2: rgba(212,175,80,0.60)   /* stronger border */
+--gold-bw:      1.5px                   /* gold border width token */
+--cream:        #111111      /* primary text — dark (variable name is legacy) */
+--cream-70:     rgba(17,17,17,0.90)
+--cream-45:     rgba(17,17,17,0.82)     /* secondary text */
+--cream-20:     rgba(17,17,17,0.70)     /* muted text */
+--grey:         #2a2a2a
+--grey2:        #1a1a1a
 --serif:        'Cormorant Garamond', Georgia, serif
 --sans:         'Barlow Condensed', 'Arial Narrow', Arial, sans-serif
 ```
+
+> **Token naming note**: `--black` and `--cream` have inverted semantics from their names — `--black` is the light page background and `--cream` is the dark text colour. The nav re-scopes both back to dark-theme values (`--black: #080808`, `--cream: #f5f0e8`) so the nav bar always reads correctly against its dark background.
 
 ---
 
@@ -92,8 +95,8 @@ assets/
 - Mobile base: tap highlight + touch-action
 
 ### `css/nav.css` — loaded by ALL pages
-- `nav` — fixed, z-index 200, height 68px, `transparent` border by default
-- `nav.scrolled` — glassmorphism: `rgba(8,8,8,0.85)` bg + `blur(24px)` + gold border + shadow; triggers at `scrollY > 40`
+- `nav` — fixed, z-index 200, height 68px, dark glassmorphism background always active (`rgba(10,10,10,0.95)` + `blur(24px)`). Scopes `--cream`, `--cream-70`, `--cream-45`, `--cream-20`, `--black` back to dark-theme values so nav text is always legible against the dark bar regardless of page theme.
+- `nav.scrolled` — darkens to `rgba(8,8,8,0.98)` + gold border + shadow; triggers at `scrollY > 40`
 - `.nav-inner` — max-width 1440px, padding `0 52px`
 - `.nav-logo` / `.nav-wordmark` — 3D tilt on hover (`perspective rotateX/Y`)
 - `.nav-links a` — gold underline extends on hover/active; `.nav-active` = gold text
@@ -193,7 +196,7 @@ The events.html render script uses `EVENTS.find(e => e.isCurrent)`. If none foun
 1. Active nav link detection (compares `location.pathname`)
 2. "Who" section accordion (expand/collapse blocks)
 3. Member count fetch from Google Apps Script endpoint
-4. Three.js globe initialization (`#globeCanvas`)
+4. Three.js globe initialization (`#globeCanvas`) — `initGlobe()` is called via `onload` on the Three.js `<script>` tag (fires after Three.js executes)
 
 **events.html** inline script contains:
 - Event card DOM builder (creates card or empty-state from `EVENTS` data; runs after `events-data.js`)
@@ -281,6 +284,8 @@ No build step. Push to `main` → Vercel auto-deploys.
 The `_headers` file sets:
 - `/assets/*` → 1-year immutable cache
 - Security headers (CSP, X-Frame-Options, etc.) — **do not modify without explicit instruction**
+
+Current CSP `connect-src` allows: `self`, `script.google.com`, `script.googleusercontent.com` (member count API), `cdn.jsdelivr.net` (globe TopoJSON), `vitals.vercel-insights.com` (Vercel Analytics).
 
 ---
 

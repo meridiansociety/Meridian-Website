@@ -10,7 +10,7 @@
   Cache-Control: public, max-age=3600, s-maxage=86400
   
   # Content Security Policy (permissive for external fonts and scripts)
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' /_vercel/insights/script.js cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' /_vercel/insights/
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net https://vitals.vercel-insights.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cdn.jsdelivr.net https://vitals.vercel-insights.com
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
